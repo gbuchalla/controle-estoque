@@ -17,7 +17,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]); // trocar o middleware p/ um de resposta mais completa do que o auth:api
+        $this->middleware('jwt.auth', ['except' => ['login', 'register']]); // trocar o middleware p/ um de resposta mais completa do que o auth:api
 
     }
 
@@ -61,8 +61,8 @@ class AuthController extends Controller
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['erro' => 'Não autorizado'], 401);
         }
-
         return $this->respondWithToken($token);
+        
     }
 
     /**

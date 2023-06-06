@@ -13,7 +13,9 @@ Vue.use(VueRouter);
 
 import { routes } from './routes';
 
-
+// const Token = require('./Helpers/Token').default;
+import User from './Helpers/User';
+window.User = User;
 
 /**
  * The following block of code may be used to automatically register your
