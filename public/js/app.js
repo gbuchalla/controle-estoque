@@ -1924,7 +1924,7 @@ __webpack_require__.r(__webpack_exports__);
     login: function login() {
       axios.post('/api/auth/login', this.form).then(function (res) {
         console.log(res);
-        User.responseAfterLogin(res);
+        User.storeDataIfValid(res);
       })["catch"](function (error) {
         return console.log(error.response);
       });
@@ -52960,8 +52960,8 @@ var User = /*#__PURE__*/function () {
     _classCallCheck(this, User);
   }
   _createClass(User, [{
-    key: "responseAfterLogin",
-    value: function responseAfterLogin(res) {
+    key: "storeDataIfValid",
+    value: function storeDataIfValid(res) {
       var access_token = res.data.access_token;
       var email = JSON.parse(res.config.data).email;
       if (_Token__WEBPACK_IMPORTED_MODULE_0__["default"].isValid(access_token)) {
