@@ -3,7 +3,7 @@ import AppStorage from './AppStorage'
 
 class User {
 
-    responseAfterLogin(res) {
+    storeDataIfValid(res) {
         const access_token = res.data.access_token;
         const email = JSON.parse(res.config.data).email;
         if (Token.isValid(access_token)) {

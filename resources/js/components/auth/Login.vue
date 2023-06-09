@@ -62,7 +62,7 @@ export default {
             axios.post('/api/auth/login', this.form)
                 .then(res => {
                     console.log(res);
-                    User.responseAfterLogin(res);
+                    User.storeDataIfValid(res);
                 })
                 .catch(error => console.log(error.response))
         }
