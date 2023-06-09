@@ -11,13 +11,13 @@
                                         <h1 class="h4 text-gray-900 mb-4">Entrar na sua conta</h1>
                                     </div>
                                     <form class="user" @submit.prevent="login">
-                                        <div class="form-group" >
+                                        <div class="form-group">
                                             <input type="email" class="form-control" v-model="form.email" id="input-email"
                                                 aria-describedby="emailHelp" placeholder="Endereço de email">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control" v-model="form.password" id="input-password"
-                                                placeholder="Senha">
+                                            <input type="password" class="form-control" v-model="form.password"
+                                                id="input-password" placeholder="Senha">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
@@ -31,7 +31,8 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <router-link to="/register" class="font-weight-bold small">Criar uma conta</router-link>
+                                        <router-link to="/register" class="font-weight-bold small">Criar uma
+                                            conta</router-link>
                                     </div>
                                     <div class="text-center">
                                     </div>
@@ -49,6 +50,11 @@
 import { userInfo } from 'os';
 
 export default {
+    mounted () {
+        if (localStorage.getItem('token')) {
+            this.$router.push({name: 'home'});
+        }
+    },
     data () {
         return {
             form: {
@@ -58,13 +64,24 @@ export default {
         }
     },
     methods: {
-        login() {   
+        login() {
             axios.post('/api/auth/login', this.form)
                 .then(res => {
-                    console.log(res);
+                    console.log(res); // Deletar em prod env
                     User.storeDataIfValid(res);
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Login feito com sucesso'
+                    });
+                    this.$router.push({ name: 'home' });
                 })
-                .catch(error => console.log(error.response))
+                .catch(error => {
+                    console.log(error.response);
+                    Toast.fire({
+                        icon: 'warning',
+                        title: 'Email e/ou senha incorretos'
+                    });
+                })
         }
     }
 
