@@ -34,7 +34,8 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|unique:users|max:255',
             'email' => 'required|unique:users|max:255',
-            'password' => 'required|confirmed|min:4|max:8|'
+            'password' => 'required|confirmed|min:4|max:8|',
+            'password_confirmation' => 'required'
         ]);
     
         $user = new User();
@@ -54,12 +55,20 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login() 
-    {   
-        $credentials = request(['email', 'password']);
+    public function login(Request $request) 
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ],
+        [
+            'email.required' => 'O campo :attribute precisa ser preenchido',
+            'password.required' => 'O campo senha precisa ser preenchido'
+        ]);
 
+        $credentials = request(['email', 'password']);
         if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['erro' => 'Não autorizado'], 401);
+            return response()->json(['error' => 'Email ou senha incorretos'], 401);
         }
         return $this->respondWithToken($token);
         
@@ -84,7 +93,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['mensagem' => 'Logout realizado com sucesso']);
+        return response()->json(['message' => 'Logout realizado com sucesso']);
     }
 
     /**
