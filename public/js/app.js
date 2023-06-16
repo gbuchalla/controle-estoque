@@ -2583,7 +2583,7 @@ var render = function render() {
   return _c("div", [_c("div", {
     staticClass: "row justify-content-center"
   }, [_c("div", {
-    staticClass: "col-xl-10 col-lg-12 col-md-9"
+    staticClass: "col-xl-9 col-lg-11 col-md-9"
   }, [_c("div", {
     staticClass: "card shadow-sm my-5"
   }, [_c("div", {
@@ -58257,6 +58257,10 @@ var routes = [{
   path: '/',
   component: Home,
   name: 'home'
+}, {
+  path: '/:pathMatch(.*)*',
+  name: 'NotFound',
+  redirect: '/'
 }];
 
 /***/ }),

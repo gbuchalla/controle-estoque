@@ -10,5 +10,7 @@ export const routes = [
     { path: '/register', component: Register, name: 'register' },
     { path: '/logout', component: Logout, name: 'logout' },
 
-    { path: '/', component: Home, name: 'home'}
+    { path: '/', component: Home, name: 'home' },
+    
+    { path: '/:pathMatch(.*)*', name: 'NotFound', redirect: '/' }
 ];
