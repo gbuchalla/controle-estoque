@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +18,25 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 
-], function ($router) {
+], function () {
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 });
+
+Route::apiResource('/employees', 'EmployeeController');
+Route::apiResource('/suppliers', 'SupplierController');
+Route::apiResource('/categories', 'CategoryController');
+Route::apiResource('/products', 'ProductController');
+Route::apiResource('/expenses', 'ExpenseController');
+Route::apiResource('/customers', 'CustomerController');
+
+Route::Get('/salaries', 'SalaryController@index');
+Route::Post('/salaries/{employee_id}/pay', 'SalaryController@pay');
+Route::Get('/salaries/{month}', 'SalaryController@show');
+Route::Get('/salaries/{id}/edit', 'SalaryController@edit');
+Route::Post('/salaries/{id}/update', 'SalaryController@update');
+
+Route::Post('/stock/update/{id}', 'ProductController@stockUpdate');
