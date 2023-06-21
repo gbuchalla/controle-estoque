@@ -11,11 +11,16 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+// Import Vue routes
 import { routes } from './routes';
 
-// const Token = require('./Helpers/Token').default;
+// Import User Class
 import User from './Helpers/User';
 window.User = User;
+
+// Import Notification Class
+import Notification from './Helpers/Notification';
+window.Notification = Notification
 
 /**
  * The following block of code may be used to automatically register your
@@ -35,6 +40,8 @@ window.User = User;
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+window.Reload = new Vue();
 
 const router = new VueRouter({
     routes,

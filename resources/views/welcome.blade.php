@@ -38,25 +38,6 @@
                     Features
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-                        aria-expanded="true" aria-controls="collapseBootstrap">
-                        <i class="far fa-fw fa-window-maximize"></i>
-                        <span>Bootstrap UI</span>
-                    </a>
-                    <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Bootstrap UI</h6>
-                            <a class="collapse-item" href="alerts.html">Alerts</a>
-                            <a class="collapse-item" href="buttons.html">Buttons</a>
-                            <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                            <a class="collapse-item" href="modals.html">Modals</a>
-                            <a class="collapse-item" href="popovers.html">Popovers</a>
-                            <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="forms.html">
                         <i class="fab fa-fw fa-wpforms"></i>
                         <span>Forms</span>
@@ -78,37 +59,37 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="ui-colors.html">
-                        <i class="fas fa-fw fa-palette"></i>
-                        <span>UI Colors</span>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees"
+                        aria-expanded="true" aria-controls="collapseEmployees">
+                        <i class="far fa-fw fa-window-maximize"></i>
+                        <span>Funcionários</span>
                     </a>
-                </li>
-                <hr class="sidebar-divider">
-                <div class="sidebar-heading">
-                    Examples
-                </div>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
-                        aria-expanded="true" aria-controls="collapsePage">
-                        <i class="fas fa-fw fa-columns"></i>
-                        <span>Pages</span>
-                    </a>
-                    <div id="collapsePage" class="collapse" aria-labelledby="headingPage"
+                    <div id="collapseEmployees" class="collapse" aria-labelledby="headingBootstrap"
                         data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Example Pages</h6>
-                            <a class="collapse-item" href="login.html">Login</a>
-                            <a class="collapse-item" href="register.html">Register</a>
-                            <a class="collapse-item" href="404.html">404 Page</a>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <div class="mt-2 bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Funcionários</h6>
+                            <router-link class="collapse-item" to="/employees/create">Cadastrar funcionário</router-link>
+                            <router-link class="collapse-item" to="/employees">Lista de funcionários</router-link>
+
                         </div>
                     </div>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                        data-target="#collapseSuppliers" aria-expanded="true" aria-controls="collapseSuppliers">
+                        <i class="far fa-fw fa-window-maximize"></i>
+                        <span>Fornecedores</span>
                     </a>
+                    <div id="collapseSuppliers" class="collapse" aria-labelledby="headingBootstrap"
+                        data-parent="#accordionSidebar">
+                        <div class="mt-2 bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Fornecedores</h6>
+                            <router-link class="collapse-item" to="/suppliers/create">Cadastrar fornecedores</router-link>
+                            <router-link class="collapse-item" to="/suppliers">Lista de fornecedores</router-link>
+
+                        </div>
+                    </div>
                 </li>
                 <hr class="sidebar-divider">
                 <div class="version" id="version-ruangadmin"></div>
@@ -129,8 +110,8 @@
                                     <img class="img-profile rounded-circle" src="{{ asset('backend/img/boy.png') }}"
                                         style="max-width: 60px">
                                     <router-link to="/logout" class="ml-2 d-none d-lg-inline text-white small"
-                                    v-if="$route.path === '/login' || $route.path === '/register' || $route.path === '/forget' ? false : true "
-                                    style="display: none;">
+                                        v-if="$route.path === '/login' || $route.path === '/register' || $route.path === '/forget' ? false : true "
+                                        style="display: none;">
                                         Logout
                                     </router-link>
                                 </a>
@@ -178,7 +159,7 @@
                                 <script>
                                     document.write(new Date().getFullYear());
                                 </script>
-                                 {{-- - desenvolvido por <b><a href="https://buchalla.dev" target="_blank">Guilherme B. Ferreira</a></b> --}}
+                                {{-- - desenvolvido por <b><a href="https://buchalla.dev" target="_blank">Guilherme B. Ferreira</a></b> --}}
                             </span>
                         </div>
                     </div>
