@@ -32,7 +32,7 @@ let Expenses = require('./components/Expense/expense.vue').default;
 let ExpensesEdit = require('./components/Expense/Edit.vue').default;
 
 // Salary Components
-let PaidSalaries = require('./components/Salary/All_Employees.vue').default;
+let EmployeesSalaries = require('./components/Salary/All_Employees.vue').default;
 let SalariesPay = require('./components/Salary/Create.vue').default;
 
 let SalariesAll = require('./components/Salary/Index.vue').default;
@@ -85,7 +85,7 @@ export const routes = [
     
     // TODO: Change salary routes and components naming later**  
     // Salary Routes 
-    { path: '/paid-salaries', component: PaidSalaries, name: 'salaries-paid' },
+    { path: '/salaries/employees', component: EmployeesSalaries, name: 'employees-salaries' },
     { path: '/pay-salary/:id', component: SalariesPay, name: 'salaries-pay' },
 
     { path: '/salaries', component: SalariesAll, name: 'salaries' },

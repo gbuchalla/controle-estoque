@@ -34,8 +34,8 @@ Route::apiResource('/expenses', 'ExpenseController');
 Route::apiResource('/customers', 'CustomerController');
 
 Route::Get('/salaries', 'SalaryController@index');
-Route::Post('/salaries/{employee_id}/pay', 'SalaryController@pay');
 Route::Get('/salaries/{month}', 'SalaryController@show');
+Route::Post('/salaries/{employee_id}/pay', 'SalaryController@pay');
 Route::Get('/salaries/{id}/edit', 'SalaryController@edit');
 Route::Post('/salaries/{id}/update', 'SalaryController@update');
 
