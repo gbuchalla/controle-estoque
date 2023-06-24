@@ -8,8 +8,9 @@ const Logout = require('./components/auth/Logout.vue').default;
 const Home = require('./components/Home.vue').default;
 
 // Employee Components
-const EmployeesCreate = require('./components/Employees/Create.vue').default;
-const Employees = require('./components/Employees/Index.vue').default;
+let EmployeesCreate = require('./components/Employees/Create.vue').default;
+let Employees = require('./components/Employees/Index.vue').default;
+let EmployeesEdit = require('./components/Employees/Edit.vue').default;
 
 // Supplier Components
 let SuppliersCreate = require('./components/Supplier/Create.vue').default;
@@ -51,55 +52,55 @@ let CustomersEdit = require('./components/Customer/Edit.vue').default;
 
 
 export const routes = [
+
+    // Auth Routes
     { path: '/login', component: Login, name: 'login' },
     { path: '/register', component: Register, name: 'register' },
     { path: '/logout', component: Logout, name: 'logout' },
 
+    // Home Route
     { path: '/', component: Home, name: 'home' },
     
     // Employee Routes
-    { path: '/employees', name: Employees, name: 'employees' },
     { path: '/employees/create', name: EmployeesCreate, name: 'employees-create' },
-    { path: '/employees/edit/:id', component: EmployeesEdit, name: 'employees-edit' },
+    { path: '/employees', name: Employees, name: 'employees' },
+    { path: '/employees/:id/edit', component: EmployeesEdit, name: 'employees-edit' },
 
     // Supplier Routes
-    { path: '/store-supplier', component: SuppliersCreate, name: 'suppliers-create' },
-    { path: '/supplier', component: Suppliers, name: 'suppliers' },
-    { path: '/edit-supplier/:id', component: SuppliersEdit, name: 'suppliers-edit' },
+    { path: '/suppliers/create', component: SuppliersCreate, name: 'suppliers-create' },
+    { path: '/suppliers', component: Suppliers, name: 'suppliers' },
+    { path: '/suppliers/:id/edit', component: SuppliersEdit, name: 'suppliers-edit' },
 
     // Category Routes
-    { path: '/store-category', component: CategoriesCreate, name: 'categories-create' },
-    { path: '/category', component: Categories, name: 'categories' },
-    { path: '/edit-category/:id', component: CategoriesEdit, name: 'categories-edit' },
+    { path: '/categories/create', component: CategoriesCreate, name: 'categories-create' },
+    { path: '/categories', component: Categories, name: 'categories' },
+    { path: '/categories/:id/edit', component: CategoriesEdit, name: 'categories-edit' },
 
     // Product Routes
-    { path: '/store-product', component: ProductsCreate, name: 'products-create' },
-    { path: '/product', component: Products, name: 'products' },
-    { path: '/edit-product/:id', component: ProductsEdit, name: 'products-edit' },
+    { path: '/products/create', component: ProductsCreate, name: 'products-create' },
+    { path: '/products', component: Products, name: 'products' },
+    { path: '/products/:id/edit', component: ProductsEdit, name: 'products-edit' },
 
     // Expense Routes
-    { path: '/store-expense', component: ExpensesCreate, name: 'expenses-create' },
-    { path: '/expense', component: Expenses, name: 'expenses' },
-    { path: '/edit-expense/:id', component: ExpensesEdit, name: 'expenses-edit' },
+    { path: '/expenses/create', component: ExpensesCreate, name: 'expenses-create' },
+    { path: '/expenses', component: Expenses, name: 'expenses' },
+    { path: '/expenses/:id/edit', component: ExpensesEdit, name: 'expenses-edit' },
 
-    
-    // TODO: Change salary routes and components naming later**  
     // Salary Routes 
     { path: '/salaries/employees', component: EmployeesSalaries, name: 'employees-salaries' },
-    { path: '/pay-salary/:id', component: SalariesPay, name: 'salaries-pay' },
-
+    { path: '/salaries/:employee_id/pay', component: SalariesPay, name: 'salaries-pay' },
     { path: '/salaries', component: SalariesAll, name: 'salaries' },
-    { path: '/show-salary/:id', component: SalariesShow, name: 'salaries-show' },
-    { path: '/edit-salary/:id', component: SalariesEdit, name: 'salaries-edit' },
+    { path: '/salaries/:id/show', component: SalariesShow, name: 'salaries-show' },
+    { path: '/salaries/:id/edit', component: SalariesEdit, name: 'salaries-edit' },
 
     // Stock Routes
-    { path: '/stock', component: stock, name: 'stock' },
-    { path: '/edit-stock/:id', component: editstock, name: 'stock-edit' },
+    { path: '/stock', component: Stock, name: 'stock' },
+    { path: '/stock/:id/edit', component: StockEdit, name: 'stock-edit' },
 
     // Customer Routes
-    { path: '/store-customer', component: CustomersCreate, name: 'customers-create' },
-    { path: '/customer', component: Customers, name: 'customers' },
-    { path: '/edit-customer/:id', component: CustomersEdit, name: 'customers-edit' },
+    { path: '/customers/create', component: CustomersCreate, name: 'customers-create' },
+    { path: '/customers', component: Customers, name: 'customers' },
+    { path: '/customers/:id/edit', component: CustomersEdit, name: 'customers-edit' },
 
     { path: '/:pathMatch(.*)*', name: 'NotFound', redirect: '/' }
 ];

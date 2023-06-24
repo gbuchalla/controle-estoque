@@ -50,31 +50,14 @@
                                                     <small class="text-danger" v-if="errors.address"> {{ errors.address[0]
                                                     }} </small>
                                                 </div>
+                                                <div class="col-md-4">
+                                                        <input type="text" class="form-control" id="inputPhone"
+                                                            placeholder="Telefone - Ex: (90)99999-9999" v-model="form.phone">
+                                                        <small class="text-danger" v-if="errors.phone"> {{ errors.phone[0] }}
+                                                        </small>
+                                                    </div>
                                             </div>
                                         </div>
-
-
-
-
-
-                                        <div class="form-group">
-
-                                            <div class="form-row">
-                                                <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="inputPhone"
-                                                        placeholder="Telefone - Ex: (90)99999-9999" v-model="form.phone">
-                                                    <small class="text-danger" v-if="errors.phone"> {{ errors.phone[0] }}
-                                                    </small>
-                                                </div>
-
-
-                                                <div class="col-md-6">
-
-                                                </div>
-
-                                            </div>
-                                        </div>
-
 
                                         <div class="form-group">
 

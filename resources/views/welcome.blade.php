@@ -21,23 +21,24 @@
         <div id="wrapper">
             <!-- Sidebar -->
             <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <router-link to="/" class="sidebar-brand d-flex align-items-center justify-content-center">
                     <div class="sidebar-brand-icon">
                         <img src="{{ asset('backend/img/logo/logo2.png') }}">
                     </div>
                     <div class="sidebar-brand-text mx-3">Controle de Estoque</div>
-                </a>
+                </router-link>
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.html">
+                    <router-link to="/" class="nav-link">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
+                        <span>Dashboard</span>
+                    </router-link>
                 </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">
                     Features
                 </div>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="forms.html">
                         <i class="fab fa-fw fa-wpforms"></i>
                         <span>Forms</span>
@@ -57,7 +58,7 @@
                             <a class="collapse-item" href="datatables.html">DataTables</a>
                         </div>
                     </div>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees"
                         aria-expanded="true" aria-controls="collapseEmployees">
@@ -68,16 +69,16 @@
                         data-parent="#accordionSidebar">
                         <div class="mt-2 bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Funcionários</h6>
-                            <router-link class="collapse-item" to="/employees/create">Cadastrar funcionário</router-link>
+                            <router-link class="collapse-item" to="/employees/create">Cadastrar funcionário
+                            </router-link>
                             <router-link class="collapse-item" to="/employees">Lista de funcionários</router-link>
-
                         </div>
                     </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                        data-target="#collapseSuppliers" aria-expanded="true" aria-controls="collapseSuppliers">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSuppliers"
+                        aria-expanded="true" aria-controls="collapseSuppliers">
                         <i class="far fa-fw fa-window-maximize"></i>
                         <span>Fornecedores</span>
                     </a>
@@ -85,16 +86,144 @@
                         data-parent="#accordionSidebar">
                         <div class="mt-2 bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Fornecedores</h6>
-                            <router-link class="collapse-item" to="/suppliers/create">Cadastrar fornecedores</router-link>
+                            <router-link class="collapse-item" to="/suppliers/create">Cadastrar fornecedor</router-link>
                             <router-link class="collapse-item" to="/suppliers">Lista de fornecedores</router-link>
-
                         </div>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                        data-target="#collapseBootstrap2" aria-expanded="true" aria-controls="collapseBootstrap2">
+                        <i class="far fa-fw fa-window-maximize"></i>
+                        <span>Categorias</span>
+                    </a>
+                    <div id="collapseBootstrap2" class="collapse" aria-labelledby="headingBootstrap"
+                        data-parent="#accordionSidebar">
+                        <div class="mt-2 bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Categorias</h6>
+                            <router-link class="collapse-item" to="/categories/create">Cadastrar categoria</router-link>
+                            <router-link class="collapse-item" to="/categories">Lista de categorias</router-link>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                        data-target="#collapseBootstrap3" aria-expanded="true" aria-controls="collapseBootstrap3">
+                        <i class="far fa-fw fa-window-maximize"></i>
+                        <span>Produtos</span>
+                    </a>
+                    <div id="collapseBootstrap3" class="collapse" aria-labelledby="headingBootstrap"
+                        data-parent="#accordionSidebar">
+                        <div class="mt-2 bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Produtos</h6>
+                            <router-link class="collapse-item" to="/products/create">Cadastrar produto</router-link>
+                            <router-link class="collapse-item" to="/products">Lista de produtos</router-link>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                        data-target="#collapseBootstrap4" aria-expanded="true" aria-controls="collapseBootstrap4">
+                        <i class="far fa-fw fa-window-maximize"></i>
+                        <span>Despesas</span>
+                    </a>
+                    <div id="collapseBootstrap4" class="collapse" aria-labelledby="headingBootstrap"
+                        data-parent="#accordionSidebar">
+                        <div class="mt-2 bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Despesas</h6>
+                            <router-link class="collapse-item" to="/expenses/create">Cadastrar despesa</router-link>
+                            <router-link class="collapse-item" to="/expenses">Lista de despesas</router-link>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                        data-target="#collapseBootstrap44" aria-expanded="true" aria-controls="collapseBootstrap44">
+                        <i class="far fa-fw fa-window-maximize"></i>
+                        <span>Clientes</span>
+                    </a>
+                    <div id="collapseBootstrap44" class="collapse" aria-labelledby="headingBootstrap"
+                        data-parent="#accordionSidebar">
+                        <div class="mt-2 bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Clientes</h6>
+                            <router-link class="collapse-item" to="/customers/create">Cadastrar cliente</router-link>
+                            <router-link class="collapse-item" to="/customers">Lista de clientes</router-link>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                        data-target="#collapseBootstrap5" aria-expanded="true" aria-controls="collapseBootstrap5">
+                        <i class="far fa-fw fa-window-maximize"></i>
+                        <span>Salários</span>
+                    </a>
+                    <div id="collapseBootstrap5" class="collapse" aria-labelledby="headingBootstrap"
+                        data-parent="#accordionSidebar">
+                        <div class="mt-2 bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Pagamento de Salário</h6>
+                            <router-link class="collapse-item" to="/salaries/employees">
+                                <span class="text-wrap text-break">Registrar pagamento de salário</span>
+                            </router-link>
+                            <router-link class="collapse-item" to="/salaries">
+                                <span class="text-wrap text-break">Lista de salários pagos por mês</span>
+                            </router-link>
+                        </div>
+                    </div>
+                </li>
+
+                {{-- <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                        data-target="#collapseBootstrap51" aria-expanded="true" aria-controls="collapseBootstrap51">
+                        <i class="far fa-fw fa-window-maximize"></i>
+                        <span>Orders</span>
+                    </a>
+                    <div id="collapseBootstrap51" class="collapse" aria-labelledby="headingBootstrap"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+
+                            <router-link class="collapse-item" to="/order">Today Order</router-link>
+                            <router-link class="collapse-item" to="/searchorder">Search</router-link>
+
+                        </div>
+                    </div>
+                </li> --}}
+
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/stock">
+                        <i class="fab fa-fw fa-wpforms"></i>
+                        <span>Estoque de produtos</span>
+                    </router-link>
+                </li>
+
+                {{-- <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable"
+                        aria-expanded="true" aria-controls="collapseTable">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>Reports</span>
+                    </a>
+                    <div id="collapseTable" class="collapse" aria-labelledby="headingTable"
+                        data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+
+                            <a class="collapse-item" href="simple-tables.html">Report One</a>
+                            <a class="collapse-item" href="datatables.html">Report Two</a>
+                        </div>
+                    </div>
+                </li> --}}
+
                 <hr class="sidebar-divider">
                 <div class="version" id="version-ruangadmin"></div>
             </ul>
+
+
             <!-- Sidebar -->
+
+
             <div id="content-wrapper" class="d-flex flex-column">
                 <div id="content">
                     <!-- TopBar -->
@@ -151,19 +280,7 @@
 
 
                 <!-- Footer -->
-                <footer class="sticky-footer mt-auto bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            Sistema de Controle de Estoque
-                            <span>&copy;
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>
-                                {{-- - desenvolvido por <b><a href="https://buchalla.dev" target="_blank">Guilherme B. Ferreira</a></b> --}}
-                            </span>
-                        </div>
-                    </div>
-                </footer>
+                <footer-component></footer-component>
                 <!-- Footer -->
 
             </div>

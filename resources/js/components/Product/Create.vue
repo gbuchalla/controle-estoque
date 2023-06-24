@@ -21,14 +21,14 @@
                                                 <div class="col-md-6">
                                                     <label for="inputName">Nome do produto</label>
                                                     <input type="text" class="form-control" id="inputName"
-                                                        placeholder="Insira o nome do produto" v-model="form.product_name">
+                                                        placeholder="" v-model="form.product_name">
                                                     <small class="text-danger" v-if="errors.product_name"> {{
                                                         errors.product_name[0] }} </small>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="inputCode">Código do produto</label>
                                                     <input type="text" class="form-control" id="inputCode"
-                                                        placeholder="Insira o có do produto" v-model="form.product_code">
+                                                        placeholder="" v-model="form.product_code">
                                                     <small class="text-danger" v-if="errors.product_code"> {{
                                                         errors.product_code[0] }} </small>
                                                 </div>
@@ -59,14 +59,14 @@
 
                                         <div class="form-group">
                                             <div class="form-row">
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <label for="inputBuyingPrice">Preço de compra (R$)</label>
                                                     <input type="text" class="form-control" id="inputBuyingPrice"
                                                         v-model="form.buying_price">
                                                     <small class="text-danger" v-if="errors.buying_price"> {{
                                                         errors.buying_price[0] }} </small>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <label for="inputSellingPrice">Preço de venda (R$)</label>
                                                     <input type="text" class="form-control" id="inputSellingPrice"
                                                         v-model="form.selling_price">
@@ -88,7 +88,7 @@
                                                 <div class="col-md-6">
                                                     <label for="inputQuantity">Quantidade de produto</label>
                                                     <input type="text" class="form-control" id="inputQuantity"
-                                                        placeholder="Insira a quantidade do produto"
+                                                        placeholder=""
                                                         v-model="form.product_quantity">
                                                     <small class="text-danger" v-if="errors.product_quantity"> {{
                                                         errors.product_quantity[0] }}
@@ -97,16 +97,16 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group">
+                                        <div class="form-group mt-4">
                                             <div class="form-row">
-                                                <div class="col-md-6">
+                                                <div class="col-8 col-md-6">
                                                     <input type="file" class="custom-file-input" id="customFile"
                                                         @change="onFileSelected">
                                                     <small class="text-danger" v-if="errors.image"> {{ errors.image[0] }}
                                                     </small>
                                                     <label class="custom-file-label" for="customFile">Escolha uma imagem</label>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-4 col-md-6">
                                                     <img :src="form.image" style="height: 40px; width: 40px;">
                                                 </div>
                                             </div>

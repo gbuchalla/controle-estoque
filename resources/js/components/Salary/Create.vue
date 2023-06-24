@@ -2,7 +2,7 @@
     <div>
 
         <div class="row">
-            <router-link to="/employees" class="btn btn-primary">Lista de funcionários</router-link>
+            <router-link to="/salaries/employees" class="btn btn-primary">Lista de funcionários</router-link>
         </div>
 
         <div class="row justify-content-center">

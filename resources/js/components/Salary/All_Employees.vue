@@ -36,7 +36,7 @@
                                     <td>{{ employee.salary }}</td>
                                     <td>{{ employee.joining_date }}</td>
                                     <td>
-                                        <router-link :to="{ name: 'salaries-pay', params: { id: employee.id } }"
+                                        <router-link :to="{ name: 'salaries-pay', params: { employee_id: employee.id } }"
                                             class="btn btn-sm btn-primary">
                                             Registrar pagamento de salário
                                         </router-link>

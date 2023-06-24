@@ -311,7 +311,7 @@
 
 <script>
 export default {
-    mounted() {
+    created() {
         if (!localStorage.getItem('token')) {
             this.$router.push('login');
         }
