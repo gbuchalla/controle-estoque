@@ -70,7 +70,7 @@ export default {
 
     computed: {
         filterSearch() {
-            return this.salaries.filter(salary => {
+            return this.salaries.filter((salary) => {
                 return salary.name.match(this.searchTerm)
             })
         }
@@ -79,8 +79,8 @@ export default {
     methods: {
         getPayments() {
             let month = this.$route.params.id
-            axios.get(`/salaries/${month}`)
-                .then(({ data }) => (this.salaries = data))
+            axios.get(`/api/salaries/${month}`)
+                .then(({ data })  => this.salaries = data)
                 .catch(error => this.errors = error.response.data.errors)
         },
     },

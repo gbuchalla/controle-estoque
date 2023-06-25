@@ -84,7 +84,7 @@ export default {
         getEmployees() {
             axios.get('/api/employees/')
                 .then(({ data }) => (this.employees = data))
-                .catch(console.log('Error'))
+                .catch(err => console.log(err))
         },
     },
 

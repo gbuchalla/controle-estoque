@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -152,7 +152,7 @@ class ProductController extends Controller
      */
     public function stockUpdate(Request $request, $id)
     {
-        $product = Product::find($id)->fill($request->product_quantity);
+        $product = Product::find($id)->fill(['product_quantity' => $request->product_quantity]);
         $product->save();
 
         return response()->json($product, 200);

@@ -8,9 +8,9 @@ const Logout = require('./components/auth/Logout.vue').default;
 const Home = require('./components/Home.vue').default;
 
 // Employee Components
-let EmployeesCreate = require('./components/Employees/Create.vue').default;
-let Employees = require('./components/Employees/Index.vue').default;
-let EmployeesEdit = require('./components/Employees/Edit.vue').default;
+let EmployeesCreate = require('./components/Employee/Create.vue').default;
+let Employees = require('./components/Employee/Index.vue').default;
+let EmployeesEdit = require('./components/Employee/Edit.vue').default;
 
 // Supplier Components
 let SuppliersCreate = require('./components/Supplier/Create.vue').default;
@@ -62,8 +62,8 @@ export const routes = [
     { path: '/', component: Home, name: 'home' },
     
     // Employee Routes
-    { path: '/employees/create', name: EmployeesCreate, name: 'employees-create' },
-    { path: '/employees', name: Employees, name: 'employees' },
+    { path: '/employees/create', component: EmployeesCreate, name: 'employees-create' },
+    { path: '/employees', component: Employees, name: 'employees' },
     { path: '/employees/:id/edit', component: EmployeesEdit, name: 'employees-edit' },
 
     // Supplier Routes

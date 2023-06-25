@@ -43,18 +43,18 @@
                                                     <select class="form-control" id="inputMonth"
                                                         v-model="form.salary_month">
                                                         <option> --Escolha um mês-- </option>
-                                                        <option value="January"> Janeiro </option>
-                                                        <option value="February"> Fevereiro </option>
-                                                        <option value="March"> Março </option>
-                                                        <option value="April"> Abril </option>
-                                                        <option value="May"> Maio </option>
-                                                        <option value="Jun"> Junho </option>
-                                                        <option value="July"> Julho </option>
-                                                        <option value="August"> Agosto </option>
-                                                        <option value="September"> Setembro </option>
-                                                        <option value="October"> Outubro </option>
-                                                        <option value="November"> Novembro </option>
-                                                        <option value="December"> Dezembro </option>
+                                                        <option value="Janeiro"> Janeiro </option>
+                                                        <option value="Fevereiro"> Fevereiro </option>
+                                                        <option value="Março"> Março </option>
+                                                        <option value="Abril"> Abril </option>
+                                                        <option value="Maio"> Maio </option>
+                                                        <option value="Junho"> Junho </option>
+                                                        <option value="Julho"> Julho </option>
+                                                        <option value="Agosto"> Agosto </option>
+                                                        <option value="Setembro"> Setembro </option>
+                                                        <option value="Outubro"> Outubro </option>
+                                                        <option value="Novembro"> Novembro </option>
+                                                        <option value="Dezembro"> Dezembro </option>
                                                     </select>
                                                     <small class="text-danger" v-if="errors.salary_month"> {{
                                                         errors.salary_month[0] }} </small>

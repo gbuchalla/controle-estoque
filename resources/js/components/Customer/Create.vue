@@ -126,7 +126,7 @@ export default {
 
         },
         customerInsert() {
-            axios.post('/api/customer', this.form)
+            axios.post('/api/customers', this.form)
                 .then(() => {
                     this.$router.push({ name: 'customers' })
                     Notification.success()

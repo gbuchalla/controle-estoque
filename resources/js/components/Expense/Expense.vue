@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row">
-            <router-link to="/expenses-create" class="btn btn-primary">Adicionar despesa</router-link>
+            <router-link :to="{name: 'expenses-create'}" class="btn btn-primary">Adicionar despesa</router-link>
         </div>
         <br>
         <input type="text" v-model="searchTerm" class="form-control" style="width: 300px;" placeholder="Pesquisar">

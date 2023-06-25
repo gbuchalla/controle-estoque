@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row">
-            <router-link to="/customers-create" class="btn btn-primary">Adicionar cliente</router-link>
+            <router-link :to="{name: 'customers-create'}" class="btn btn-primary">Adicionar cliente</router-link>
         </div>
 
         <br>
