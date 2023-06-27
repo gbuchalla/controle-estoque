@@ -33,10 +33,44 @@ Route::apiResource('/products', 'ProductController');
 Route::apiResource('/expenses', 'ExpenseController');
 Route::apiResource('/customers', 'CustomerController');
 
-Route::Get('/salaries', 'SalaryController@index');
-Route::Get('/salaries/{month}', 'SalaryController@show');
-Route::Post('/salaries/{employee_id}/pay', 'SalaryController@pay');
-Route::Get('/salaries/{id}/edit', 'SalaryController@edit');
-Route::Post('/salaries/{id}/update', 'SalaryController@update');
+// Stock route
+Route::post('/stock/update/{id}', 'ProductController@stockUpdate');
 
-Route::Post('/stock/update/{id}', 'ProductController@stockUpdate');
+// Salaries routes
+
+// Falta um método p/ remover o Salaries
+Route::get('/salaries', 'SalaryController@index');
+Route::get('/salaries/{month}', 'SalaryController@show');
+Route::post('/salaries/{employee_id}/pay', 'SalaryController@pay');
+Route::get('/salaries/{id}/edit', 'SalaryController@edit');
+Route::post('/salaries/{id}/update', 'SalaryController@update');
+
+// Cart Routes
+Route::post('/cart/{$product_id}', 'CartController@addToCart'); // 
+Route::get('/cart/products', 'CartController@getProducts');//
+Route::delete('/cart/{id}', 'CartController@destroy');
+Route::patch('/cart/products/{id}/increment', 'CartController@incrementProduct');
+Route::patch('/cart/products/{id}/decrement', 'CartController@decrementProduct');
+
+// Extra infos Route
+Route::get('/extra', 'CartController@getExtraInfo');
+
+
+// Point of Sale Routes 
+Route::get('/products/{category_id}', 'PosController@getFilteredProducts');
+Route::post('/orders', 'PosController@storeOrder');
+
+// Orders Routes
+Route::get('/orders', 'OrderController@getTodayOrders');
+Route::get('/orders/{id}', 'OrderController@show');
+Route::get('/orders/details/{id}', 'OrderController@showDetails');
+Route::post('/orders/search', 'OrderController@searchByDate'); // Change to GET http verb
+
+// Dashboard Routes
+
+Route::get('/today/sold', 'DashboardController@getTodaySold');
+Route::get('/today/income', 'DashboardController@getTodayIncome');
+Route::get('/today/due', 'DashboardController@getTodayDue');
+Route::get('/today/expense', 'DashboardController@getTodayExpense');
+Route::get('/products/stockout', 'DashboardController@stockOut');
+
