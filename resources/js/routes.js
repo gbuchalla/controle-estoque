@@ -2,7 +2,6 @@
 const Login = require('./components/auth/Login.vue').default;
 const Register = require('./components/auth/Register.vue').default;
 const Logout = require('./components/auth/Logout.vue').default;
-// import Register from './components/auth/Register.vue'; // sintaxe opcional
 
 // Home Component
 const Home = require('./components/Home.vue').default;
@@ -48,6 +47,14 @@ let StockEdit = require('./components/Product/Edit_Stock.vue').default;
 let CustomersCreate = require('./components/Customer/Create.vue').default;
 let Customers = require('./components/Customer/Index.vue').default;
 let CustomersEdit = require('./components/Customer/Edit.vue').default;
+
+// Point of Sale Component
+let Pos = require('./components/Pos/Index.vue').default;
+
+// Order Components
+let OrdersToday = require('./components/Order/TodayOrders.vue').default;
+let OrdersShow = require('./components/Order/Show.vue').default;
+let OrdersSearch = require('./components/Order/Search.vue').default;
 
 
 
@@ -102,5 +109,14 @@ export const routes = [
     { path: '/customers', component: Customers, name: 'customers' },
     { path: '/customers/:id/edit', component: CustomersEdit, name: 'customers-edit' },
 
+    // Point of Sale Route
+    { path: '/pos', component: Pos, name: 'pos' },
+
+    // Order Routes
+    { path: '/orders/today', component: OrdersToday, name: 'orders-today' },
+    { path: '/orders/:id', component: OrdersShow, name: 'orders-show' },
+    { path: '/orders/search', component: OrdersSearch, name: 'orders-search' },
+
     { path: '/:pathMatch(.*)*', name: 'NotFound', redirect: '/' }
+    
 ];

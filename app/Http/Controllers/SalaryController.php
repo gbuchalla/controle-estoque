@@ -79,4 +79,11 @@ class SalaryController extends Controller
 
         return response()->json($salary, 200);
     }
+
+    public function destroy ($id)
+    {
+        DB::table('salaries')->where('id', $id)->delete();
+
+        return response()->json(['msg' => 'O registro de pagamento de salário foi removido com sucesso!'], 200);
+    }
 }

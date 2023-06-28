@@ -37,13 +37,12 @@ Route::apiResource('/customers', 'CustomerController');
 Route::post('/stock/update/{id}', 'ProductController@stockUpdate');
 
 // Salaries routes
-
-// Falta um método p/ remover o Salaries
 Route::get('/salaries', 'SalaryController@index');
 Route::get('/salaries/{month}', 'SalaryController@show');
 Route::post('/salaries/{employee_id}/pay', 'SalaryController@pay');
 Route::get('/salaries/{id}/edit', 'SalaryController@edit');
 Route::post('/salaries/{id}/update', 'SalaryController@update');
+Route::delete('/salaries/{id}', 'SalaryController@destroy');
 
 // Cart Routes
 Route::post('/cart/{$product_id}', 'CartController@addToCart'); // 
@@ -61,10 +60,10 @@ Route::get('/products/{category_id}', 'PosController@getFilteredProducts');
 Route::post('/orders', 'PosController@storeOrder');
 
 // Orders Routes
-Route::get('/orders', 'OrderController@getTodayOrders');
+Route::get('/orders/today', 'OrderController@getTodayOrders');
 Route::get('/orders/{id}', 'OrderController@show');
-Route::get('/orders/details/{id}', 'OrderController@showDetails');
-Route::post('/orders/search', 'OrderController@searchByDate'); // Change to GET http verb
+Route::get('/orders/{id}/details', 'OrderController@showDetails');
+Route::post('/orders/search', 'OrderController@searchByDate');
 
 // Dashboard Routes
 
