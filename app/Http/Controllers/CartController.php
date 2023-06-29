@@ -16,9 +16,8 @@ class CartController extends Controller
 
 		if ($cart = DB::table('pos')->where('product_id', $id)->first()) {
 			DB::table('pos')->where('product_id', $id)->increment('product_quantity');
-			
-			$subtotal = $cart->product_quantity * $cart->product_price;
 			$cart = Pos::where('product_id', $id)->first();
+			$subtotal = intval($cart->product_quantity)  * intval($cart->product_price);
 			$cart->fill(['sub_total' => $subtotal])->save();
 
 			return response()->json($cart, 200);
