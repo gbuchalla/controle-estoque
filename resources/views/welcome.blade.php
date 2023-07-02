@@ -21,44 +21,34 @@
         <div id="wrapper">
             <!-- Sidebar -->
             <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-                <router-link to="/" class="sidebar-brand d-flex align-items-center justify-content-center">
+
+                <router-link :to="{name: 'home'}" class="sidebar-brand d-flex align-items-center justify-content-center">
                     <div class="sidebar-brand-icon">
                         <img src="{{ asset('backend/img/logo/logo2.png') }}">
                     </div>
                     <div class="sidebar-brand-text mx-3">Controle de Estoque</div>
                 </router-link>
+
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
-                    <router-link to="/" class="nav-link">
+                    <router-link :to="{name: 'home'}" class="nav-link">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </router-link>
                 </li>
+
+                <li class="nav-item">
+                    <router-link class="nav-link" :to="{name: 'pos'}">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Caixa - Registro de Ordens</span>
+                    </router-link>
+                </li>
+
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">
                     Features
                 </div>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="forms.html">
-                        <i class="fab fa-fw fa-wpforms"></i>
-                        <span>Forms</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable"
-                        aria-expanded="true" aria-controls="collapseTable">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Tables</span>
-                    </a>
-                    <div id="collapseTable" class="collapse" aria-labelledby="headingTable"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Tables</h6>
-                            <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
-                            <a class="collapse-item" href="datatables.html">DataTables</a>
-                        </div>
-                    </div>
-                </li> --}}
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees"
                         aria-expanded="true" aria-controls="collapseEmployees">
@@ -176,22 +166,21 @@
                     </div>
                 </li>
 
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse"
                         data-target="#collapseBootstrap51" aria-expanded="true" aria-controls="collapseBootstrap51">
                         <i class="far fa-fw fa-window-maximize"></i>
-                        <span>Orders</span>
+                        <span>Ordens</span>
                     </a>
                     <div id="collapseBootstrap51" class="collapse" aria-labelledby="headingBootstrap"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-
-                            <router-link class="collapse-item" to="/order">Today Order</router-link>
-                            <router-link class="collapse-item" to="/searchorder">Search</router-link>
-
+                            <h6 class="collapse-header">Ordens</h6>
+                            <router-link class="collapse-item" :to="{name: 'orders-today'}">Ordens do dia</router-link>
+                            <router-link class="collapse-item" :to="{name: 'orders-search'}">Pesquisar ordem</router-link>
                         </div>
                     </div>
-                </li> --}}
+                </li>
 
                 <li class="nav-item">
                     <router-link class="nav-link" to="/stock">
@@ -199,22 +188,6 @@
                         <span>Estoque de produtos</span>
                     </router-link>
                 </li>
-
-                {{-- <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable"
-                        aria-expanded="true" aria-controls="collapseTable">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Reports</span>
-                    </a>
-                    <div id="collapseTable" class="collapse" aria-labelledby="headingTable"
-                        data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-
-                            <a class="collapse-item" href="simple-tables.html">Report One</a>
-                            <a class="collapse-item" href="datatables.html">Report Two</a>
-                        </div>
-                    </div>
-                </li> --}}
 
                 <hr class="sidebar-divider">
                 <div class="version" id="version-ruangadmin"></div>
@@ -299,8 +272,8 @@
 
     <script src="{{ asset('backend/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('backend/js/ruang-admin.min.js') }}"></script>
-    <script src="{{ asset('backend/vendor/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('backend/js/demo/chart-area-demo.js') }}"></script>
+    {{-- <script src="{{ asset('backend/vendor/chart.js/Chart.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('backend/js/demo/chart-area-demo.js') }}"></script> --}}
 
 </body>
 

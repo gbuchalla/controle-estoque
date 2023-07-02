@@ -184,11 +184,11 @@ export default {
     created() {
         axios.get('/api/categories/')
             .then(({ data }) => (this.categories = data))
-            .catch(console.log('Error'))
+            .catch(err => console.log(err))
 
         axios.get('/api/suppliers/')
             .then(({ data }) => (this.suppliers = data))
-            .catch(console.log('Error'))
+            .catch(err => console.log(err))
     }
 }
 </script>

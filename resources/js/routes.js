@@ -28,7 +28,7 @@ let ProductsEdit = require('./components/Product/Edit.vue').default;
 
 // Expense Components
 let ExpensesCreate = require('./components/Expense/Create.vue').default;
-let Expenses = require('./components/Expense/expense.vue').default;
+let Expenses = require('./components/Expense/Index.vue').default;
 let ExpensesEdit = require('./components/Expense/Edit.vue').default;
 
 // Salary Components

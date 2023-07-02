@@ -24,9 +24,9 @@
                             <tbody>
                                 <tr v-for="order in filtersearch" :key="order.id">
                                     <td> {{ order.name }} </td>
-                                    <td> {{ order.total }} $ </td>
-                                    <td> {{ order.pay }} $ </td>
-                                    <td> {{ order.due }} $ </td>
+                                    <td> R$ {{ order.total }} </td>
+                                    <td> R$ {{ order.pay }} </td>
+                                    <td> R$ {{ order.due }} </td>
                                     <td> {{ order.payment_method }} </td>
 
                                     <td>

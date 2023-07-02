@@ -53,20 +53,20 @@ class CartController extends Controller
 
 	public function incrementProduct($id)
 	{
-		$product = DB::table('pos')->where('id', $id)->first();
-		$product->increment('product_quantity');
-		$subtotal = $product->product_quantity * $product->product_price;
-		$product->update(['sub_total' => $subtotal]);
+		DB::table('pos')->where('id', $id)->increment('product_quantity');
+		$product = Pos::find($id);
+		$subtotal = intval($product->product_quantity) * floatval($product->product_price);
+		$product->fill(['sub_total' => $subtotal])->save();
 		return response(['msg' => 'O acréscimo da quantidade de produto foi realizado com sucesso!'], 200);
 	}
 
 
 	public function decrementProduct($id)
 	{
-		$product = DB::table('pos')->where('id', $id)->first();
-		$product->decrement('product_quantity');
-		$subtotal = $product->product_quantity * $product->product_price;
-		$product->update(['sub_total' => $subtotal]);
+		DB::table('pos')->where('id', $id)->decrement('product_quantity');
+		$product = Pos::find($id);
+		$subtotal = intval($product->product_quantity) * floatval($product->product_price);
+		$product->fill(['sub_total' => $subtotal])->save();
 		return response(['msg' => 'O descréscimo da quantidade de produto foi realizado com sucesso!'], 200);
 	}
 

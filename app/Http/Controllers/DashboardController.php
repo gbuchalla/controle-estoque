@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
-class OrderController extends Controller
+class DashboardController extends Controller
 {
 
     public function getTodaySold()
@@ -46,10 +45,10 @@ class OrderController extends Controller
     }
 
     
-    public function stockOut()
+    public function getStockOut()
     {
-
-        $product = DB::table('products')->where('product_quantity', '<', '1')->get();
-        return response()->json($product, 200);
+        // echo ('aaa');
+        $products = DB::table('products')->where('product_quantity', '<', '1')->get();
+        return response()->json($products, 200);
     }
 }

@@ -39,9 +39,9 @@ class ExpenseController extends Controller
         $expense->details = $request->details;
         $expense->amount = $request->amount;
         if ($request->expense_date) {
-            $expense->expense_date = date('d/m/y', strtotime($request->expense_date));
+            $expense->expense_date = date('d/m/Y', strtotime($request->expense_date));
         } else {
-            $expense->expense_date = date('d/m/y');
+            $expense->expense_date = date('d/m/Y');
         }
         $expense->save();
 
@@ -72,10 +72,10 @@ class ExpenseController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-
+        
         if ($request->expense_date) {
-            $data['expense_date'] = date('d/m/y', strtotime($request->expense_date));
-        }
+            $data['expense_date'] = date('d/m/Y', strtotime($request->expense_date));
+        };
 
         $expense = Expense::find($id)->fill($data);
         $expense->save();

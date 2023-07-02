@@ -49,16 +49,16 @@
                                                 </div>
                                                 <div class="table-responsive">
                                                     <ul class="list-group">
-                                                        <li class="list-group-item"><b>SubTotal :</b> {{ orders.sub_total }}
-                                                            $ </li>
-                                                        <li class="list-group-item"><b>Taxa de Imposto :</b> {{ orders.tax
-                                                        }} $</li>
-                                                        <li class="list-group-item"><b>Valor Total :</b> {{ orders.total }}
-                                                            $</li>
-                                                        <li class="list-group-item"><b>Valor Pago :</b> {{ orders.pay }} $
+                                                        <li class="list-group-item"><b>SubTotal :</b> R$ {{ orders.sub_total }}
+                                                            </li>
+                                                        <li class="list-group-item" v-if="orders.tax"><b>Taxa de Imposto :</b> {{ orders.tax
+                                                        }} %</li>
+                                                        <li class="list-group-item"><b>Valor Total :</b> R$ {{ orders.total }}
                                                         </li>
-                                                        <li class="list-group-item"><b>Saldo Devedor :</b> {{
-                                                            orders.due }} $</li>
+                                                        <li class="list-group-item"><b>Valor Pago :</b> R$ {{ orders.pay }}
+                                                        </li>
+                                                        <li class="list-group-item"><b>Saldo Devedor :</b> R$ {{
+                                                            orders.due }}</li>
                                                     </ul>
                                                 </div>
                                                 <div class="card-footer"></div>
@@ -93,8 +93,8 @@
                                                                 <td>{{ detail.product_code }}</td>
                                                                 <td><img :src="'/' + detail.image" id="em_photo"></td>
                                                                 <td>{{ detail.product_quantity }}</td>
-                                                                <td>{{ detail.product_price }} $</td>
-                                                                <td>{{ detail.sub_total }} $</td>
+                                                                <td>R$ {{ detail.product_price }}</td>
+                                                                <td>R$ {{ detail.sub_total }}</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

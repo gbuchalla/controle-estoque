@@ -65,9 +65,9 @@
                       <td>{{ order.quantity }}</td>
                       <td>{{ order.sub_total }}</td>
                       <td>{{ order.tax }}</td>
-                      <td>{{ order.total }} $</td>
-                      <td>{{ order.pay }} $</td>
-                      <td>{{ order.due }} $</td>
+                      <td>R$ {{ order.total }} </td>
+                      <td>R$ {{ order.pay }} </td>
+                      <td>R$ {{ order.due }} </td>
                     </tr>
                   </tbody>
                 </table>

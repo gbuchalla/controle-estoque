@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,15 +46,14 @@ Route::post('/salaries/{id}/update', 'SalaryController@update');
 Route::delete('/salaries/{id}', 'SalaryController@destroy');
 
 // Cart Routes
-Route::post('/cart/{$product_id}', 'CartController@addToCart'); // 
-Route::get('/cart/products', 'CartController@getProducts');//
+Route::post('/cart/{product_id}', 'CartController@addToCart');
+Route::get('/cart/products', 'CartController@getProducts');
 Route::delete('/cart/{id}', 'CartController@destroy');
 Route::patch('/cart/products/{id}/increment', 'CartController@incrementProduct');
 Route::patch('/cart/products/{id}/decrement', 'CartController@decrementProduct');
 
 // Extra infos Route
 Route::get('/extra', 'CartController@getExtraInfo');
-
 
 // Point of Sale Routes 
 Route::get('/products/{category_id}', 'PosController@getFilteredProducts');
@@ -71,5 +71,4 @@ Route::get('/today/sold', 'DashboardController@getTodaySold');
 Route::get('/today/income', 'DashboardController@getTodayIncome');
 Route::get('/today/due', 'DashboardController@getTodayDue');
 Route::get('/today/expense', 'DashboardController@getTodayExpense');
-Route::get('/products/stockout', 'DashboardController@stockOut');
-
+Route::get('/dashboard/products/stockout', 'DashboardController@getStockOut');
