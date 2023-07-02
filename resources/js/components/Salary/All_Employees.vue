@@ -62,7 +62,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getEmployees();
     },
 
     data() {
@@ -86,10 +87,6 @@ export default {
                 .then(({ data }) => (this.employees = data))
                 .catch(err => console.log(err))
         },
-    },
-
-    created() {
-        this.getEmployees();
     }
 } 
 </script>

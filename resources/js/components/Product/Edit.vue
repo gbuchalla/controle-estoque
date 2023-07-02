@@ -145,7 +145,10 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getCategories();
+        this.getProduct();
+        this.getSuppliers();
     },
 
     data() {
@@ -167,23 +170,27 @@ export default {
             suppliers: {},
         }
     },
-    
-    created() {
-        let id = this.$route.params.id
-        axios.get('/api/products/' + id)
-            .then(({ data }) => (this.form = data))
-            .catch(console.log('Error'))
-
-        axios.get('/api/categories/')
-            .then(({ data }) => (this.categories = data))
-            .catch(console.log('Error'))
-
-        axios.get('/api/suppliers/')
-            .then(({ data }) => (this.suppliers = data))
-            .catch(console.log('Error'))
-    },
 
     methods: {
+        getProduct() {
+            let id = this.$route.params.id
+            axios.get('/api/products/' + id)
+                .then(({ data }) => (this.form = data))
+                .catch(error => console.log(error))
+        },
+
+        getCategories() {
+            axios.get('/api/categories/')
+                .then(({ data }) => (this.categories = data))
+                .catch(error => console.log(error))
+        },
+
+        getSuppliers() {
+            axios.get('/api/suppliers/')
+                .then(({ data }) => (this.suppliers = data))
+                .catch(error => console.log(error))
+        },
+        
         onFileSelected(event) {
             let file = event.target.files[0];
             if (file.size > 1048770) {

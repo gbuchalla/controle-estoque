@@ -126,7 +126,9 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getOrder();
+        this.getOrderDetails();
     },
 
     data() {
@@ -137,16 +139,19 @@ export default {
         }
     },
 
-    created() {
-        let id = this.$route.params.id
-
-        axios.get(`/api/orders/${id}`)
-            .then(({ data }) => (this.orders = data))
-            .catch(error => console.log(error))
-
-        axios.get(`/api/orders/${id}/details`)
-            .then(({ data }) => (this.details = data))
-            .catch(error => console.log(error))
+    methods: {
+        getOrder() {
+            let id = this.$route.params.id
+            axios.get(`/api/orders/${id}`)
+                .then(({ data }) => (this.orders = data))
+                .catch(error => console.log(error))
+        },
+        getOrderDetails() {
+            let id = this.$route.params.id
+            axios.get(`/api/orders/${id}/details`)
+                .then(({ data }) => (this.details = data))
+                .catch(error => console.log(error))
+        }
     }
 }
 

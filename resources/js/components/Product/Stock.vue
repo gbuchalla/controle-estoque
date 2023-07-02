@@ -63,7 +63,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.listProducts();
     },
 
     data() {
@@ -87,10 +88,6 @@ export default {
                 .then(({ data }) => (this.products = data))
                 .catch(console.log('Error'))
         }
-    },
-
-    created() {
-        this.listProducts();
     }
 } 
 </script>

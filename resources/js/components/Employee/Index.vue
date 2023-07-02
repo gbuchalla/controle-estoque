@@ -69,7 +69,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.listEmployees();
     },
     data() {
         return {
@@ -120,9 +121,6 @@ export default {
             })
         }
 
-    },
-    created() {
-        this.listEmployees();
     }
 } 
 </script>

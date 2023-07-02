@@ -97,7 +97,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getSalaryPayment();
     },
 
     data() {
@@ -113,15 +114,14 @@ export default {
             errors: {}
         }
     },
-    created() {
-        let id = this.$route.params.id
-        axios.get(`/api/salaries/${id}/edit/`)
-            .then(({ data }) => (this.form = data))
-            .catch(console.log('Error'))
-    },
 
     methods: {
-
+        getSalaryPayment() {
+            let id = this.$route.params.id
+            axios.get(`/api/salaries/${id}/edit/`)
+                .then(({ data }) => (this.form = data))
+                .catch(console.log('Error'))
+        },
         salaryUpdate() {
             let id = this.$route.params.id
             axios.post(`/api/salaries/${id}/update/`, this.form)

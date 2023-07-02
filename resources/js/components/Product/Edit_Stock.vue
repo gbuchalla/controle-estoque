@@ -57,7 +57,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getProduct();
     },
 
     data() {
@@ -69,14 +70,14 @@ export default {
         }
     },
 
-    created() {
-        let id = this.$route.params.id
-        axios.get('/api/products/' + id)
-            .then(({ data }) => (this.form = data))
-            .catch(console.log('Error'))
-    },
-
     methods: {
+        getProduct() {
+            let id = this.$route.params.id
+            axios.get('/api/products/' + id)
+                .then(({ data }) => (this.form = data))
+                .catch(console.log('Error'))
+        },
+
         StockUpdate() {
             let id = this.$route.params.id
             axios.post('/api/stock/update/' + id, this.form)

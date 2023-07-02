@@ -52,7 +52,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getTodayOrders();
     },
 
     data() {
@@ -76,10 +77,6 @@ export default {
                 .then(({ data }) => (this.orders = data))
                 .catch(err => console.log(err))
         },
-    },
-
-    created() {
-        this.getTodayOrders();
     }
 } 
 </script>

@@ -57,7 +57,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.listSuppliers();
     },
     data() {
         return {
@@ -106,9 +107,6 @@ export default {
                 }
             })
         }
-    },
-    created() {
-        this.listSuppliers();
     }
 } 
 </script>

@@ -55,8 +55,10 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getCategory();
     },
+    
     data() {
         return {
             form: {
@@ -65,13 +67,15 @@ export default {
             errors: {}
         }
     },
-    created() {
-        let id = this.$route.params.id
-        axios.get('/api/categories/' + id)
-            .then(({ data }) => this.form = data)
-            .catch(console.log('error'))
-    },
+    
     methods: {
+        getCategory() {
+            let id = this.$route.params.id
+            axios.get('/api/categories/' + id)
+                .then(({ data }) => this.form = data)
+                .catch(console.log('error'));
+        },
+        
         categoryUpdate() {
             let id = this.$route.params.id
             axios.patch('/api/categories/' + id, this.form)
@@ -80,7 +84,7 @@ export default {
                     Notification.success()
                 })
                 .catch(error => this.errors = error.response.data.errors)
-        },
+        }
     }
 }
 </script>

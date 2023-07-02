@@ -96,7 +96,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getEmployee();
     },
 
     data() {
@@ -111,14 +112,13 @@ export default {
         }
     },
 
-    created() {
-        let id = this.$route.params.employee_id
-        axios.get('/api/employees/' + id)
-            .then(({ data }) => (this.form = data))
-            .catch(console.log('Error'))
-    },
-
     methods: {
+        getEmployee() {
+            let id = this.$route.params.employee_id
+            axios.get('/api/employees/' + id)
+                .then(({ data }) => (this.form = data))
+                .catch(console.log('Error'))
+        },
         registerPayment() {
             let id = this.$route.params.employee_id
             axios.post(`/api/salaries/${id}/pay`, this.form)

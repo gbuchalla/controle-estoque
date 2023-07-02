@@ -64,8 +64,10 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getExpense();
     },
+
     data() {
         return {
             form: {
@@ -76,13 +78,14 @@ export default {
             errors: {},
         }
     },
-    created() {
-        let id = this.$route.params.id
-        axios.get('/api/expenses/' + id)
-            .then(({ data }) => (this.form = data))
-            .catch(error => this.errors = error.response.data.errors)
-    },
+
     methods: {
+        getExpense() {
+            let id = this.$route.params.id
+            axios.get('/api/expenses/' + id)
+                .then(({ data }) => (this.form = data))
+                .catch(error => this.errors = error.response.data.errors)
+        },
         expenseUpdate() {
             let id = this.$route.params.id
             axios.patch('/api/expenses/' + id, this.form)

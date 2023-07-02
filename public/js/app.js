@@ -1950,18 +1950,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _created$data$created;
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_created$data$created = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getCategory();
   },
   data: function data() {
     return {
@@ -1970,28 +1967,30 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       },
       errors: {}
     };
-  }
-}, _defineProperty(_created$data$created, "created", function created() {
-  var _this = this;
-  var id = this.$route.params.id;
-  axios.get('/api/categories/' + id).then(function (_ref) {
-    var data = _ref.data;
-    return _this.form = data;
-  })["catch"](console.log('error'));
-}), _defineProperty(_created$data$created, "methods", {
-  categoryUpdate: function categoryUpdate() {
-    var _this2 = this;
-    var id = this.$route.params.id;
-    axios.patch('/api/categories/' + id, this.form).then(function () {
-      _this2.$router.push({
-        name: 'categories'
+  },
+  methods: {
+    getCategory: function getCategory() {
+      var _this = this;
+      var id = this.$route.params.id;
+      axios.get('/api/categories/' + id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.form = data;
+      })["catch"](console.log('error'));
+    },
+    categoryUpdate: function categoryUpdate() {
+      var _this2 = this;
+      var id = this.$route.params.id;
+      axios.patch('/api/categories/' + id, this.form).then(function () {
+        _this2.$router.push({
+          name: 'categories'
+        });
+        Notification.success();
+      })["catch"](function (error) {
+        return _this2.errors = error.response.data.errors;
       });
-      Notification.success();
-    })["catch"](function (error) {
-      return _this2.errors = error.response.data.errors;
-    });
+    }
   }
-}), _created$data$created);
+});
 
 /***/ }),
 
@@ -2004,17 +2003,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.listCategories();
   },
   data: function data() {
     return {
@@ -2064,9 +2061,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
     }
   }
-}, "created", function created() {
-  this.listCategories();
-}));
+});
 
 /***/ }),
 
@@ -2139,18 +2134,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _created$data$created;
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_created$data$created = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getCustomer();
   },
   data: function data() {
     return {
@@ -2164,43 +2156,45 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       },
       errors: {}
     };
-  }
-}, _defineProperty(_created$data$created, "created", function created() {
-  var _this = this;
-  var id = this.$route.params.id;
-  axios.get('/api/customers/' + id).then(function (_ref) {
-    var data = _ref.data;
-    return _this.form = data;
-  })["catch"](function (error) {
-    return _this.errors = error.response.data.errors;
-  });
-}), _defineProperty(_created$data$created, "methods", {
-  onFileSelected: function onFileSelected(event) {
-    var _this2 = this;
-    var file = event.target.files[0];
-    if (file.size > 1048770) {
-      Notification.image_validation();
-    } else {
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        _this2.form.newphoto = event.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
   },
-  customerUpdate: function customerUpdate() {
-    var _this3 = this;
-    var id = this.$route.params.id;
-    axios.patch('/api/customers/' + id, this.form).then(function () {
-      _this3.$router.push({
-        name: 'customers'
+  methods: {
+    getCustomer: function getCustomer() {
+      var _this = this;
+      var id = this.$route.params.id;
+      axios.get('/api/customers/' + id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.form = data;
+      })["catch"](function (error) {
+        return _this.errors = error.response.data.errors;
       });
-      Notification.success();
-    })["catch"](function (error) {
-      return _this3.errors = error.response.data.errors;
-    });
+    },
+    onFileSelected: function onFileSelected(event) {
+      var _this2 = this;
+      var file = event.target.files[0];
+      if (file.size > 1048770) {
+        Notification.image_validation();
+      } else {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          _this2.form.newphoto = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    customerUpdate: function customerUpdate() {
+      var _this3 = this;
+      var id = this.$route.params.id;
+      axios.patch('/api/customers/' + id, this.form).then(function () {
+        _this3.$router.push({
+          name: 'customers'
+        });
+        Notification.success();
+      })["catch"](function (error) {
+        return _this3.errors = error.response.data.errors;
+      });
+    }
   }
-}), _created$data$created);
+});
 
 /***/ }),
 
@@ -2213,17 +2207,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.listCustomers();
   },
   data: function data() {
     return {
@@ -2276,9 +2268,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
     }
   }
-}, "created", function created() {
-  this.listCustomers();
-}));
+});
 
 /***/ }),
 
@@ -2353,18 +2343,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _created$data$created;
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_created$data$created = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getEmployees();
   },
   data: function data() {
     return {
@@ -2381,41 +2368,43 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       },
       errors: {}
     };
-  }
-}, _defineProperty(_created$data$created, "created", function created() {
-  var _this = this;
-  var id = this.$route.params.id;
-  axios.get('/api/employees/' + id).then(function (_ref) {
-    var data = _ref.data;
-    return _this.form = data;
-  })["catch"](console.log('error'));
-}), _defineProperty(_created$data$created, "methods", {
-  onFileSelected: function onFileSelected(event) {
-    var _this2 = this;
-    var file = event.target.files[0];
-    if (file.size > 1048770) {
-      Notification.image_validation();
-    } else {
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        _this2.form.newphoto = event.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
   },
-  employeeUpdate: function employeeUpdate() {
-    var _this3 = this;
-    var id = this.$route.params.id;
-    axios.patch('/api/employees/' + id, this.form).then(function () {
-      _this3.$router.push({
-        name: 'employees'
+  methods: {
+    getEmployees: function getEmployees() {
+      var _this = this;
+      var id = this.$route.params.id;
+      axios.get('/api/employees/' + id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.form = data;
+      })["catch"](console.log('error'));
+    },
+    onFileSelected: function onFileSelected(event) {
+      var _this2 = this;
+      var file = event.target.files[0];
+      if (file.size > 1048770) {
+        Notification.image_validation();
+      } else {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          _this2.form.newphoto = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    employeeUpdate: function employeeUpdate() {
+      var _this3 = this;
+      var id = this.$route.params.id;
+      axios.patch('/api/employees/' + id, this.form).then(function () {
+        _this3.$router.push({
+          name: 'employees'
+        });
+        Notification.success();
+      })["catch"](function (error) {
+        return _this3.errors = error.response.data.errors;
       });
-      Notification.success();
-    })["catch"](function (error) {
-      return _this3.errors = error.response.data.errors;
-    });
+    }
   }
-}), _created$data$created);
+});
 
 /***/ }),
 
@@ -2428,17 +2417,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.listEmployees();
   },
   data: function data() {
     return {
@@ -2491,9 +2478,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
     }
   }
-}, "created", function created() {
-  this.listEmployees();
-}));
+});
 
 /***/ }),
 
@@ -2550,18 +2535,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _created$data$created;
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_created$data$created = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getExpense();
   },
   data: function data() {
     return {
@@ -2572,30 +2554,32 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       },
       errors: {}
     };
-  }
-}, _defineProperty(_created$data$created, "created", function created() {
-  var _this = this;
-  var id = this.$route.params.id;
-  axios.get('/api/expenses/' + id).then(function (_ref) {
-    var data = _ref.data;
-    return _this.form = data;
-  })["catch"](function (error) {
-    return _this.errors = error.response.data.errors;
-  });
-}), _defineProperty(_created$data$created, "methods", {
-  expenseUpdate: function expenseUpdate() {
-    var _this2 = this;
-    var id = this.$route.params.id;
-    axios.patch('/api/expenses/' + id, this.form).then(function () {
-      _this2.$router.push({
-        name: 'expenses'
+  },
+  methods: {
+    getExpense: function getExpense() {
+      var _this = this;
+      var id = this.$route.params.id;
+      axios.get('/api/expenses/' + id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.form = data;
+      })["catch"](function (error) {
+        return _this.errors = error.response.data.errors;
       });
-      Notification.success();
-    })["catch"](function (error) {
-      return _this2.errors = error.response.data.errors;
-    });
+    },
+    expenseUpdate: function expenseUpdate() {
+      var _this2 = this;
+      var id = this.$route.params.id;
+      axios.patch('/api/expenses/' + id, this.form).then(function () {
+        _this2.$router.push({
+          name: 'expenses'
+        });
+        Notification.success();
+      })["catch"](function (error) {
+        return _this2.errors = error.response.data.errors;
+      });
+    }
   }
-}), _created$data$created);
+});
 
 /***/ }),
 
@@ -2608,17 +2592,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.listExpenses();
   },
   data: function data() {
     return {
@@ -2668,9 +2650,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
     }
   }
-}, "created", function created() {
-  this.listExpenses();
-}));
+});
 
 /***/ }),
 
@@ -2832,17 +2812,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getOrder();
+    this.getOrderDetails();
   },
   data: function data() {
     return {
@@ -2850,23 +2829,30 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       orders: {},
       details: {}
     };
+  },
+  methods: {
+    getOrder: function getOrder() {
+      var _this = this;
+      var id = this.$route.params.id;
+      axios.get("/api/orders/".concat(id)).then(function (_ref) {
+        var data = _ref.data;
+        return _this.orders = data;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+    getOrderDetails: function getOrderDetails() {
+      var _this2 = this;
+      var id = this.$route.params.id;
+      axios.get("/api/orders/".concat(id, "/details")).then(function (_ref2) {
+        var data = _ref2.data;
+        return _this2.details = data;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
   }
-}, "created", function created() {
-  var _this = this;
-  var id = this.$route.params.id;
-  axios.get("/api/orders/".concat(id)).then(function (_ref) {
-    var data = _ref.data;
-    return _this.orders = data;
-  })["catch"](function (error) {
-    return console.log(error);
-  });
-  axios.get("/api/orders/".concat(id, "/details")).then(function (_ref2) {
-    var data = _ref2.data;
-    return _this.details = data;
-  })["catch"](function (error) {
-    return console.log(error);
-  });
-}));
+});
 
 /***/ }),
 
@@ -2879,17 +2865,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getTodayOrders();
   },
   data: function data() {
     return {
@@ -2916,9 +2900,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
     }
   }
-}, "created", function created() {
-  this.getTodayOrders();
-}));
+});
 
 /***/ }),
 
@@ -2931,181 +2913,180 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _created$created$data;
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-/* harmony default export */ __webpack_exports__["default"] = (_created$created$data = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
+    var _this = this;
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
-  }
-}, _defineProperty(_created$created$data, "created", function created() {
-  var _this = this;
-  this.getProducts();
-  this.getCategories();
-  this.getCustomers();
-  this.getCartProducts();
-  this.getExtraInfo();
-  Reload.$on('AfterAdd', function () {
-    _this.getCartProducts();
-  });
-}), _defineProperty(_created$created$data, "data", function data() {
-  return {
-    customer_id: '',
-    pay: '',
-    due: '',
-    payment_method: '',
-    products: [],
-    categories: '',
-    subproducts: [],
-    productSearchTerm: '',
-    subproductSearchTerm: '',
-    customers: '',
-    errors: '',
-    carts: [],
-    extraInfo: ''
-  };
-}), _defineProperty(_created$created$data, "computed", {
-  productsFilterSearch: function productsFilterSearch() {
-    var _this2 = this;
-    return this.products.filter(function (product) {
-      return product.product_name.match(_this2.productSearchTerm);
+    ;
+    this.getProducts();
+    this.getCategories();
+    this.getCustomers();
+    this.getCartProducts();
+    this.getExtraInfo();
+    Reload.$on('AfterAdd', function () {
+      _this.getCartProducts();
     });
   },
-  subproductsFilterSearch: function subproductsFilterSearch() {
-    var _this3 = this;
-    return this.subproducts.filter(function (subproduct) {
-      return subproduct.product_name.match(_this3.subproductSearchTerm);
-    });
-  },
-  quantity: function quantity() {
-    var quantity = 0;
-    for (var i = 0; i < this.carts.length; i++) {
-      quantity += parseInt(this.carts[i].product_quantity);
-    }
-    return quantity;
-  },
-  subtotal: function subtotal() {
-    var subtotal = 0;
-    for (var i = 0; i < this.carts.length; i++) {
-      subtotal += parseInt(this.carts[i].product_quantity) * parseFloat(this.carts[i].product_price);
-    }
-    return subtotal;
-  },
-  total: function total() {
-    var total;
-    if (this.extraInfo.tax) {
-      total = this.subtotal * (extraInfo.tax / 100) + subtotal;
-    } else {
-      total = this.subtotal;
-    }
-    return total;
-  }
-}), _defineProperty(_created$created$data, "methods", {
-  // Start cart methods
-  addToCart: function addToCart(product_id) {
-    axios.post("/api/cart/".concat(product_id)).then(function () {
-      Reload.$emit('AfterAdd');
-      Notification.cart_success();
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  getCartProducts: function getCartProducts() {
-    var _this4 = this;
-    axios.get('/api/cart/products').then(function (_ref) {
-      var data = _ref.data;
-      return _this4.carts = data;
-    })["catch"]();
-  },
-  removeItem: function removeItem(id) {
-    axios["delete"]("/api/cart/".concat(id)).then(function () {
-      Reload.$emit('AfterAdd');
-      Notification.cart_delete();
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  increment: function increment(id) {
-    axios.patch("/api/cart/products/".concat(id, "/increment")).then(function () {
-      Reload.$emit('AfterAdd');
-      Notification.success();
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  decrement: function decrement(id) {
-    axios.patch("/api/cart/products/".concat(id, "/decrement")).then(function () {
-      Reload.$emit('AfterAdd');
-      Notification.success();
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  getExtraInfo: function getExtraInfo() {
-    var _this5 = this;
-    axios.get('/api/extra').then(function (_ref2) {
-      var data = _ref2.data;
-      return _this5.extraInfo = data;
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  },
-  storeOrder: function storeOrder() {
-    var _this6 = this;
-    var data = {
-      quantity: this.quantity,
-      sub_total: this.subtotal,
-      customer_id: this.customer_id,
-      payment_method: this.payment_method,
-      pay: this.pay,
-      due: this.due,
-      tax: this.extraInfo.tax,
-      total: this.total
+  data: function data() {
+    return {
+      customer_id: '',
+      pay: '',
+      due: '',
+      payment_method: '',
+      products: [],
+      categories: '',
+      subproducts: [],
+      productSearchTerm: '',
+      subproductSearchTerm: '',
+      customers: '',
+      errors: '',
+      carts: [],
+      extraInfo: ''
     };
-    axios.post('/api/orders', data).then(function () {
-      Notification.success();
-      _this6.$router.push({
-        name: 'home'
+  },
+  computed: {
+    productsFilterSearch: function productsFilterSearch() {
+      var _this2 = this;
+      return this.products.filter(function (product) {
+        return product.product_name.match(_this2.productSearchTerm);
       });
-    });
+    },
+    subproductsFilterSearch: function subproductsFilterSearch() {
+      var _this3 = this;
+      return this.subproducts.filter(function (subproduct) {
+        return subproduct.product_name.match(_this3.subproductSearchTerm);
+      });
+    },
+    quantity: function quantity() {
+      var quantity = 0;
+      for (var i = 0; i < this.carts.length; i++) {
+        quantity += parseInt(this.carts[i].product_quantity);
+      }
+      return quantity;
+    },
+    subtotal: function subtotal() {
+      var subtotal = 0;
+      for (var i = 0; i < this.carts.length; i++) {
+        subtotal += parseInt(this.carts[i].product_quantity) * parseFloat(this.carts[i].product_price);
+      }
+      return subtotal;
+    },
+    total: function total() {
+      var total;
+      if (this.extraInfo.tax) {
+        total = this.subtotal * (extraInfo.tax / 100) + subtotal;
+      } else {
+        total = this.subtotal;
+      }
+      return total;
+    }
   },
-  // End cart methods 
-  // Start methods to fetch resources
-  getProducts: function getProducts() {
-    var _this7 = this;
-    axios.get('/api/products/').then(function (_ref3) {
-      var data = _ref3.data;
-      return _this7.products = data;
-    })["catch"]();
-  },
-  getCategories: function getCategories() {
-    var _this8 = this;
-    axios.get('/api/categories/').then(function (_ref4) {
-      var data = _ref4.data;
-      return _this8.categories = data;
-    })["catch"]();
-  },
-  getCustomers: function getCustomers() {
-    var _this9 = this;
-    axios.get('/api/customers/').then(function (_ref5) {
-      var data = _ref5.data;
-      return _this9.customers = data;
-    })["catch"]();
-  },
-  getSubproducts: function getSubproducts(category_id) {
-    var _this10 = this;
-    axios.get("/api/products/".concat(category_id)).then(function (_ref6) {
-      var data = _ref6.data;
-      return _typeof(data) == Array ? _this10.subproducts = data : _this10.subproducts.push(data);
-    })["catch"]();
-  } // End methods to fetch resources
-}), _created$created$data);
+  methods: {
+    // Start cart methods
+    addToCart: function addToCart(product_id) {
+      axios.post("/api/cart/".concat(product_id)).then(function () {
+        Reload.$emit('AfterAdd');
+        Notification.cart_success();
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getCartProducts: function getCartProducts() {
+      var _this4 = this;
+      axios.get('/api/cart/products').then(function (_ref) {
+        var data = _ref.data;
+        return _this4.carts = data;
+      })["catch"]();
+    },
+    removeItem: function removeItem(id) {
+      axios["delete"]("/api/cart/".concat(id)).then(function () {
+        Reload.$emit('AfterAdd');
+        Notification.cart_delete();
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    increment: function increment(id) {
+      axios.patch("/api/cart/products/".concat(id, "/increment")).then(function () {
+        Reload.$emit('AfterAdd');
+        // Notification.success();
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    decrement: function decrement(id) {
+      axios.patch("/api/cart/products/".concat(id, "/decrement")).then(function () {
+        Reload.$emit('AfterAdd');
+        // Notification.success();
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getExtraInfo: function getExtraInfo() {
+      var _this5 = this;
+      axios.get('/api/extra').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this5.extraInfo = data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    storeOrder: function storeOrder() {
+      var _this6 = this;
+      var data = {
+        quantity: this.quantity,
+        sub_total: this.subtotal,
+        customer_id: this.customer_id,
+        payment_method: this.payment_method,
+        pay: this.pay,
+        due: this.due,
+        tax: this.extraInfo.tax,
+        total: this.total
+      };
+      axios.post('/api/orders', data).then(function () {
+        Notification.success();
+        _this6.$router.push({
+          name: 'home'
+        });
+      });
+    },
+    // End cart methods 
+    // Start methods to fetch resources
+    getProducts: function getProducts() {
+      var _this7 = this;
+      axios.get('/api/products/').then(function (_ref3) {
+        var data = _ref3.data;
+        return _this7.products = data;
+      })["catch"]();
+    },
+    getCategories: function getCategories() {
+      var _this8 = this;
+      axios.get('/api/categories/').then(function (_ref4) {
+        var data = _ref4.data;
+        return _this8.categories = data;
+      })["catch"]();
+    },
+    getCustomers: function getCustomers() {
+      var _this9 = this;
+      axios.get('/api/customers/').then(function (_ref5) {
+        var data = _ref5.data;
+        return _this9.customers = data;
+      })["catch"]();
+    },
+    getSubproducts: function getSubproducts(category_id) {
+      var _this10 = this;
+      axios.get("/api/products/".concat(category_id)).then(function (_ref6) {
+        var data = _ref6.data;
+        return _typeof(data) == Array ? _this10.subproducts = data : _this10.subproducts.push(data);
+      })["catch"]();
+    } // End methods to fetch resources
+  }
+});
 
 /***/ }),
 
@@ -3118,17 +3099,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getCategories();
+    this.getSuppliers();
   },
   data: function data() {
     return {
@@ -3149,46 +3129,50 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     };
   },
   methods: {
-    onFileSelected: function onFileSelected(event) {
+    getCategories: function getCategories() {
       var _this = this;
+      axios.get('/api/categories/').then(function (_ref) {
+        var data = _ref.data;
+        return _this.categories = data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    getSuppliers: function getSuppliers() {
+      var _this2 = this;
+      axios.get('/api/suppliers/').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this2.suppliers = data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    onFileSelected: function onFileSelected(event) {
+      var _this3 = this;
       var file = event.target.files[0];
       if (file.size > 1048770) {
         Notification.image_validation();
       } else {
         var reader = new FileReader();
         reader.onload = function (event) {
-          _this.form.image = event.target.result;
+          _this3.form.image = event.target.result;
         };
         reader.readAsDataURL(file);
       }
     },
     ProductInsert: function ProductInsert() {
-      var _this2 = this;
+      var _this4 = this;
       axios.post('/api/products', this.form).then(function () {
-        _this2.$router.push({
+        _this4.$router.push({
           name: 'products'
         });
         Notification.success();
       })["catch"](function (error) {
-        return _this2.errors = error.response.data.errors;
+        return _this4.errors = error.response.data.errors;
       });
     }
   }
-}, "created", function created() {
-  var _this3 = this;
-  axios.get('/api/categories/').then(function (_ref) {
-    var data = _ref.data;
-    return _this3.categories = data;
-  })["catch"](function (err) {
-    return console.log(err);
-  });
-  axios.get('/api/suppliers/').then(function (_ref2) {
-    var data = _ref2.data;
-    return _this3.suppliers = data;
-  })["catch"](function (err) {
-    return console.log(err);
-  });
-}));
+});
 
 /***/ }),
 
@@ -3201,18 +3185,17 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _created$data$created;
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_created$data$created = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getCategories();
+    this.getProduct();
+    this.getSuppliers();
   },
   data: function data() {
     return {
@@ -3232,49 +3215,63 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       categories: {},
       suppliers: {}
     };
-  }
-}, _defineProperty(_created$data$created, "created", function created() {
-  var _this = this;
-  var id = this.$route.params.id;
-  axios.get('/api/products/' + id).then(function (_ref) {
-    var data = _ref.data;
-    return _this.form = data;
-  })["catch"](console.log('Error'));
-  axios.get('/api/categories/').then(function (_ref2) {
-    var data = _ref2.data;
-    return _this.categories = data;
-  })["catch"](console.log('Error'));
-  axios.get('/api/suppliers/').then(function (_ref3) {
-    var data = _ref3.data;
-    return _this.suppliers = data;
-  })["catch"](console.log('Error'));
-}), _defineProperty(_created$data$created, "methods", {
-  onFileSelected: function onFileSelected(event) {
-    var _this2 = this;
-    var file = event.target.files[0];
-    if (file.size > 1048770) {
-      Notification.image_validation();
-    } else {
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        _this2.form.newimage = event.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
   },
-  ProductUpdate: function ProductUpdate() {
-    var _this3 = this;
-    var id = this.$route.params.id;
-    axios.patch('/api/products/' + id, this.form).then(function () {
-      _this3.$router.push({
-        name: 'products'
+  methods: {
+    getProduct: function getProduct() {
+      var _this = this;
+      var id = this.$route.params.id;
+      axios.get('/api/products/' + id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.form = data;
+      })["catch"](function (error) {
+        return console.log(error);
       });
-      Notification.success();
-    })["catch"](function (error) {
-      return _this3.errors = error.response.data.errors;
-    });
+    },
+    getCategories: function getCategories() {
+      var _this2 = this;
+      axios.get('/api/categories/').then(function (_ref2) {
+        var data = _ref2.data;
+        return _this2.categories = data;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+    getSuppliers: function getSuppliers() {
+      var _this3 = this;
+      axios.get('/api/suppliers/').then(function (_ref3) {
+        var data = _ref3.data;
+        return _this3.suppliers = data;
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+    onFileSelected: function onFileSelected(event) {
+      var _this4 = this;
+      var file = event.target.files[0];
+      if (file.size > 1048770) {
+        Notification.image_validation();
+      } else {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          _this4.form.newimage = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    ProductUpdate: function ProductUpdate() {
+      var _this5 = this;
+      var id = this.$route.params.id;
+      axios.patch('/api/products/' + id, this.form).then(function () {
+        _this5.$router.push({
+          name: 'products'
+        });
+        Notification.success();
+      })["catch"](function (error) {
+        return _this5.errors = error.response.data.errors;
+      });
+    }
   }
-}), _created$data$created);
+});
 
 /***/ }),
 
@@ -3287,18 +3284,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _created$data$created;
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_created$data$created = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getProduct();
   },
   data: function data() {
     return {
@@ -3307,28 +3301,30 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       },
       errors: {}
     };
-  }
-}, _defineProperty(_created$data$created, "created", function created() {
-  var _this = this;
-  var id = this.$route.params.id;
-  axios.get('/api/products/' + id).then(function (_ref) {
-    var data = _ref.data;
-    return _this.form = data;
-  })["catch"](console.log('Error'));
-}), _defineProperty(_created$data$created, "methods", {
-  StockUpdate: function StockUpdate() {
-    var _this2 = this;
-    var id = this.$route.params.id;
-    axios.post('/api/stock/update/' + id, this.form).then(function () {
-      _this2.$router.push({
-        name: 'stock'
+  },
+  methods: {
+    getProduct: function getProduct() {
+      var _this = this;
+      var id = this.$route.params.id;
+      axios.get('/api/products/' + id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.form = data;
+      })["catch"](console.log('Error'));
+    },
+    StockUpdate: function StockUpdate() {
+      var _this2 = this;
+      var id = this.$route.params.id;
+      axios.post('/api/stock/update/' + id, this.form).then(function () {
+        _this2.$router.push({
+          name: 'stock'
+        });
+        Notification.success();
+      })["catch"](function (error) {
+        return _this2.errors = error.response.data.errors;
       });
-      Notification.success();
-    })["catch"](function (error) {
-      return _this2.errors = error.response.data.errors;
-    });
+    }
   }
-}), _created$data$created);
+});
 
 /***/ }),
 
@@ -3341,17 +3337,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.listProducts();
   },
   data: function data() {
     return {
@@ -3401,9 +3395,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
     }
   }
-}, "created", function created() {
-  this.listProducts();
-}));
+});
 
 /***/ }),
 
@@ -3416,17 +3408,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.listProducts();
   },
   data: function data() {
     return {
@@ -3451,9 +3441,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       })["catch"](console.log('Error'));
     }
   }
-}, "created", function created() {
-  this.listProducts();
-}));
+});
 
 /***/ }),
 
@@ -3466,17 +3454,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getEmployees();
   },
   data: function data() {
     return {
@@ -3503,9 +3489,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
     }
   }
-}, "created", function created() {
-  this.getEmployees();
-}));
+});
 
 /***/ }),
 
@@ -3518,18 +3502,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _created$data$created;
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_created$data$created = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getEmployee();
   },
   data: function data() {
     return {
@@ -3541,28 +3522,30 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       },
       errors: {}
     };
-  }
-}, _defineProperty(_created$data$created, "created", function created() {
-  var _this = this;
-  var id = this.$route.params.employee_id;
-  axios.get('/api/employees/' + id).then(function (_ref) {
-    var data = _ref.data;
-    return _this.form = data;
-  })["catch"](console.log('Error'));
-}), _defineProperty(_created$data$created, "methods", {
-  registerPayment: function registerPayment() {
-    var _this2 = this;
-    var id = this.$route.params.employee_id;
-    axios.post("/api/salaries/".concat(id, "/pay"), this.form).then(function () {
-      _this2.$router.push({
-        name: 'employees-salaries'
+  },
+  methods: {
+    getEmployee: function getEmployee() {
+      var _this = this;
+      var id = this.$route.params.employee_id;
+      axios.get('/api/employees/' + id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.form = data;
+      })["catch"](console.log('Error'));
+    },
+    registerPayment: function registerPayment() {
+      var _this2 = this;
+      var id = this.$route.params.employee_id;
+      axios.post("/api/salaries/".concat(id, "/pay"), this.form).then(function () {
+        _this2.$router.push({
+          name: 'employees-salaries'
+        });
+        Notification.success();
+      })["catch"](function (error) {
+        return _this2.errors = error.response.data.errors;
       });
-      Notification.success();
-    })["catch"](function (error) {
-      return _this2.errors = error.response.data.errors;
-    });
+    }
   }
-}), _created$data$created);
+});
 
 /***/ }),
 
@@ -3575,18 +3558,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _created$data$created;
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_created$data$created = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getSalaryPayment();
   },
   data: function data() {
     return {
@@ -3599,28 +3579,30 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       },
       errors: {}
     };
-  }
-}, _defineProperty(_created$data$created, "created", function created() {
-  var _this = this;
-  var id = this.$route.params.id;
-  axios.get("/api/salaries/".concat(id, "/edit/")).then(function (_ref) {
-    var data = _ref.data;
-    return _this.form = data;
-  })["catch"](console.log('Error'));
-}), _defineProperty(_created$data$created, "methods", {
-  salaryUpdate: function salaryUpdate() {
-    var _this2 = this;
-    var id = this.$route.params.id;
-    axios.post("/api/salaries/".concat(id, "/update/"), this.form).then(function () {
-      _this2.$router.push({
-        name: 'salaries'
+  },
+  methods: {
+    getSalaryPayment: function getSalaryPayment() {
+      var _this = this;
+      var id = this.$route.params.id;
+      axios.get("/api/salaries/".concat(id, "/edit/")).then(function (_ref) {
+        var data = _ref.data;
+        return _this.form = data;
+      })["catch"](console.log('Error'));
+    },
+    salaryUpdate: function salaryUpdate() {
+      var _this2 = this;
+      var id = this.$route.params.id;
+      axios.post("/api/salaries/".concat(id, "/update/"), this.form).then(function () {
+        _this2.$router.push({
+          name: 'salaries'
+        });
+        Notification.success();
+      })["catch"](function (error) {
+        return _this2.errors = error.response.data.errors;
       });
-      Notification.success();
-    })["catch"](function (error) {
-      return _this2.errors = error.response.data.errors;
-    });
+    }
   }
-}), _created$data$created);
+});
 
 /***/ }),
 
@@ -3633,17 +3615,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.listPayments();
   },
   data: function data() {
     return {
@@ -3668,9 +3648,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       })["catch"]();
     }
   }
-}, "created", function created() {
-  this.listPayments();
-}));
+});
 
 /***/ }),
 
@@ -3683,17 +3661,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.getPayments();
   },
   data: function data() {
     return {
@@ -3721,9 +3697,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
     }
   }
-}, "created", function created() {
-  this.getPayments();
-}));
+});
 
 /***/ }),
 
@@ -3795,18 +3769,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _created$data$created;
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_created$data$created = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: '/'
       });
     }
+    ;
+    this.getSuppliers;
   },
   data: function data() {
     return {
@@ -3820,41 +3791,43 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       },
       errors: {}
     };
-  }
-}, _defineProperty(_created$data$created, "created", function created() {
-  var _this = this;
-  var id = this.$route.params.id;
-  axios.get('/api/suppliers/' + id).then(function (_ref) {
-    var data = _ref.data;
-    return _this.form = data;
-  })["catch"](console.log('error'));
-}), _defineProperty(_created$data$created, "methods", {
-  onFileSelected: function onFileSelected(event) {
-    var _this2 = this;
-    var file = event.target.files[0];
-    if (file.size > 1048770) {
-      Notification.image_validation();
-    } else {
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        _this2.form.newphoto = event.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
   },
-  supplierUpdate: function supplierUpdate() {
-    var _this3 = this;
-    var id = this.$route.params.id;
-    axios.patch('/api/suppliers/' + id, this.form).then(function () {
-      _this3.$router.push({
-        name: 'suppliers'
+  methods: {
+    getSuppliers: function getSuppliers() {
+      var _this = this;
+      var id = this.$route.params.id;
+      axios.get('/api/suppliers/' + id).then(function (_ref) {
+        var data = _ref.data;
+        return _this.form = data;
+      })["catch"](console.log('error'));
+    },
+    onFileSelected: function onFileSelected(event) {
+      var _this2 = this;
+      var file = event.target.files[0];
+      if (file.size > 1048770) {
+        Notification.image_validation();
+      } else {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          _this2.form.newphoto = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+    supplierUpdate: function supplierUpdate() {
+      var _this3 = this;
+      var id = this.$route.params.id;
+      axios.patch('/api/suppliers/' + id, this.form).then(function () {
+        _this3.$router.push({
+          name: 'suppliers'
+        });
+        Notification.success();
+      })["catch"](function (error) {
+        return _this3.errors = error.response.data.errors;
       });
-      Notification.success();
-    })["catch"](function (error) {
-      return _this3.errors = error.response.data.errors;
-    });
+    }
   }
-}), _created$data$created);
+});
 
 /***/ }),
 
@@ -3867,17 +3840,15 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-/* harmony default export */ __webpack_exports__["default"] = (_defineProperty({
+/* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
       });
     }
+    ;
+    this.listSuppliers();
   },
   data: function data() {
     return {
@@ -3927,9 +3898,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
     }
   }
-}, "created", function created() {
-  this.listSuppliers();
-}));
+});
 
 /***/ }),
 
@@ -6783,7 +6752,7 @@ var render = function render() {
         value: cart.product_quantity
       }
     }), _vm._v(" "), _c("button", {
-      staticClass: "btn btn-sm btn-success",
+      staticClass: "btn btn-sm btn-success table-tbn",
       on: {
         click: function click($event) {
           $event.preventDefault();
@@ -6791,7 +6760,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("+")]), _vm._v(" "), cart.product_quantity >= 2 ? _c("button", {
-      staticClass: "btn btn-sm btn-danger",
+      staticClass: "btn btn-sm btn-danger table-tbn",
       on: {
         click: function click($event) {
           $event.preventDefault();
@@ -6799,12 +6768,14 @@ var render = function render() {
         }
       }
     }, [_vm._v("-")]) : _c("button", {
-      staticClass: "btn btn-sm btn-danger",
+      staticClass: "btn btn-sm btn-danger table-tbn",
       attrs: {
         disabled: ""
       }
-    }, [_vm._v("-")])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cart.product_price))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cart.sub_total))]), _vm._v(" "), _c("td", [_c("a", {
-      staticClass: "btn btn-sm btn-primary",
+    }, [_vm._v("-")])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cart.product_price))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cart.sub_total))]), _vm._v(" "), _c("td", {
+      staticClass: "pr-3"
+    }, [_c("a", {
+      staticClass: "btn btn-sm btn-primary table-tbn",
       on: {
         click: function click($event) {
           return _vm.removeItem(cart.id);
@@ -6814,7 +6785,7 @@ var render = function render() {
       attrs: {
         color: "#ffffff"
       }
-    }, [_vm._v("X")])], 1)])]);
+    }, [_vm._v("x")])], 1)])]);
   }), 0)])]), _vm._v(" "), _c("div", {
     staticClass: "card-footer"
   }, [_c("ul", {
@@ -7117,7 +7088,9 @@ var staticRenderFns = [function () {
     _c = _vm._self._c;
   return _c("thead", {
     staticClass: "thead-light"
-  }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Quantidade")]), _vm._v(" "), _c("th", [_vm._v("Unidade")]), _vm._v(" "), _c("th", [_vm._v("Total")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
+  }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Quantidade")]), _vm._v(" "), _c("th", [_vm._v("Unidade")]), _vm._v(" "), _c("th", [_vm._v("Total")]), _vm._v(" "), _c("th", {
+    staticClass: "pr-3"
+  }, [_vm._v("Ação")])])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -14421,7 +14394,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#em_photo[data-v-3ec65048] {\n  height: 100px;\n  width: 135px;\n}\n", ""]);
+exports.push([module.i, "\n#em_photo[data-v-3ec65048] {\n  height: 100px;\n  width: 135px;\n}\n.table-tbn[data-v-3ec65048] {\n  line-height: 1;\n  width:16px;\n  text-align: center;\n  padding-inline: 2px;\n}\n", ""]);
 
 // exports
 

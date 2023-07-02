@@ -57,8 +57,10 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.listCustomers();
     },
+
     data() {
         return {
             customers: [],
@@ -66,6 +68,7 @@ export default {
             errors: {}
         }
     },
+
     computed: {
         filtersearch() {
             return this.customers.filter(customer => {
@@ -73,12 +76,14 @@ export default {
             })
         }
     },
+
     methods: {
         listCustomers() {
             axios.get('/api/customers/')
                 .then(({ data }) => (this.customers = data))
                 .catch(error => this.errors = error.response.data.errors)
         },
+        
         deleteCustomer(id) {
             Swal.fire({
                 title: 'Você tem certeza?',
@@ -107,9 +112,6 @@ export default {
                 }
             })
         }
-    },
-    created() {
-        this.listCustomers();
     }
 } 
 </script>

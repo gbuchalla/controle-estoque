@@ -28,7 +28,7 @@
                     <th>Quantidade</th>
                     <th>Unidade</th>
                     <th>Total</th>
-                    <th>Ação</th>
+                    <th class="pr-3">Ação</th>
                   </tr>
                 </thead>
 
@@ -37,16 +37,16 @@
                     <td>{{ cart.product_name }}</td>
                     <td>
                       <input type="text" readonly="" style="width: 15px;" :value="cart.product_quantity">
-                      <button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success">+</button>
-                      <button @click.prevent="decrement(cart.id)" class="btn btn-sm btn-danger"
+                      <button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success table-tbn ">+</button>
+                      <button @click.prevent="decrement(cart.id)" class="btn btn-sm btn-danger table-tbn "
                         v-if="cart.product_quantity >= 2">-</button>
-                      <button class="btn btn-sm btn-danger" v-else="" disabled="">-</button>
+                      <button class="btn btn-sm btn-danger table-tbn " v-else="" disabled="">-</button>
                     </td>
                     <td>{{ cart.product_price }}</td>
                     <td>{{ cart.sub_total }}</td>
-                    <td>
-                      <a @click="removeItem(cart.id)" class="btn btn-sm btn-primary">
-                        <font color="#ffffff">X</font>
+                    <td class="pr-3">
+                      <a @click="removeItem(cart.id)" class="btn btn-sm btn-primary table-tbn ">
+                        <font color="#ffffff">x</font>
                       </a>
                     </td>
                   </tr>
@@ -179,10 +179,7 @@ export default {
   created() {
     if (!User.loggedIn()) {
       this.$router.push({ name: 'login' });
-    }
-  },
-
-  created() {
+    };
     this.getProducts();
     this.getCategories();
     this.getCustomers();
@@ -191,7 +188,6 @@ export default {
     Reload.$on('AfterAdd', () => {
       this.getCartProducts();
     });
-
   },
 
   data() {
@@ -210,7 +206,6 @@ export default {
       errors: '',
       carts: [],
       extraInfo: ''
-
     }
   },
 
@@ -220,11 +215,13 @@ export default {
         return product.product_name.match(this.productSearchTerm);
       })
     },
+
     subproductsFilterSearch() {
       return this.subproducts.filter(subproduct => {
         return subproduct.product_name.match(this.subproductSearchTerm);
       })
     },
+
     quantity() {
       let quantity = 0;
       for (let i = 0; i < this.carts.length; i++) {
@@ -232,6 +229,7 @@ export default {
       }
       return quantity;
     },
+
     subtotal() {
       let subtotal = 0;
       for (let i = 0; i < this.carts.length; i++) {
@@ -239,6 +237,7 @@ export default {
       }
       return subtotal;
     },
+
     total() {
       let total
       if (this.extraInfo.tax) {
@@ -261,11 +260,13 @@ export default {
         })
         .catch(err => console.log(err));
     },
+
     getCartProducts() {
       axios.get('/api/cart/products')
         .then(({ data }) => (this.carts = data))
         .catch();
     },
+
     removeItem(id) {
       axios.delete(`/api/cart/${id}`)
         .then(() => {
@@ -274,27 +275,31 @@ export default {
         })
         .catch(err => console.log(err));
     },
+
     increment(id) {
       axios.patch(`/api/cart/products/${id}/increment`)
         .then(() => {
           Reload.$emit('AfterAdd');
-          Notification.success();
+          // Notification.success();
         })
         .catch(err => console.log(err));
     },
+
     decrement(id) {
       axios.patch(`/api/cart/products/${id}/decrement`)
         .then(() => {
           Reload.$emit('AfterAdd');
-          Notification.success();
+          // Notification.success();
         })
         .catch(err => console.log(err));
     },
+
     getExtraInfo() {
       axios.get('/api/extra')
         .then(({ data }) => (this.extraInfo = data))
         .catch(err => console.log(err));
     },
+
     storeOrder() {
       let data = { quantity: this.quantity, sub_total: this.subtotal, customer_id: this.customer_id, payment_method: this.payment_method, pay: this.pay, due: this.due, tax: this.extraInfo.tax, total: this.total }
 
@@ -312,16 +317,19 @@ export default {
         .then(({ data }) => (this.products = data))
         .catch();
     },
+
     getCategories() {
       axios.get('/api/categories/')
         .then(({ data }) => (this.categories = data))
         .catch();
     },
+
     getCustomers() {
       axios.get('/api/customers/')
         .then(({ data }) => (this.customers = data))
         .catch();
     },
+    
     getSubproducts(category_id) {
       axios.get(`/api/products/${category_id}`)
         .then(({ data }) => {
@@ -340,5 +348,11 @@ export default {
 #em_photo {
   height: 100px;
   width: 135px;
+}
+.table-tbn {
+  line-height: 1;
+  width:16px;
+  text-align: center;
+  padding-inline: 2px;
 }
 </style>

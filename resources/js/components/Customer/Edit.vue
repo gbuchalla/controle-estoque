@@ -88,7 +88,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getCustomer();
     },
 
     data() {
@@ -105,14 +106,14 @@ export default {
         }
     },
 
-    created() {
-        let id = this.$route.params.id
-        axios.get('/api/customers/' + id)
-            .then(({ data }) => (this.form = data))
-            .catch(error => this.errors = error.response.data.errors)
-    },
-
     methods: {
+        getCustomer() {
+            let id = this.$route.params.id
+            axios.get('/api/customers/' + id)
+                .then(({ data }) => (this.form = data))
+                .catch(error => this.errors = error.response.data.errors)
+        },
+
         onFileSelected(event) {
             let file = event.target.files[0];
             if (file.size > 1048770) {
@@ -125,6 +126,7 @@ export default {
                 reader.readAsDataURL(file);
             }
         },
+
         customerUpdate() {
             let id = this.$route.params.id
             axios.patch('/api/customers/' + id, this.form)

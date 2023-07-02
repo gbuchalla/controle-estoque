@@ -137,7 +137,9 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getCategories();
+        this.getSuppliers();
     },
 
     data() {
@@ -160,6 +162,16 @@ export default {
     },
 
     methods: {
+        getCategories() {
+            axios.get('/api/categories/')
+                .then(({ data }) => (this.categories = data))
+                .catch(err => console.log(err))
+        },
+        getSuppliers() {
+            axios.get('/api/suppliers/')
+                .then(({ data }) => (this.suppliers = data))
+                .catch(err => console.log(err))
+        },
         onFileSelected(event) {
             let file = event.target.files[0];
             if (file.size > 1048770) {
@@ -180,15 +192,6 @@ export default {
                 })
                 .catch(error => this.errors = error.response.data.errors)
         },
-    },
-    created() {
-        axios.get('/api/categories/')
-            .then(({ data }) => (this.categories = data))
-            .catch(err => console.log(err))
-
-        axios.get('/api/suppliers/')
-            .then(({ data }) => (this.suppliers = data))
-            .catch(err => console.log(err))
     }
 }
 </script>

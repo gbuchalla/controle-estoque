@@ -119,7 +119,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: '/' })
-        }
+        };
+        this.getSuppliers;
     },
 
     data() {
@@ -136,14 +137,14 @@ export default {
             errors: {}
         }
     },
-    created() {
-        let id = this.$route.params.id
-        axios.get('/api/suppliers/' + id)
-            .then(({ data }) => (this.form = data))
-            .catch(console.log('error'))
-    },
-
+   
     methods: {
+        getSuppliers() {
+            let id = this.$route.params.id
+            axios.get('/api/suppliers/' + id)
+                .then(({ data }) => (this.form = data))
+                .catch(console.log('error'))
+        },
         onFileSelected(event) {
             let file = event.target.files[0];
             if (file.size > 1048770) {
@@ -168,8 +169,6 @@ export default {
                 .catch(error => this.errors = error.response.data.errors)
         },
     }
-
-
 }
    
 </script>

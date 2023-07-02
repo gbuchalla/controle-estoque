@@ -48,7 +48,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.listPayments();
     },
 
     data() {
@@ -72,10 +73,6 @@ export default {
                 .then(({ data }) => (this.salaries = data))
                 .catch()
         },
-    },
-
-    created() {
-        this.listPayments();
     }
 }
 

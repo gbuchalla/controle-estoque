@@ -53,14 +53,17 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.listCategories();
     },
+
     data() {
         return {
             categories: [],
             searchTerm: ''
         }
     },
+    
     computed: {
         filtersearch() {
             return this.categories.filter(category => {
@@ -104,10 +107,8 @@ export default {
                 }
             })
         }
-    },
-    created() {
-        this.listCategories();
     }
+ 
 } 
 </script>
 

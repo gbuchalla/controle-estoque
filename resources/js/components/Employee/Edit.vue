@@ -123,7 +123,8 @@ export default {
     created() {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
-        }
+        };
+        this.getEmployees();
     },
 
     data() {
@@ -142,14 +143,14 @@ export default {
             errors: {}
         }
     },
-    created() {
-        let id = this.$route.params.id
-        axios.get('/api/employees/' + id)
-            .then(({ data }) => this.form = data)
-            .catch(console.log('error'))
-    },
-
+    
     methods: {
+        getEmployees() {
+            let id = this.$route.params.id
+            axios.get('/api/employees/' + id)
+                .then(({ data }) => this.form = data)
+                .catch(console.log('error'))
+        },
         onFileSelected(event) {
             let file = event.target.files[0];
             if (file.size > 1048770) {
