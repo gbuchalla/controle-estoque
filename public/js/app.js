@@ -2689,6 +2689,12 @@ __webpack_require__.r(__webpack_exports__);
         name: 'login'
       });
     }
+    ;
+    this.getTodaySold();
+    this.getTodayIncome();
+    this.getTodayDue();
+    this.getTodayExpense();
+    this.getStockOut();
   },
   data: function data() {
     return {
@@ -2703,13 +2709,6 @@ __webpack_require__.r(__webpack_exports__);
     date: function date() {
       return new Date().toLocaleDateString('pt-br');
     }
-  },
-  mounted: function mounted() {
-    this.getTodaySold();
-    this.getTodayIncome();
-    this.getTodayDue();
-    this.getTodayExpense();
-    this.getStockOut();
   },
   methods: {
     getTodaySold: function getTodaySold() {
@@ -3912,7 +3911,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
+  created: function created() {
     if (localStorage.getItem('token')) {
       this.$router.push({
         name: 'home'
@@ -3932,25 +3931,25 @@ __webpack_require__.r(__webpack_exports__);
     login: function login() {
       var _this = this;
       axios.post('/api/auth/login', this.form).then(function (res) {
-        console.log(res); // Deletar em prod env
+        console.log(res);
         User.storeDataIfValid(res);
         _this.$router.push({
           name: 'home'
-        });
-        Toast.fire({
+        }).then(Toast.fire({
           icon: 'success',
           title: 'Login feito com sucesso'
-        });
+        }));
       })["catch"](function (error) {
-        if (error.response.data.errors) {
-          _this.errors = error.response.data.errors;
+        if (error.response.data.error) {
+          _this.errors = error.response.data.error;
+          Toast.fire({
+            icon: 'warning',
+            title: 'Email e/ou senha incorretos'
+          });
         } else {
           _this.errors = '';
         }
-      })["catch"](Toast.fire({
-        icon: 'warning',
-        title: 'Email e/ou senha incorretos'
-      }));
+      });
     }
   }
 });
@@ -6147,7 +6146,7 @@ var render = function render() {
     staticClass: "col mr-2"
   }, [_c("div", {
     staticClass: "text-xs font-weight-bold text-uppercase mb-1"
-  }, [_vm._v("Valor vendido  ")]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Valor vendido ")]), _vm._v(" "), _c("div", {
     staticClass: "h5 mb-0 font-weight-bold text-gray-800"
   }, [_vm._v("R$ " + _vm._s(_vm.sold))]), _vm._v(" "), _c("div", {
     staticClass: "mt-2 mb-0 text-muted text-xs"

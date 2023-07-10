@@ -50,7 +50,7 @@
 <script>
 
 export default {
-    mounted () {
+    created () {
         if (localStorage.getItem('token')) {
             this.$router.push({name: 'home'});
         }
@@ -68,27 +68,26 @@ export default {
         login() {
             axios.post('/api/auth/login', this.form)
                 .then(res => {
-                    console.log(res); // Deletar em prod env
+                    console.log(res);
                     User.storeDataIfValid(res);
-                    this.$router.push({ name: 'home' });
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Login feito com sucesso'
-                    });
+                    this.$router.push({ name: 'home' })
+                        .then(Toast.fire({
+                            icon: 'success',
+                            title: 'Login feito com sucesso'
+                        }));
                 })
                 .catch(error => {
-                    if (error.response.data.errors) {
-                        this.errors = error.response.data.errors;
+                    if (error.response.data.error) {
+                        this.errors = error.response.data.error;
+                        Toast.fire({
+                            icon: 'warning',
+                            title: 'Email e/ou senha incorretos'
+                        })
                     } else {
                         this.errors = '';
                     }
                 })
-                .catch(
-                    Toast.fire({
-                        icon: 'warning',
-                        title: 'Email e/ou senha incorretos'
-                    })
-                )
+               
         }
     }   
 }
