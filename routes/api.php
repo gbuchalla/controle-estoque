@@ -56,7 +56,7 @@ Route::patch('/cart/products/{id}/decrement', 'CartController@decrementProduct')
 Route::get('/extra', 'CartController@getExtraInfo');
 
 // Point of Sale Routes 
-Route::get('/products/{category_id}', 'PosController@getFilteredProducts');
+Route::get('/products/categories/{category_id}', 'PosController@getFilteredProducts');
 Route::post('/orders', 'PosController@storeOrder');
 
 // Orders Routes

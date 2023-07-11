@@ -2912,7 +2912,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
     var _this = this;
@@ -3079,9 +3078,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     },
     getSubproducts: function getSubproducts(category_id) {
       var _this10 = this;
-      axios.get("/api/products/".concat(category_id)).then(function (_ref6) {
+      axios.get("/api/products/categories/".concat(category_id)).then(function (_ref6) {
         var data = _ref6.data;
-        return _typeof(data) == Array ? _this10.subproducts = data : _this10.subproducts.push(data);
+        return _this10.subproducts = data;
       })["catch"]();
     } // End methods to fetch resources
   }
@@ -4261,7 +4260,9 @@ var render = function render() {
   }, [_c("router-link", {
     staticClass: "btn btn-primary",
     attrs: {
-      to: "/categories-create"
+      to: {
+        name: "categories-create"
+      }
     }
   }, [_vm._v("Adicionar categoria")])], 1), _vm._v(" "), _c("br"), _vm._v(" "), _c("input", {
     directives: [{

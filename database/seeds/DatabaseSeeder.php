@@ -1,6 +1,5 @@
 <?php
 
-// use Database\Seeder\SupplierSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +13,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SupplierSeeder::class,
-            CustomerSeeder::class
+            CustomerSeeder::class,
+            ProductSeeder::class
         ]);
     }
 }

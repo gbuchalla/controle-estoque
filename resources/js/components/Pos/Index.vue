@@ -331,9 +331,9 @@ export default {
     },
     
     getSubproducts(category_id) {
-      axios.get(`/api/products/${category_id}`)
+      axios.get(`/api/products/categories/${category_id}`)
         .then(({ data }) => {
-          return typeof (data) == Array ? this.subproducts = data : this.subproducts.push(data);
+          return this.subproducts = data;
         })
         .catch();
     }

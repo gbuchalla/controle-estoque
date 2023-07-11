@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row">
-            <router-link to="/categories-create" class="btn btn-primary">Adicionar categoria</router-link>
+            <router-link :to="{ name: 'categories-create'}" class="btn btn-primary">Adicionar categoria</router-link>
         </div>
 
         <br>
