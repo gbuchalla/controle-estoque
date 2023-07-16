@@ -31,7 +31,7 @@ class OrderSeeder extends Seeder
                 'pay' => $pay = rand($total / 2, $total),
                 'due' => $total - $pay,
                 'payment_method' => ['Dinheiro', 'Crédito', 'Débito', 'Pix'][rand(0, 3)],
-                'order_date' => date('d/m/Y', $time = strtotime('-' . rand(1, 7) . ' days')),
+                'order_date' => date('d/m/Y', $time = strtotime('-' . rand(0, 7) . ' days')),
                 'order_month' => ucfirst(Carbon::parseFromLocale(date('F', $time), 'pt-BR')->translatedFormat('F')),
                 'order_year' => date('Y', $time)
             ]);
