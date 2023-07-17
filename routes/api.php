@@ -67,8 +67,7 @@ Route::post('/orders/search', 'OrderController@searchByDate');
 
 // Dashboard Routes
 
-Route::get('/today/sold', 'DashboardController@getTodaySold');
-Route::get('/today/income', 'DashboardController@getTodayIncome');
-Route::get('/today/due', 'DashboardController@getTodayDue');
-Route::get('/today/expense', 'DashboardController@getTodayExpense');
+Route::get('/today/sales', 'DashboardController@getTodaySales');
+Route::get('/month/sales', 'DashboardController@getMonthSales');
+Route::get('/month/expense', 'DashboardController@getMonthExpenses');
 Route::get('/dashboard/products/stockout', 'DashboardController@getStockOut');

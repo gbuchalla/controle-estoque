@@ -30,10 +30,8 @@ class SalarySeeder extends Seeder
                 Salary::create([
                     'employee_id' => $employee['id'],
                     'amount' => $employee['salary'],
-                    //'salary_date' => '10/' . date('m/Y', $time = strtotime('-' . $i . ' months')),
                     'salary_date' => '10/' . $dateToday->copy()->subMonths($m)->format('m/Y'),
-                    'salary_month' => $dateToday->copy()->subMonths($m)->locale('pt-BR')->translatedFormat('F'),
-                    //'salary_month' => ucfirst(Carbon::parseFromLocale(date('F', $time), 'pt-BR')->translatedFormat('F')),
+                    'salary_month' => ucfirst($dateToday->copy()->subMonths($m)->locale('pt-BR')->translatedFormat('F')),
                     'salary_year' => $dateToday->copy()->subMonths($m)->format('Y')
                 ]);
             }

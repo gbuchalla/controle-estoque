@@ -3,51 +3,61 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
+    private $current_month;
+    private $current_date;
 
-    public function getTodaySold()
+
+    public function __construct()
     {
-        $current_date = date('d/m/Y');
-        $sold = DB::table('orders')->where('order_date', $current_date)->sum('total');
+        $this->current_month = ucfirst(Carbon::now()->locale('pt-BR')->translatedFormat('F'));
+        $this->current_date = Carbon::now()->format('d/m/Y');
+    }
+
+
+    public function getMonthSales()
+    {
+        $sold = DB::table('orders')->where('order_month', $this->current_month)->sum('total');
 
         return response()->json($sold, 200);
     }
 
 
-    public function getTodayIncome()
+    public function getTodaySales()
     {
-        $current_date = date('d/m/Y');
-        $income = DB::table('orders')->where('order_date', $current_date)->sum('pay');
+        $current_date = $this->current_date;
+        $sales = DB::table('orders')->where('order_date', $current_date)->sum('total');
 
-        return response()->json($income, 200);
+        return response()->json($sales, 200);
     }
 
 
-    public function getTodayDue()
+    public function getMonthExpenses()
     {
-        $current_date = date('d/m/Y');
-        $todaydue = DB::table('orders')->where('order_date', $current_date)->sum('due');
+        $current_month = $this->current_month;
 
-        return response()->json($todaydue, 200);
+        $expenses = DB::table('expenses')->get()->filter(function ($expense, $key) {
+            $expense_date = $expense->expense_date;
+            return $this->current_month == 
+                ucfirst(Carbon::createFromFormat('d/m/Y', $expense_date)->locale('pt-BR')->translatedFormat('F'));
+        });
+
+        $expenses_sum = $expenses->sum('amount');
+
+        $salary_payments = DB::table('salaries')->where('salary_month', $current_month)->sum('amount');
+
+        $total_expense = $expenses_sum +  $salary_payments;
+
+        return response()->json($total_expense, 200);
     }
 
 
-    public function getTodayExpense()
-    {
-        $current_date = date('d/m/Y');
-        $expense = DB::table('expenses')->where('expense_date', $current_date)->sum('amount');
-
-        return response()->json($expense, 200);
-    }
-
-    
     public function getStockOut()
     {
-        // echo ('aaa');
         $products = DB::table('products')->where('product_quantity', '<', '1')->get();
         return response()->json($products, 200);
     }
