@@ -32,14 +32,14 @@
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
                     <router-link :to="{name: 'home'}" class="nav-link">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <i class="fas fa-chart-line"></i>
                         <span>Dashboard</span>
                     </router-link>
                 </li>
 
                 <li class="nav-item">
                     <router-link class="nav-link" :to="{name: 'pos'}">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <i class="fas fa-cash-register"></i>
                         <span>Caixa - Registro de Ordens</span>
                     </router-link>
                 </li>

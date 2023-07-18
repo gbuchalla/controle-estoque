@@ -2,7 +2,10 @@
   <div>
     <div class="container-fluid" id="container-wrapper">
       <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Caixa para registro de ordens</h1>
+        <h1 class="h3 mb-0 text-gray-800">
+          <i class="fas fa-cash-register mr-2 title-icon"></i>
+          <span> Caixa para registro de ordens</span>
+        </h1>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><router-link :to="{name: 'home'}">Início</router-link></li>
           <li class="breadcrumb-item active" aria-current="page">Caixa</li>
@@ -15,7 +18,7 @@
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 
               <!-- TODO: COLOCAR UM ROUTER-LINK P/ EXPENSES-CREATE E UM P/ CUSTOMERS-CREATE -->
-              <router-link :to="{ name: 'expenses-create' }" class="m-0 font-weight-bold text-primary">Inserir despesa</router-link> 
+              <router-link :to="{ name: 'expenses-create'}" class="m-0 font-weight-bold text-primary">Inserir despesa</router-link> 
               <router-link :to="{name: 'customers-create'}" class="btn btn-sm btn-info">
                 <font color="#ffffff">Adicionar cliente</font>
               </router-link>

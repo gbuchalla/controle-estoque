@@ -2,89 +2,77 @@
     <div>
         <div class="container-fluid">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Painel de visão geral</h1>
-
+                <h1 class="h3 mb-0 text-gray-800">
+                    <i class="fas fa-chart-line mr-2 title-icon"></i>
+                    <span>Painel de visão geral</span></h1>
             </div>
 
             <div class="row mb-3 justify-content-center">
-                <!-- Sold (today) card -->
+                <!-- Sold (month) card -->
                 <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card h-100">
+                    <div class="card border-success h-100">
                         <div class="card-body">
                             <div class="row align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-uppercase mb-1">Valor vendido </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ sold }}</div>
+                                    <div class="text-xs font-weight-bold text-uppercase mb-1">Vendas no mês</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ sales_month }}</div>
+                                    <div class="mt-2 mb-0 text-muted text-xs">
+                                        <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
+                                        <span>Mês: {{ date.slice(3) }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-arrow-up text-success mr-1"></i>
+                                    <i class="fas fa-dollar-sign text-success"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Expenditure (month) card -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-danger h-100">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-uppercase mb-1">Despesas no mês</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ expenses }} </div>
+                                    <div class="mt-2 mb-0 text-muted text-xs">
+                                        <span>Mês: {{ date.slice(3) }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-arrow-down text-danger mr-1"></i>
+                                    <i class="fas fa-dollar-sign text-danger"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            <!-- Sold (today) card -->
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-success h-100">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-uppercase mb-1">Vendas no dia</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ sales_day }}</div>
                                     <div class="mt-2 mb-0 text-muted text-xs">
                                         <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
                                         <span>Hoje - {{ date }}</span>
                                     </div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-calendar fa-2x text-primary"></i>
+                                    <i class="fas fa-arrow-up text-success mr-1"></i>
+                                    <i class="fas fa-dollar-sign text-success"></i>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Income/Earnings (today) card -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-uppercase mb-1">Valor recebido </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$ {{ income }} </div>
-                                    <div class="mt-2 mb-0 text-muted text-xs">
-                                        <span>Hoje - {{ date }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-shopping-cart fa-2x text-success"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Due (today) card -->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-uppercase mb-1">Saldo devedor gerado </div>
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">$ {{ due }} </div>
-                                    <div class="mt-2 mb-0 text-muted text-xs">
-                                        <span>Hoje - {{ date }}</span>
-                                    </div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fas fa-users fa-2x text-info"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Expenditure (today) card -->
-                <div class="card h-100">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">Despesas </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$ {{ expense }} </div>
-                                <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span>Hoje - {{ date }}</span>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-warning"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
+            <!-- Out of stock products table -->   
             <div class="col-lg-12 mb-4">
                 <div class="card">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -130,19 +118,17 @@ export default {
         if (!User.loggedIn()) {
             this.$router.push({ name: 'login' })
         };
-        this.getTodaySold();
-        this.getTodayIncome();
-        this.getTodayDue();
-        this.getTodayExpense();
+        this.getMonthSales();
+        this.getTodaySales();
+        this.getMonthExpenses();
         this.getStockOut();
     },
 
     data() {
         return {
-            sold: '',
-            income: '',
-            due: '',
-            expense: '',
+            sales_day: '',
+            sales_month: '',
+            expenses: '',
             stockOutProducts: ''
         }
     },
@@ -154,24 +140,19 @@ export default {
     },
 
     methods: {
-        getTodaySold() {
-            axios.get('/api/today/sold')
-                .then(({ data }) => (this.sold = data))
+        getTodaySales() {
+            axios.get('/api/today/sales')
+                .then(({ data }) => (this.sales_day = data))
                 .catch(err => console.log(err))
         },
-        getTodayIncome() {
-            axios.get('/api/today/income')
-                .then(({ data }) => (this.income = data))
+        getMonthSales() {
+            axios.get('/api/month/sales')
+                .then(({ data }) => (this.sales_month = data))
                 .catch(err => console.log(err))
         },
-        getTodayDue() {
-            axios.get('/api/today/due')
-                .then(({ data }) => (this.due = data))
-                .catch(err => console.log(err))
-        },
-        getTodayExpense() {
-            axios.get('/api/today/expense')
-                .then(({ data }) => (this.expense = data))
+        getMonthExpenses() {
+            axios.get('/api/month/expenses')
+                .then(({ data }) => (this.expenses = data))
                 .catch(err => console.log(err))
         },
         getStockOut() {
@@ -182,3 +163,13 @@ export default {
     }
 } 
 </script>
+
+<style type="text/css">
+#em_photo {
+    height: 40px;
+    width: 40px;
+}
+.title-icon {
+    color:#4C60DA;
+}
+</style>

@@ -21,9 +21,10 @@ class DashboardController extends Controller
 
     public function getMonthSales()
     {
-        $sold = DB::table('orders')->where('order_month', $this->current_month)->sum('total');
+        $current_month = $this->current_month;
+        $sales = DB::table('orders')->where('order_month', $current_month)->sum('total');
 
-        return response()->json($sold, 200);
+        return response()->json($sales, 200);
     }
 
 
@@ -42,7 +43,9 @@ class DashboardController extends Controller
 
         $expenses = DB::table('expenses')->get()->filter(function ($expense, $key) {
             $expense_date = $expense->expense_date;
-            return $this->current_month == 
+            $expense->amount = floatval($expense->amount); // Convert 'amount' field of model instance fom string to float
+            return 
+                $this->current_month == 
                 ucfirst(Carbon::createFromFormat('d/m/Y', $expense_date)->locale('pt-BR')->translatedFormat('F'));
         });
 
