@@ -6725,7 +6725,7 @@ var render = function render() {
         value: cart.product_quantity
       }
     }), _vm._v(" "), _c("button", {
-      staticClass: "btn btn-sm btn-success table-tbn",
+      staticClass: "btn btn-sm btn-success table-btn",
       on: {
         click: function click($event) {
           $event.preventDefault();
@@ -6733,7 +6733,7 @@ var render = function render() {
         }
       }
     }, [_vm._v("+")]), _vm._v(" "), cart.product_quantity >= 2 ? _c("button", {
-      staticClass: "btn btn-sm btn-danger table-tbn",
+      staticClass: "btn btn-sm btn-danger table-btn",
       on: {
         click: function click($event) {
           $event.preventDefault();
@@ -6741,14 +6741,14 @@ var render = function render() {
         }
       }
     }, [_vm._v("-")]) : _c("button", {
-      staticClass: "btn btn-sm btn-danger table-tbn",
+      staticClass: "btn btn-sm btn-danger table-btn",
       attrs: {
         disabled: ""
       }
     }, [_vm._v("-")])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cart.product_price))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(cart.sub_total))]), _vm._v(" "), _c("td", {
       staticClass: "pr-3"
     }, [_c("a", {
-      staticClass: "btn btn-sm btn-primary table-tbn",
+      staticClass: "btn btn-sm btn-primary table-btn",
       on: {
         click: function click($event) {
           return _vm.removeItem(cart.id);
@@ -6900,7 +6900,7 @@ var render = function render() {
       key: category.id,
       staticClass: "nav-item"
     }, [_c("a", {
-      staticClass: "nav-link",
+      staticClass: "nav-link rounded-0",
       attrs: {
         id: "profile-tab",
         "data-toggle": "tab",
@@ -6928,7 +6928,7 @@ var render = function render() {
       "aria-labelledby": "home-tab"
     }
   }, [_c("div", {
-    staticClass: "card-body"
+    staticClass: "card-body p-2"
   }, [_c("input", {
     directives: [{
       name: "model",
@@ -6936,13 +6936,10 @@ var render = function render() {
       value: _vm.productSearchTerm,
       expression: "productSearchTerm"
     }],
-    staticClass: "form-control",
-    staticStyle: {
-      width: "300px"
-    },
+    staticClass: "search-bar form-control",
     attrs: {
       type: "text",
-      placeholder: "Pesquisar produto"
+      placeholder: "Pesquisar produto da categoria"
     },
     domProps: {
       value: _vm.productSearchTerm
@@ -6954,13 +6951,13 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("div", {
-    staticClass: "row"
+    staticClass: "row mw-100 m-0"
   }, _vm._l(_vm.productsFilterSearch, function (product) {
     return _c("div", {
       key: product.id,
-      staticClass: "col-lg-3 col-md-3 col-sm-6 col-6"
+      staticClass: "col-lg-3 col-md-3 col-sm-6 col-6 px-0"
     }, [_c("button", {
-      staticClass: "btn btn-sm",
+      staticClass: "btn btn-sm px-0 h-100 w-100",
       on: {
         click: function click($event) {
           $event.preventDefault();
@@ -6968,16 +6965,12 @@ var render = function render() {
         }
       }
     }, [_c("div", {
-      staticClass: "card",
-      staticStyle: {
-        width: "8.5rem",
-        "margin-bottom": "5px"
-      }
+      staticClass: "card h-100"
     }, [_c("img", {
       staticClass: "card-img-top",
       attrs: {
         src: product.image,
-        id: "em_photo"
+        id: "pos-photo"
       }
     }), _vm._v(" "), _c("div", {
       staticClass: "card-body"
@@ -7002,13 +6995,10 @@ var render = function render() {
       value: _vm.subproductSearchTerm,
       expression: "subproductSearchTerm"
     }],
-    staticClass: "form-control",
-    staticStyle: {
-      width: "300px"
-    },
+    staticClass: "search-bar form-control",
     attrs: {
       type: "text",
-      placeholder: "Procurar produto da categoria"
+      placeholder: "Pesquisar produto da categoria"
     },
     domProps: {
       value: _vm.subproductSearchTerm
@@ -7020,13 +7010,13 @@ var render = function render() {
       }
     }
   }), _vm._v(" "), _c("div", {
-    staticClass: "row"
+    staticClass: "row mw-100 m-0"
   }, _vm._l(_vm.subproductsFilterSearch, function (subproduct) {
     return _c("div", {
       key: subproduct.id,
-      staticClass: "col-lg-3 col-md-3 col-sm-6 col-6"
+      staticClass: "col-lg-3 col-md-3 col-sm-6 col-6 px-0"
     }, [_c("button", {
-      staticClass: "btn btn-sm",
+      staticClass: "btn btn-sm px-0 h-100 w-100",
       on: {
         click: function click($event) {
           $event.preventDefault();
@@ -7034,16 +7024,12 @@ var render = function render() {
         }
       }
     }, [_c("div", {
-      staticClass: "card",
-      staticStyle: {
-        width: "8.5rem",
-        "margin-bottom": "5px"
-      }
+      staticClass: "card h-100"
     }, [_c("img", {
       staticClass: "card-img-top",
       attrs: {
         src: subproduct.image,
-        id: "em_photo"
+        id: "pos-photo"
       }
     }), _vm._v(" "), _c("div", {
       staticClass: "card-body"
@@ -7086,7 +7072,7 @@ var staticRenderFns = [function () {
   return _c("li", {
     staticClass: "nav-item"
   }, [_c("a", {
-    staticClass: "nav-link active",
+    staticClass: "nav-link active rounded-0 px-2",
     attrs: {
       id: "home-tab",
       "data-toggle": "tab",
@@ -14394,7 +14380,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#em_photo[data-v-3ec65048] {\n  height: 100px;\n  width: 135px;\n}\n.table-tbn[data-v-3ec65048] {\n  line-height: 1;\n  width:16px;\n  text-align: center;\n  padding-inline: 2px;\n}\n", ""]);
+exports.push([module.i, "\n#pos-photo[data-v-3ec65048] {\n  height: 150px;\n}\n.table-btn[data-v-3ec65048] {\n  line-height: 1;\n  width:16px;\n  text-align: center;\n  padding-inline: 2px;\n}\n.search-bar[data-v-3ec65048] {\n  width: 300px;\n}\n.nav-tab[data-v-3ec65048] {\n  justify-content: space-evenly;\n}\n.nav-tabs .active[data-v-3ec65048] {\n  background-color: #2653d4;\n  color: white;\n}\n/* .tab-pane.active {\n  background-color: #2653d4;\n} */\n", ""]);
 
 // exports
 

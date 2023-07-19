@@ -40,15 +40,15 @@
                     <td>{{ cart.product_name }}</td>
                     <td>
                       <input type="text" readonly="" style="width: 15px;" :value="cart.product_quantity">
-                      <button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success table-tbn ">+</button>
-                      <button @click.prevent="decrement(cart.id)" class="btn btn-sm btn-danger table-tbn "
+                      <button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success table-btn ">+</button>
+                      <button @click.prevent="decrement(cart.id)" class="btn btn-sm btn-danger table-btn "
                         v-if="cart.product_quantity >= 2">-</button>
-                      <button class="btn btn-sm btn-danger table-tbn " v-else="" disabled="">-</button>
+                      <button class="btn btn-sm btn-danger table-btn " v-else="" disabled="">-</button>
                     </td>
                     <td>{{ cart.product_price }}</td>
                     <td>{{ cart.sub_total }}</td>
                     <td class="pr-3">
-                      <a @click="removeItem(cart.id)" class="btn btn-sm btn-primary table-tbn ">
+                      <a @click="removeItem(cart.id)" class="btn btn-sm btn-primary table-btn ">
                         <font color="#ffffff">x</font>
                       </a>
                     </td>
@@ -112,31 +112,31 @@
             <!-- Start list of products -->
             <ul class="nav nav-tabs" id="myTab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                <a class="nav-link active rounded-0 px-2" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
                   aria-selected="true">Todos produtos</a>
               </li>
               <li class="nav-item" v-for="category in categories" :key="category.id">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                <a class="nav-link rounded-0" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
                   aria-selected="false" @click="getSubproducts(category.id)">{{ category.category_name }}</a>
               </li>
             </ul>
 
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <div class="card-body">
-                  <input type="text" v-model="productSearchTerm" class="form-control" style="width: 300px;"
-                    placeholder="Pesquisar produto">
-                  <div class="row">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-6" v-for="product in productsFilterSearch"
+                <div class="card-body p-2 ">
+                  <input type="text" v-model="productSearchTerm" class="search-bar form-control"
+                    placeholder="Pesquisar produto da categoria">
+                  <div class="row mw-100 m-0">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-6 px-0" v-for="product in productsFilterSearch"
                       :key="product.id">
-                      <button class="btn btn-sm" @click.prevent="addToCart(product.id)">
-                        <div class="card" style="width: 8.5rem; margin-bottom: 5px;">
-                          <img :src="product.image" id="em_photo" class="card-img-top">
+                      <button class="btn btn-sm px-0 h-100 w-100" @click.prevent="addToCart(product.id)">
+                        <div class="card h-100">
+                          <img :src="product.image" id="pos-photo" class="card-img-top"> 
                           <div class="card-body">
                             <h6 class="card-title">{{ product.product_name }}</h6>
                             <span class="badge badge-success" v-if="product.product_quantity >= 1">Disponível: {{
                               product.product_quantity }} </span>
-                            <span class="badge badge-danger" v-else=" ">Sem estoque</span>
+                            <span class="badge badge-danger" v-else>Sem estoque</span>
                           </div>
                         </div>
                       </button>
@@ -146,19 +146,19 @@
               </div>
 
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <input type="text" v-model="subproductSearchTerm" class="form-control" style="width: 300px;"
-                  placeholder="Procurar produto da categoria">
-                <div class="row">
-                  <div class="col-lg-3 col-md-3 col-sm-6 col-6" v-for="subproduct in subproductsFilterSearch"
+                <input type="text" v-model="subproductSearchTerm" class="search-bar form-control"
+                  placeholder="Pesquisar produto da categoria">
+                <div class="row mw-100 m-0">
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-6 px-0" v-for="subproduct in subproductsFilterSearch"
                     :key="subproduct.id">
-                    <button class="btn btn-sm" @click.prevent="addToCart(subproduct.id)">
-                      <div class="card" style="width: 8.5rem; margin-bottom: 5px;">
-                        <img :src="subproduct.image" id="em_photo" class="card-img-top">
+                    <button class="btn btn-sm px-0 h-100 w-100" @click.prevent="addToCart(subproduct.id)">
+                      <div class="card h-100">
+                        <img :src="subproduct.image" id="pos-photo" class="card-img-top">
                         <div class="card-body">
                           <h6 class="card-title">{{ subproduct.product_name }}</h6>
                           <span class="badge badge-success" v-if="subproduct.product_quantity >= 1">Disponível: {{
                             subproduct.product_quantity }} </span>
-                          <span class="badge badge-danger" v-else=" ">Sem estoque</span>
+                          <span class="badge badge-danger" v-else>Sem estoque</span>
                         </div>
                       </div>
                     </button>
@@ -348,14 +348,26 @@ export default {
 
 
 <style type="text/css" scoped>
-#em_photo {
-  height: 100px;
-  width: 135px;
+#pos-photo {
+  height: 150px;
 }
-.table-tbn {
+.table-btn {
   line-height: 1;
   width:16px;
   text-align: center;
   padding-inline: 2px;
 }
+.search-bar {
+  width: 300px;
+}
+.nav-tab {
+  justify-content: space-evenly;
+}
+.nav-tabs .active {
+  background-color: #2653d4;
+  color: white;
+}
+/* .tab-pane.active {
+  background-color: #2653d4;
+} */
 </style>
