@@ -16,8 +16,6 @@
         <div class="col-xl-5 col-lg-5">
           <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-
-              <!-- TODO: COLOCAR UM ROUTER-LINK P/ EXPENSES-CREATE E UM P/ CUSTOMERS-CREATE -->
               <router-link :to="{ name: 'expenses-create'}" class="m-0 font-weight-bold text-primary">Inserir despesa</router-link> 
               <router-link :to="{name: 'customers-create'}" class="btn btn-sm btn-info">
                 <font color="#ffffff">Adicionar cliente</font>
@@ -26,7 +24,7 @@
             <div class="table-responsive" style="font-size: 12px;">
               <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                  <tr>
+                  <tr class="text-center">
                     <th>Nome</th>
                     <th>Quantidade</th>
                     <th>Unidade</th>
@@ -35,7 +33,7 @@
                   </tr>
                 </thead>
 
-                <tbody>
+                <tbody class="text-center">
                   <tr v-for="cart in carts" :key="cart.id">
                     <td>{{ cart.product_name }}</td>
                     <td>
@@ -73,29 +71,27 @@
                   <strong>R$ {{ total }}</strong>
                 </li>
               </ul>
-              <br>
-
-              <form @submit.prevent="storeOrder">
+              
+              <form class="my-3" @submit.prevent="storeOrder">
                 <label>Nome do cliente</label>
-                <select class="form-control" v-model="customer_id">
+                <select class="form-control mb-3" v-model="customer_id">
                   <option :value="customer.id" v-for="customer in customers">{{ customer.name }}</option>
                 </select>
 
                 <label>Valor pago (R$)</label>
-                <input type="text" class="form-control" required v-model="pay">
+                <input type="text" class="form-control mb-3" required v-model="pay">
 
                 <label>Saldo devedor (R$)</label>
-                <input type="text" class="form-control" required v-model="due">
+                <input type="text" class="form-control mb-3" required v-model="due">
 
                 <label>Método de pagamento</label>
-                <select class="form-control" v-model="payment_method">
+                <select class="form-control mb-4" v-model="payment_method">
                   <option value="Dinheiro">Dinheiro</option>
                   <option value="Débito">Cartão - Débito</option>
                   <option value="Crédito">Cartão - Crédito</option>
                   <option value="Pix">Pix</option>
                 </select>
 
-                <br>
                 <button type="submit" class="btn btn-success">Registrar Ordem</button>
               </form>
 
@@ -105,7 +101,7 @@
 
         <div class="col-xl-7 col-lg-7">
           <div class="card mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-center">
               <h6 class="m-0 font-weight-bold text-primary">Produtos vendidos</h6>
             </div>
 
@@ -125,18 +121,18 @@
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="card-body p-2 ">
                   <input type="text" v-model="productSearchTerm" class="search-bar form-control"
-                    placeholder="Pesquisar produto da categoria">
+                    placeholder="Pesquisar produto">
                   <div class="row mw-100 m-0">
                     <div class="col-lg-3 col-md-3 col-sm-6 col-6 px-0" v-for="product in productsFilterSearch"
                       :key="product.id">
                       <button class="btn btn-sm px-0 h-100 w-100" @click.prevent="addToCart(product.id)">
                         <div class="card h-100">
                           <img :src="product.image" id="pos-photo" class="card-img-top"> 
-                          <div class="card-body">
+                          <div class="card-body p-1 d-flex flex-column justify-content-between align-items-center">
                             <h6 class="card-title">{{ product.product_name }}</h6>
-                            <span class="badge badge-success" v-if="product.product_quantity >= 1">Disponível: {{
+                            <span class="badge badge-success mb-2 w-75" v-if="product.product_quantity >= 1">Disponível: {{
                               product.product_quantity }} </span>
-                            <span class="badge badge-danger" v-else>Sem estoque</span>
+                            <span class="badge badge-danger mb-2 w-75" v-else>Sem estoque</span>
                           </div>
                         </div>
                       </button>
@@ -146,22 +142,24 @@
               </div>
 
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <input type="text" v-model="subproductSearchTerm" class="search-bar form-control"
-                  placeholder="Pesquisar produto da categoria">
-                <div class="row mw-100 m-0">
-                  <div class="col-lg-3 col-md-3 col-sm-6 col-6 px-0" v-for="subproduct in subproductsFilterSearch"
-                    :key="subproduct.id">
-                    <button class="btn btn-sm px-0 h-100 w-100" @click.prevent="addToCart(subproduct.id)">
-                      <div class="card h-100">
-                        <img :src="subproduct.image" id="pos-photo" class="card-img-top">
-                        <div class="card-body">
-                          <h6 class="card-title">{{ subproduct.product_name }}</h6>
-                          <span class="badge badge-success" v-if="subproduct.product_quantity >= 1">Disponível: {{
-                            subproduct.product_quantity }} </span>
-                          <span class="badge badge-danger" v-else>Sem estoque</span>
+                <div class="card-body p-2 ">
+                  <input type="text" v-model="subproductSearchTerm" class="search-bar form-control"
+                    placeholder="Pesquisar produto da categoria">
+                  <div class="row mw-100 m-0">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-6 px-0" v-for="subproduct in subproductsFilterSearch"
+                      :key="subproduct.id">
+                      <button class="btn btn-sm px-0 h-100 w-100" @click.prevent="addToCart(subproduct.id)">
+                        <div class="card h-100">
+                          <img :src="subproduct.image" id="pos-photo" class="card-img-top">
+                          <div class="card-body p-1 d-flex flex-column justify-content-between align-items-center">
+                            <h6 class="card-title">{{ subproduct.product_name }}</h6>
+                            <span class="badge badge-success mb-2 w-75" v-if="subproduct.product_quantity >= 1">Disponível: {{
+                              subproduct.product_quantity }} </span>
+                            <span class="badge badge-danger mb-2 w-75" v-else>Sem estoque</span>
+                          </div>
                         </div>
-                      </div>
-                    </button>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -349,7 +347,7 @@ export default {
 
 <style type="text/css" scoped>
 #pos-photo {
-  height: 150px;
+  height: 130px;
 }
 .table-btn {
   line-height: 1;
@@ -360,8 +358,8 @@ export default {
 .search-bar {
   width: 300px;
 }
-.nav-tab {
-  justify-content: space-evenly;
+.nav-tabs {
+  justify-content: space-between;
 }
 .nav-tabs .active {
   background-color: #2653d4;
