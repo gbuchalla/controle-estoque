@@ -11,7 +11,7 @@
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
+                            <thead class="thead-light text-center">
                                 <tr>
                                     <th>Nome</th>
                                     <th>Valor total</th>
@@ -21,7 +21,7 @@
                                     <th>Ação</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr v-for="order in filtersearch" :key="order.id">
                                     <td> {{ order.name }} </td>
                                     <td> R$ {{ order.total }} </td>

@@ -114,8 +114,8 @@ export const routes = [
 
     // Order Routes
     { path: '/orders/today', component: OrdersToday, name: 'orders-today' },
-    { path: '/orders/:id', component: OrdersShow, name: 'orders-show' },
     { path: '/orders/search', component: OrdersSearch, name: 'orders-search' },
+    { path: '/orders/:id', component: OrdersShow, name: 'orders-show' },
 
     { path: '/:pathMatch(.*)*', name: 'NotFound', redirect: '/' }
     

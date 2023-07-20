@@ -17,7 +17,7 @@
 
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
+                            <thead class="thead-light text-center">
                                 <tr>
                                     <th>Nome</th>
                                     <th>Código</th>
@@ -26,11 +26,11 @@
                                     <th>Preço de compra</th>
                                     <th>Status</th>
                                     <th>Quantidade</th>
-                                    <th>Ação</th>
+                                    <th class="pr-3">Ação</th>
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr v-for="product in filtersearch" :key="product.id">
                                     <td> {{ product.product_name }} </td>
                                     <td> {{ product.product_code }} </td>
@@ -41,7 +41,7 @@
                                             class="badge badge-success">Disponível</span></td>
                                     <td v-else=" "><span class="badge badge-danger">Sem estoque</span></td>
                                     <td>{{ product.product_quantity }}</td>
-                                    <td>
+                                    <td class="pr-3">
                                         <router-link :to="{ name: 'stock-edit', params: { id: product.id } }"
                                             class="btn btn-sm btn-primary">Editar</router-link>
                                     </td>

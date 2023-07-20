@@ -18,7 +18,7 @@
 
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
+                            <thead class="thead-light text-center">
                                 <tr>
                                     <th>Nome</th>
                                     <th>Código</th>
@@ -30,7 +30,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr v-for="product in filtersearch" :key="product.id">
                                     <td> {{ product.product_name }} </td>
                                     <td> {{ product.product_code }} </td>

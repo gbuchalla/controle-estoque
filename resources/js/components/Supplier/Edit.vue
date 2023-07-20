@@ -23,6 +23,7 @@
 
                                             <div class="form-row">
                                                 <div class="col-md-6">
+                                                    <label for="inputName">Nome completo</label>
                                                     <input type="text" class="form-control" id="inputName"
                                                         placeholder="Nome do fornecedor" v-model="form.name">
                                                     <small class="text-danger" v-if="errors.name"> {{ errors.name[0] }}
@@ -31,6 +32,7 @@
 
 
                                                 <div class="col-md-6">
+                                                    <label for="inputEmail">Endereço de email</label>
                                                     <input type="email" class="form-control" id="inputEmail"
                                                         placeholder="Email" v-model="form.email">
                                                     <small class="text-danger" v-if="errors.email"> {{ errors.email[0] }}
@@ -45,6 +47,7 @@
 
                                             <div class="form-row">
                                                 <div class="col-md-8">
+                                                    <label for="inputAddress">Endereço residencial</label>
                                                     <input type="text" class="form-control" id="inputAddress"
                                                         placeholder="Endereço" v-model="form.address">
                                                     <small class="text-danger" v-if="errors.address"> {{ errors.address[0]
@@ -58,8 +61,9 @@
 
                                             <div class="form-row">
                                                 <div class="col-md-6">
+                                                    <label for="inputPhone">Telefone</label>
                                                     <input type="text" class="form-control" id="inputPhone"
-                                                        placeholder="Telefone - Ex: (90)99999-9999" v-model="form.phone">
+                                                        placeholder="Ex: (90)99999-9999" v-model="form.phone">
                                                     <small class="text-danger" v-if="errors.phone"> {{ errors.phone[0] }}
                                                     </small>
                                                 </div>
@@ -73,7 +77,7 @@
                                         </div>
 
 
-                                        <div class="form-group">
+                                        <div class="form-group mt-4">
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <input type="file" class="custom-file-input" id="customFile"
@@ -120,7 +124,19 @@ export default {
         if (!User.loggedIn()) {
             this.$router.push({ name: '/' })
         };
-        this.getSuppliers;
+        this.getSuppliers();
+        Reload.$on('afterUpload', (event) => {
+            let file = event.target.files[0];
+            if (file.size > 1048770) {
+                Notification.image_validation()
+            } else {
+                let reader = new FileReader();
+                reader.onload = event => {
+                    this.form.newphoto = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     },
 
     data() {
@@ -146,18 +162,7 @@ export default {
                 .catch(console.log('error'))
         },
         onFileSelected(event) {
-            let file = event.target.files[0];
-            if (file.size > 1048770) {
-                Notification.image_validation()
-            } else {
-                let reader = new FileReader();
-                reader.onload = event => {
-                    this.form.newphoto = event.target.result
-
-                };
-                reader.readAsDataURL(file);
-            }
-
+           Reload.$emit('afterUpload', event);
         },
         supplierUpdate() {
             let id = this.$route.params.id

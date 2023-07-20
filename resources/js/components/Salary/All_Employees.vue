@@ -17,7 +17,7 @@
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
 
-                            <thead class="thead-light">
+                            <thead class="thead-light text-center">
                                 <tr>
                                     <th>Nome</th>
                                     <th>Foto</th>
@@ -28,7 +28,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr v-for="employee in filterSearch" :key="employee.id">
                                     <td> {{ employee.name }} </td>
                                     <td><img :src="employee.photo" id="em_photo"></td>

@@ -19,7 +19,7 @@
                         <h6 class="m-0 font-weight-bold text-primary">Lista de funcionários</h6>
                     </div>
                     <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table class="table align-items-center table-flush text-center">
                             <thead class="thead-light">
                                 <tr>
                                     <th>Nome</th>
@@ -30,7 +30,7 @@
                                     <th>Ação</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr v-for="employee in filtersearch" :key="employee.id">
                                     <td> {{ employee.name }} </td>
                                     <td><img :src="employee.photo" id="em_photo"></td>

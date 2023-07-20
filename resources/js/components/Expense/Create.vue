@@ -19,28 +19,26 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-12">
-                                                    <label for="inputDetails"><b>Detalhes da despesa</b></label>
+                                                    <label for="inputDetails"><b>Detalhes da despesa:</b></label>
                                                     <textarea class="form-control" id="inputDetails" rows="3"
                                                         v-model="form.details"></textarea>
                                                     <small class="text-danger" v-if="errors.details"> {{ errors.details[0]
                                                     }} </small>
                                                 </div>
                                                 <div class="col-md-12"><br>
-                                                    <label for="inputAmount"><b>Valor (R$)</b></label>
+                                                    <label for="inputAmount"><b>Valor (R$):</b></label>
                                                     <input type="text" class="form-control" id="inputAmount"
                                                         placeholder="Insira o valor" v-model="form.amount">
                                                     <small class="text-danger" v-if="errors.amount"> {{ errors.amount[0] }}
                                                     </small>
                                                 </div>
 
-
-                                                <!-- INSERIR INPUT PARA DATA DA EXPENSE -->
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group mt-4">
                                             <div class="form-row">
                                                 <div class="col-md-6">
-                                                    <label for="inputDate">Data da despesa</label>
+                                                    <label class="mr-2" for="inputDate"><b>Data da despesa:</b></label>
                                                     <input type="date" v-model="form.expense_date" id="inputDate">
                                                     <small class="text-danger" v-if="errors.expense_date"> {{ errors.expense_date[0] }} </small>
                                                 </div>

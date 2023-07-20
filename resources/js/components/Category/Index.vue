@@ -15,14 +15,14 @@
                         <h6 class="m-0 font-weight-bold text-primary">Lista de categorias</h6>
                     </div>
                     <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
+                        <table class="table align-items-center table-flush text-center">
                             <thead class="thead-light">
-                                <tr>
+                                <tr class="text-center">
                                     <th>Categoria</th>
                                     <th>Ação</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr v-for="category in filtersearch" :key="category.id">
                                     <td> {{ category.category_name }} </td>
 

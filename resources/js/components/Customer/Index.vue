@@ -15,24 +15,24 @@
                     </div>
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
+                            <thead class="thead-light text-center">
                                 <tr>
                                     <th>Nome</th>
                                     <th>Foto</th>
                                     <th>Telefone</th>
                                     <th>Email</th>
                                     <th>Endereço</th>
-                                    <th>Ação</th>
+                                    <th class="pr-3" style="width:150px;">Ação</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr v-for="customer in filtersearch" :key="customer.id">
                                     <td> {{ customer.name }} </td>
                                     <td><img :src="customer.photo" id="em_photo"></td>
                                     <td>{{ customer.phone }}</td>
                                     <td>{{ customer.email }}</td>
                                     <td>{{ customer.address }}</td>
-                                    <td>
+                                    <td class="pr-3" style="width:150px;">
                                         <router-link :to="{ name: 'customers-edit', params: { id: customer.id } }"
                                             class="btn btn-sm btn-primary">Editar</router-link>
                                         <a @click="deleteCustomer(customer.id)" class="btn btn-sm btn-danger"><font color="#ffffff">Excluir</font>
@@ -121,5 +121,9 @@ export default {
 #em_photo {
     height: 40px;
     width: 40px;
+}
+
+.table td {
+    vertical-align: middle;
 }
 </style>

@@ -17,7 +17,7 @@
 
                     <div class="table-responsive">
                         <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
+                            <thead class="thead-light text-center">
                                 <tr>
                                     <th>Nome</th>
                                     <th>Mês</th>
@@ -27,7 +27,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody class="text-center">
                                 <tr v-for="salary in filterSearch" :key="salary.id">
                                     <td> {{ salary.name }} </td>
                                     <td>{{ salary.salary_month }}</td>

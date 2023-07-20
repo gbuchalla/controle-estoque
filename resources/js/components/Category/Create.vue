@@ -20,8 +20,9 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-12">
+                                                    <label for="inputName">Nome da categoria</label>
                                                     <input type="text" class="form-control" id="inputName"
-                                                        placeholder="Nome da categoria" v-model="form.category_name">
+                                                        placeholder="" v-model="form.category_name">
                                                     <small class="text-danger" v-if="errors.category_name"> {{
                                                         errors.category_name[0] }} </small>
                                                 </div>

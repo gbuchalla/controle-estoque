@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sistema de Controle de Estoque - Dashboard</title>
 
-    <link href="{{ asset('backend/img/logo/logo.png') }}" rel="icon">
+    <link href="{{ asset('img/logo2.png') }}" rel="icon">
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -23,8 +23,8 @@
             <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
 
                 <router-link :to="{name: 'home'}" class="sidebar-brand d-flex align-items-center justify-content-center">
-                    <div class="sidebar-brand-icon">
-                        <img src="{{ asset('backend/img/logo/logo2.png') }}">
+                    <div class="text-white sidebar-brand-icon">
+                        <img src="{{ asset('img/logo3.png') }}">
                     </div>
                     <div class="sidebar-brand-text mx-3">Controle de Estoque</div>
                 </router-link>
@@ -210,8 +210,6 @@
                             <li class="nav-item dropdown no-arrow" >
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img class="img-profile rounded-circle" src="{{ asset('backend/img/boy.png') }}"
-                                        style="max-width: 60px">
                                     <router-link to="/logout" class="ml-2 d-lg-inline text-white small"
                                         v-if="$route.path === '/login' || $route.path === '/register' || $route.path === '/forget' ? false : true "
                                         style="display: none;">

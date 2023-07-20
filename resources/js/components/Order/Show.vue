@@ -77,7 +77,7 @@
                                                 </div>
                                                 <div class="table-responsive">
                                                     <table class="table align-items-center table-flush">
-                                                        <thead class="thead-light">
+                                                        <thead class="thead-light text-center">
                                                             <tr>
                                                                 <th>Nome do Produto</th>
                                                                 <th>Código do Produto</th>
@@ -87,7 +87,7 @@
                                                                 <th>Total</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
+                                                        <tbody class="text-center">
                                                             <tr v-for="detail in details">
                                                                 <td>{{ detail.product_name }}</td>
                                                                 <td>{{ detail.product_code }}</td>

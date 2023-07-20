@@ -25,16 +25,18 @@
 
                                             <div class="form-row">
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="exampleInputFirstName"
-                                                        placeholder="Nome completo" v-model="form.name">
+                                                    <label for="inputName">Nome completo</label>
+                                                    <input type="text" class="form-control" id="inputName"
+                                                        placeholder="" v-model="form.name">
                                                     <small class="text-danger" v-if="errors.name"> {{ errors.name[0] }}
                                                     </small>
                                                 </div>
 
 
                                                 <div class="col-md-6">
-                                                    <input type="email" class="form-control" id="exampleInputFirstName"
-                                                        placeholder="Endereço de email" v-model="form.email">
+                                                    <label for="inputEmail">Endereço de email</label>
+                                                    <input type="email" class="form-control" id="inputEmail"
+                                                        placeholder="" v-model="form.email">
                                                     <small class="text-danger" v-if="errors.email"> {{ errors.email[0] }}
                                                     </small>
                                                 </div>
@@ -47,16 +49,18 @@
 
                                             <div class="form-row">
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="exampleInputFirstName"
-                                                        placeholder="Endereço residencial" v-model="form.address">
+                                                    <label for="inputAddress">Endereço residencial</label>
+                                                    <input type="text" class="form-control" id="inputAddress"
+                                                        placeholder="" v-model="form.address">
                                                     <small class="text-danger" v-if="errors.address"> {{ errors.address[0]
                                                     }} </small>
                                                 </div>
 
 
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="exampleInputFirstName"
-                                                        placeholder="Salário" v-model="form.salary">
+                                                    <label for="inputSalary">Salário</label>
+                                                    <input type="text" class="form-control" id="inputSalary"
+                                                        placeholder="" v-model="form.salary">
                                                     <small class="text-danger" v-if="errors.salary"> {{ errors.salary[0] }}
                                                     </small>
                                                 </div>
@@ -69,15 +73,17 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-6">
-                                                    <input type="date" class="form-control" id="exampleInputFirstName"
-                                                        placeholder="Data de entrada na empresa"
+                                                    <label for="inputJoiningDate">Data de entrada na empresa</label>
+                                                    <input type="date" class="form-control" id="inputJoiningDate"
+                                                        placeholder=""
                                                         v-model="form.joining_date">
                                                     <small class="text-danger" v-if="errors.joining_date"> {{
                                                         errors.joining_date[0] }} </small>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="exampleInputFirstName"
-                                                        placeholder="RG" v-model="form.rg">
+                                                    <label for="inputRG">RG</label>
+                                                    <input type="text" class="form-control" id="inputRG"
+                                                        placeholder="" v-model="form.rg">
                                                     <small class="text-danger" v-if="errors.rg"> {{ errors.rg[0] }} </small>
                                                 </div>
                                             </div>
@@ -88,8 +94,9 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="exampleInputFirstName"
-                                                        placeholder="Telefone - Ex: (90)99999-9999" v-model="form.phone">
+                                                    <label for="inputPhone">Telefone</label>
+                                                    <input type="text" class="form-control" id="inputPhone"
+                                                        placeholder="Ex: (90)99999-9999" v-model="form.phone">
                                                     <small class="text-danger" v-if="errors.phone"> {{ errors.phone[0] }}
                                                     </small>
                                                 </div>
@@ -99,7 +106,7 @@
                                         </div>
 
 
-                                        <div class="form-group">
+                                        <div class="form-group mt-4">
                                             <div class="form-row">
                                                 <div class="col-md-6">
                                                     <input type="file" class="custom-file-input" id="customFile"

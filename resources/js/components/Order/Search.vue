@@ -43,28 +43,28 @@
           <div class="col-lg-12 mb-4">
             <div class="card">
               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Detalhes da Ordem</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Lista de Ordens</h6>
               </div>
               <div class="table-responsive">
                 <table class="table align-items-center table-flush">
-                  <thead class="thead-light">
+                  <thead class="thead-light text-center">
                     <tr>
                       <th>Nome do produto</th>
                       <th>Quantidade</th>
                       <th>SubTotal</th>
-                      <th>Taxa de imposto</th>
+                      <th v-if="hasOrderWithTax()">Taxa de imposto</th>
                       <th>Valor total</th>
                       <th>Valor pago</th>
                       <th>Saldo devedor</th>
                     </tr>
                   </thead>
 
-                  <tbody>
+                  <tbody class="text-center">
                     <tr v-for="order in orders">
                       <td>{{ order.name }}</td>
                       <td>{{ order.quantity }}</td>
                       <td>{{ order.sub_total }}</td>
-                      <td>{{ order.tax }}</td>
+                      <td v-if="order.tax">{{ order.tax }}</td>
                       <td>R$ {{ order.total }} </td>
                       <td>R$ {{ order.pay }} </td>
                       <td>R$ {{ order.due }} </td>
@@ -96,7 +96,7 @@ export default {
   data() {
     return {
       date: '',
-      orders: {}
+      orders: []
     }
   },
 
@@ -107,6 +107,12 @@ export default {
         .then(({ data }) => (this.orders = data))
         .catch(error => this.errors = error.response.data.errors)
     },
+    hasOrderWithTax() {
+      this.orders.forEach(order => {
+        if (order.tax) return true;
+        return false;
+      });
+    }
   }
 }
 

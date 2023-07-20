@@ -2345,6 +2345,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
+    var _this = this;
     if (!User.loggedIn()) {
       this.$router.push({
         name: 'login'
@@ -2352,6 +2353,18 @@ __webpack_require__.r(__webpack_exports__);
     }
     ;
     this.getEmployees();
+    Reload.$on('afterUpload', function (event) {
+      var file = event.target.files[0];
+      if (file.size > 1048770) {
+        Notification.image_validation();
+      } else {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          _this.form.photo = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
   },
   data: function data() {
     return {
@@ -2371,25 +2384,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getEmployees: function getEmployees() {
-      var _this = this;
+      var _this2 = this;
       var id = this.$route.params.id;
       axios.get('/api/employees/' + id).then(function (_ref) {
         var data = _ref.data;
-        return _this.form = data;
+        return _this2.form = data;
       })["catch"](console.log('error'));
     },
     onFileSelected: function onFileSelected(event) {
-      var _this2 = this;
-      var file = event.target.files[0];
-      if (file.size > 1048770) {
-        Notification.image_validation();
-      } else {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-          _this2.form.newphoto = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
+      Reload.$emit('afterUpload', event);
     },
     employeeUpdate: function employeeUpdate() {
       var _this3 = this;
@@ -2770,7 +2773,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       date: '',
-      orders: {}
+      orders: []
     };
   },
   methods: {
@@ -2784,6 +2787,12 @@ __webpack_require__.r(__webpack_exports__);
         return _this.orders = data;
       })["catch"](function (error) {
         return _this.errors = error.response.data.errors;
+      });
+    },
+    hasOrderWithTax: function hasOrderWithTax() {
+      this.orders.forEach(function (order) {
+        if (order.tax) return true;
+        return false;
       });
     }
   }
@@ -3758,13 +3767,26 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
+    var _this = this;
     if (!User.loggedIn()) {
       this.$router.push({
         name: '/'
       });
     }
     ;
-    this.getSuppliers;
+    this.getSuppliers();
+    Reload.$on('afterUpload', function (event) {
+      var file = event.target.files[0];
+      if (file.size > 1048770) {
+        Notification.image_validation();
+      } else {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+          _this.form.newphoto = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
   },
   data: function data() {
     return {
@@ -3781,25 +3803,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getSuppliers: function getSuppliers() {
-      var _this = this;
+      var _this2 = this;
       var id = this.$route.params.id;
       axios.get('/api/suppliers/' + id).then(function (_ref) {
         var data = _ref.data;
-        return _this.form = data;
+        return _this2.form = data;
       })["catch"](console.log('error'));
     },
     onFileSelected: function onFileSelected(event) {
-      var _this2 = this;
-      var file = event.target.files[0];
-      if (file.size > 1048770) {
-        Notification.image_validation();
-      } else {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-          _this2.form.newphoto = event.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
+      Reload.$emit('afterUpload', event);
     },
     supplierUpdate: function supplierUpdate() {
       var _this3 = this;
@@ -4071,7 +4083,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-12"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputName"
+    }
+  }, [_vm._v("Nome da categoria")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4082,7 +4098,7 @@ var render = function render() {
     attrs: {
       type: "text",
       id: "inputName",
-      placeholder: "Nome da categoria"
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.category_name
@@ -4175,7 +4191,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-12"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputName"
+    }
+  }, [_vm._v("Nome da categoria")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4186,7 +4206,7 @@ var render = function render() {
     attrs: {
       type: "text",
       id: "inputName",
-      placeholder: "Nome da categoria"
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.category_name
@@ -4286,8 +4306,10 @@ var render = function render() {
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "table-responsive"
   }, [_c("table", {
-    staticClass: "table align-items-center table-flush"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.filtersearch, function (category) {
+    staticClass: "table align-items-center table-flush text-center"
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filtersearch, function (category) {
     return _c("tr", {
       key: category.id
     }, [_c("td", [_vm._v(" " + _vm._s(category.category_name) + " ")]), _vm._v(" "), _c("td", [_c("router-link", {
@@ -4329,7 +4351,9 @@ var staticRenderFns = [function () {
     _c = _vm._self._c;
   return _c("thead", {
     staticClass: "thead-light"
-  }, [_c("tr", [_c("th", [_vm._v("Categoria")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
+  }, [_c("tr", {
+    staticClass: "text-center"
+  }, [_c("th", [_vm._v("Categoria")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
 }];
 render._withStripped = true;
 
@@ -4388,7 +4412,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputName"
+    }
+  }, [_vm._v("Nome do cliente")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4399,7 +4427,7 @@ var render = function render() {
     attrs: {
       type: "text",
       id: "inputName",
-      placeholder: "Nome do cliente"
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.name
@@ -4414,7 +4442,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.name[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputEmail"
+    }
+  }, [_vm._v("Endereço de email")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4425,7 +4457,7 @@ var render = function render() {
     attrs: {
       type: "email",
       id: "inputEmail",
-      placeholder: "Endereço de email"
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.email
@@ -4444,7 +4476,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputAddress"
+    }
+  }, [_vm._v("Endereço residencial")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4455,7 +4491,7 @@ var render = function render() {
     attrs: {
       type: "text",
       id: "inputAddress",
-      placeholder: "Endereço"
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.address
@@ -4470,7 +4506,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.address[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputPhone"
+    }
+  }, [_vm._v("Telefone")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4481,7 +4521,7 @@ var render = function render() {
     attrs: {
       type: "text",
       id: "inputPhone",
-      placeholder: "Número de telefone"
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.phone
@@ -4495,7 +4535,7 @@ var render = function render() {
   }), _vm._v(" "), _vm.errors.phone ? _c("small", {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.phone[0]) + "\n                                                ")]) : _vm._e()])])]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
+    staticClass: "form-group mt-4"
   }, [_c("div", {
     staticClass: "form-row"
   }, [_c("div", {
@@ -4609,7 +4649,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputName"
+    }
+  }, [_vm._v("Nome do cliente")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4620,7 +4664,7 @@ var render = function render() {
     attrs: {
       type: "text",
       id: "inputName",
-      placeholder: "Nome do cliente"
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.name
@@ -4635,7 +4679,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.name[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputEmail"
+    }
+  }, [_vm._v("Endereço de email")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4646,7 +4694,7 @@ var render = function render() {
     attrs: {
       type: "email",
       id: "inputEmail",
-      placeholder: "Endereço de email"
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.email
@@ -4665,7 +4713,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputAddress"
+    }
+  }, [_vm._v("Endereço residencial")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4676,7 +4728,7 @@ var render = function render() {
     attrs: {
       type: "text",
       id: "inputAddress",
-      placeholder: "Endereço"
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.address
@@ -4691,7 +4743,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.address[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputPhone"
+    }
+  }, [_vm._v("Telefone")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4702,7 +4758,7 @@ var render = function render() {
     attrs: {
       type: "text",
       id: "inputPhone",
-      placeholder: "Número de telefone"
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.phone
@@ -4716,7 +4772,7 @@ var render = function render() {
   }), _vm._v(" "), _vm.errors.phone ? _c("small", {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.phone[0]) + " ")]) : _vm._e()])])]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
+    staticClass: "form-group mt-4"
   }, [_c("div", {
     staticClass: "form-row"
   }, [_c("div", {
@@ -4835,7 +4891,9 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.filtersearch, function (customer) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filtersearch, function (customer) {
     return _c("tr", {
       key: customer.id
     }, [_c("td", [_vm._v(" " + _vm._s(customer.name) + " ")]), _vm._v(" "), _c("td", [_c("img", {
@@ -4843,7 +4901,12 @@ var render = function render() {
         src: customer.photo,
         id: "em_photo"
       }
-    })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(customer.phone))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(customer.email))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(customer.address))]), _vm._v(" "), _c("td", [_c("router-link", {
+    })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(customer.phone))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(customer.email))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(customer.address))]), _vm._v(" "), _c("td", {
+      staticClass: "pr-3",
+      staticStyle: {
+        width: "150px"
+      }
+    }, [_c("router-link", {
       staticClass: "btn btn-sm btn-primary",
       attrs: {
         to: {
@@ -4881,8 +4944,13 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "thead-light"
-  }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Foto")]), _vm._v(" "), _c("th", [_vm._v("Telefone")]), _vm._v(" "), _c("th", [_vm._v("Email")]), _vm._v(" "), _c("th", [_vm._v("Endereço")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
+    staticClass: "thead-light text-center"
+  }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Foto")]), _vm._v(" "), _c("th", [_vm._v("Telefone")]), _vm._v(" "), _c("th", [_vm._v("Email")]), _vm._v(" "), _c("th", [_vm._v("Endereço")]), _vm._v(" "), _c("th", {
+    staticClass: "pr-3",
+    staticStyle: {
+      width: "150px"
+    }
+  }, [_vm._v("Ação")])])]);
 }];
 render._withStripped = true;
 
@@ -4941,7 +5009,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputName"
+    }
+  }, [_vm._v("Nome completo")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4951,8 +5023,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "exampleInputFirstName",
-      placeholder: "Nome completo"
+      id: "inputName",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.name
@@ -4967,7 +5039,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.name[0]) + "\n                                                    ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputEmail"
+    }
+  }, [_vm._v("Endereço de email")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -4977,8 +5053,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "email",
-      id: "exampleInputFirstName",
-      placeholder: "Endereço de email"
+      id: "inputEmail",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.email
@@ -4997,7 +5073,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputAddress"
+    }
+  }, [_vm._v("Endereço residencial")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5007,8 +5087,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "exampleInputFirstName",
-      placeholder: "Endereço residencial"
+      id: "inputAddress",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.address
@@ -5023,7 +5103,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.address[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputSalary"
+    }
+  }, [_vm._v("Salário")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5033,8 +5117,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "exampleInputFirstName",
-      placeholder: "Salário"
+      id: "inputSalary",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.salary
@@ -5053,7 +5137,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputJoiningDate"
+    }
+  }, [_vm._v("Data de entrada na empresa")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5063,8 +5151,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "date",
-      id: "exampleInputFirstName",
-      placeholder: "Data de entrada na empresa"
+      id: "inputJoiningDate",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.joining_date
@@ -5079,7 +5167,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.joining_date[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputRG"
+    }
+  }, [_vm._v("RG")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5089,8 +5181,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "exampleInputFirstName",
-      placeholder: "RG"
+      id: "inputRG",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.rg
@@ -5109,7 +5201,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputPhone"
+    }
+  }, [_vm._v("Telefone")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5119,8 +5215,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "exampleInputFirstName",
-      placeholder: "Telefone - Ex: (90)99999-9999"
+      id: "inputPhone",
+      placeholder: "Ex: (90)99999-9999"
     },
     domProps: {
       value: _vm.form.phone
@@ -5136,7 +5232,7 @@ var render = function render() {
   }, [_vm._v(" " + _vm._s(_vm.errors.phone[0]) + "\n                                                    ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   })])]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
+    staticClass: "form-group mt-4"
   }, [_c("div", {
     staticClass: "form-row"
   }, [_c("div", {
@@ -5250,7 +5346,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputName"
+    }
+  }, [_vm._v("Nome completo")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5260,8 +5360,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "exampleInputFirstName",
-      placeholder: "Nome completo"
+      id: "inputName",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.name
@@ -5276,7 +5376,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.name[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputEmail"
+    }
+  }, [_vm._v("Endereço de email")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5286,8 +5390,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "email",
-      id: "exampleInputFirstName",
-      placeholder: "Endereço de email"
+      id: "inputEmail",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.email
@@ -5306,7 +5410,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputAddress"
+    }
+  }, [_vm._v("Endereço residencial")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5316,8 +5424,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "exampleInputFirstName",
-      placeholder: "Endereço residencial"
+      id: "inputAddress",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.address
@@ -5330,9 +5438,13 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.errors.address ? _c("small", {
     staticClass: "text-danger"
-  }, [_vm._v(" " + _vm._s(_vm.errors.address[0]) + " ")]) : _vm._e()])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(" " + _vm._s(_vm.errors.address[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputSalary"
+    }
+  }, [_vm._v("Salário")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5342,8 +5454,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "exampleInputFirstName",
-      placeholder: "Salário"
+      id: "inputSalary",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.salary
@@ -5356,13 +5468,17 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.errors.salary ? _c("small", {
     staticClass: "text-danger"
-  }, [_vm._v(" " + _vm._s(_vm.errors.salary[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
+  }, [_vm._v(" " + _vm._s(_vm.errors.salary[0]) + " ")]) : _vm._e()])])]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("div", {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputJoiningDate"
+    }
+  }, [_vm._v("Data de entrada na empresa")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5372,8 +5488,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "date",
-      id: "exampleInputFirstName",
-      placeholder: "Data de entrada na empresa"
+      id: "inputJoiningDate",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.joining_date
@@ -5388,7 +5504,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.joining_date[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputRG"
+    }
+  }, [_vm._v("RG")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5398,8 +5518,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "exampleInputFirstName",
-      placeholder: "RG"
+      id: "inputRG",
+      placeholder: ""
     },
     domProps: {
       value: _vm.form.rg
@@ -5418,7 +5538,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputPhone"
+    }
+  }, [_vm._v("Telefone")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5428,8 +5552,8 @@ var render = function render() {
     staticClass: "form-control",
     attrs: {
       type: "text",
-      id: "exampleInputFirstName",
-      placeholder: "Telefone - Ex: (90)99999-9999"
+      id: "inputPhone",
+      placeholder: "Ex: (90)99999-9999"
     },
     domProps: {
       value: _vm.form.phone
@@ -5445,7 +5569,7 @@ var render = function render() {
   }, [_vm._v(" " + _vm._s(_vm.errors.phone[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   })])]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
+    staticClass: "form-group mt-4"
   }, [_c("div", {
     staticClass: "form-row"
   }, [_c("div", {
@@ -5563,8 +5687,10 @@ var render = function render() {
   }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "table-responsive"
   }, [_c("table", {
-    staticClass: "table align-items-center table-flush"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.filtersearch, function (employee) {
+    staticClass: "table align-items-center table-flush text-center"
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filtersearch, function (employee) {
     return _c("tr", {
       key: employee.id
     }, [_c("td", [_vm._v(" " + _vm._s(employee.name) + " ")]), _vm._v(" "), _c("td", [_c("img", {
@@ -5717,16 +5843,12 @@ var render = function render() {
   }), _vm._v(" "), _vm.errors.amount ? _c("small", {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.amount[0]) + "\n                                                ")]) : _vm._e()])])]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
+    staticClass: "form-group mt-4"
   }, [_c("div", {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("label", {
-    attrs: {
-      "for": "inputDate"
-    }
-  }, [_vm._v("Data da despesa")]), _vm._v(" "), _c("input", {
+  }, [_vm._m(3), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5748,7 +5870,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.errors.expense_date ? _c("small", {
     staticClass: "text-danger"
-  }, [_vm._v(" " + _vm._s(_vm.errors.expense_date[0]) + " ")]) : _vm._e()])])]), _vm._v(" "), _vm._m(3)]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", {
+  }, [_vm._v(" " + _vm._s(_vm.errors.expense_date[0]) + " ")]) : _vm._e()])])]), _vm._v(" "), _vm._m(4)]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", {
     staticClass: "text-center"
   }), _vm._v(" "), _c("div", {
     staticClass: "text-center"
@@ -5769,7 +5891,7 @@ var staticRenderFns = [function () {
     attrs: {
       "for": "inputDetails"
     }
-  }, [_c("b", [_vm._v("Detalhes da despesa")])]);
+  }, [_c("b", [_vm._v("Detalhes da despesa:")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -5777,7 +5899,16 @@ var staticRenderFns = [function () {
     attrs: {
       "for": "inputAmount"
     }
-  }, [_c("b", [_vm._v("Valor (R$)")])]);
+  }, [_c("b", [_vm._v("Valor (R$):")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("label", {
+    staticClass: "mr-2",
+    attrs: {
+      "for": "inputDate"
+    }
+  }, [_c("b", [_vm._v("Data da despesa:")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -5894,16 +6025,12 @@ var render = function render() {
   }), _vm._v(" "), _vm.errors.amount ? _c("small", {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.amount[0]) + " ")]) : _vm._e()])])]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
+    staticClass: "form-group mt-4"
   }, [_c("div", {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("label", {
-    attrs: {
-      "for": "inputDate"
-    }
-  }, [_vm._v("Data da despesa")]), _vm._v(" "), _c("input", {
+  }, [_vm._m(3), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -5925,7 +6052,7 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.errors.expense_date ? _c("small", {
     staticClass: "text-danger"
-  }, [_vm._v(" " + _vm._s(_vm.errors.expense_date[0]) + " ")]) : _vm._e()])])]), _vm._v(" "), _vm._m(3)]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", {
+  }, [_vm._v(" " + _vm._s(_vm.errors.expense_date[0]) + " ")]) : _vm._e()])])]), _vm._v(" "), _vm._m(4)]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("div", {
     staticClass: "text-center"
   }), _vm._v(" "), _c("div", {
     staticClass: "text-center"
@@ -5946,7 +6073,7 @@ var staticRenderFns = [function () {
     attrs: {
       "for": "inputDetails"
     }
-  }, [_c("b", [_vm._v("Detalhes da despesa")])]);
+  }, [_c("b", [_vm._v("Detalhes da despesa:")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -5954,7 +6081,16 @@ var staticRenderFns = [function () {
     attrs: {
       "for": "inputAmount"
     }
-  }, [_c("b", [_vm._v("Valor (R$)")])]);
+  }, [_c("b", [_vm._v("Valor (R$):")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("label", {
+    staticClass: "mr-2",
+    attrs: {
+      "for": "inputDate"
+    }
+  }, [_c("b", [_vm._v("Data da despesa:")])]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -6029,7 +6165,9 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.filtersearch, function (expense) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filtersearch, function (expense) {
     return _c("tr", {
       key: expense.id
     }, [_c("td", [_vm._v(" " + _vm._s(expense.details) + " ")]), _vm._v(" "), _c("td", [_vm._v(" " + _vm._s(expense.amount) + " ")]), _vm._v(" "), _c("td", [_vm._v(" " + _vm._s(expense.expense_date) + " ")]), _vm._v(" "), _c("td", [_c("router-link", {
@@ -6070,7 +6208,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "thead-light"
+    staticClass: "thead-light text-center"
   }, [_c("tr", [_c("th", [_vm._v("Detalhes")]), _vm._v(" "), _c("th", [_vm._v("Valor (R$)")]), _vm._v(" "), _c("th", [_vm._v("Data")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
 }];
 render._withStripped = true;
@@ -6354,8 +6492,12 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(4), _vm._v(" "), _c("tbody", _vm._l(_vm.orders, function (order) {
-    return _c("tr", [_c("td", [_vm._v(_vm._s(order.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(order.quantity))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(order.sub_total))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(order.tax))]), _vm._v(" "), _c("td", [_vm._v("R$ " + _vm._s(order.total) + " ")]), _vm._v(" "), _c("td", [_vm._v("R$ " + _vm._s(order.pay) + " ")]), _vm._v(" "), _c("td", [_vm._v("R$ " + _vm._s(order.due) + " ")])]);
+  }, [_c("thead", {
+    staticClass: "thead-light text-center"
+  }, [_c("tr", [_c("th", [_vm._v("Nome do produto")]), _vm._v(" "), _c("th", [_vm._v("Quantidade")]), _vm._v(" "), _c("th", [_vm._v("SubTotal")]), _vm._v(" "), _vm.hasOrderWithTax() ? _c("th", [_vm._v("Taxa de imposto")]) : _vm._e(), _vm._v(" "), _c("th", [_vm._v("Valor total")]), _vm._v(" "), _c("th", [_vm._v("Valor pago")]), _vm._v(" "), _c("th", [_vm._v("Saldo devedor")])])]), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.orders, function (order) {
+    return _c("tr", [_c("td", [_vm._v(_vm._s(order.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(order.quantity))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(order.sub_total))]), _vm._v(" "), order.tax ? _c("td", [_vm._v(_vm._s(order.tax))]) : _vm._e(), _vm._v(" "), _c("td", [_vm._v("R$ " + _vm._s(order.total) + " ")]), _vm._v(" "), _c("td", [_vm._v("R$ " + _vm._s(order.pay) + " ")]), _vm._v(" "), _c("td", [_vm._v("R$ " + _vm._s(order.due) + " ")])]);
   }), 0)])]), _vm._v(" "), _c("div", {
     staticClass: "card-footer"
   })])])])])])]);
@@ -6394,13 +6536,7 @@ var staticRenderFns = [function () {
     staticClass: "card-header py-3 d-flex flex-row align-items-center justify-content-between"
   }, [_c("h6", {
     staticClass: "m-0 font-weight-bold text-primary"
-  }, [_vm._v("Detalhes da Ordem")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("thead", {
-    staticClass: "thead-light"
-  }, [_c("tr", [_c("th", [_vm._v("Nome do produto")]), _vm._v(" "), _c("th", [_vm._v("Quantidade")]), _vm._v(" "), _c("th", [_vm._v("SubTotal")]), _vm._v(" "), _c("th", [_vm._v("Taxa de imposto")]), _vm._v(" "), _c("th", [_vm._v("Valor total")]), _vm._v(" "), _c("th", [_vm._v("Valor pago")]), _vm._v(" "), _c("th", [_vm._v("Saldo devedor")])])]);
+  }, [_vm._v("Lista de Ordens")])]);
 }];
 render._withStripped = true;
 
@@ -6496,7 +6632,9 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(4), _vm._v(" "), _c("tbody", _vm._l(_vm.details, function (detail) {
+  }, [_vm._m(4), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.details, function (detail) {
     return _c("tr", [_c("td", [_vm._v(_vm._s(detail.product_name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(detail.product_code))]), _vm._v(" "), _c("td", [_c("img", {
       attrs: {
         src: "/" + detail.image,
@@ -6547,7 +6685,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "thead-light"
+    staticClass: "thead-light text-center"
   }, [_c("tr", [_c("th", [_vm._v("Nome do Produto")]), _vm._v(" "), _c("th", [_vm._v("Código do Produto")]), _vm._v(" "), _c("th", [_vm._v("Imagem")]), _vm._v(" "), _c("th", [_vm._v("Quantidade")]), _vm._v(" "), _c("th", [_vm._v("Preço Unitário")]), _vm._v(" "), _c("th", [_vm._v("Total")])])]);
 }];
 render._withStripped = true;
@@ -6603,7 +6741,9 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.filtersearch, function (order) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filtersearch, function (order) {
     return _c("tr", {
       key: order.id
     }, [_c("td", [_vm._v(" " + _vm._s(order.name) + " ")]), _vm._v(" "), _c("td", [_vm._v(" R$ " + _vm._s(order.total) + " ")]), _vm._v(" "), _c("td", [_vm._v(" R$ " + _vm._s(order.pay) + " ")]), _vm._v(" "), _c("td", [_vm._v(" R$ " + _vm._s(order.due) + " ")]), _vm._v(" "), _c("td", [_vm._v(" " + _vm._s(order.payment_method) + " ")]), _vm._v(" "), _c("td", [_c("router-link", {
@@ -6633,7 +6773,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "thead-light"
+    staticClass: "thead-light text-center"
   }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Valor total")]), _vm._v(" "), _c("th", [_vm._v("Valor pago")]), _vm._v(" "), _c("th", [_vm._v("Saldo devedor")]), _vm._v(" "), _c("th", [_vm._v("Método de pagamento")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
 }];
 render._withStripped = true;
@@ -8000,7 +8140,9 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.filtersearch, function (product) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filtersearch, function (product) {
     return _c("tr", {
       key: product.id
     }, [_c("td", [_vm._v(" " + _vm._s(product.product_name) + " ")]), _vm._v(" "), _c("td", [_vm._v(" " + _vm._s(product.product_code) + " ")]), _vm._v(" "), _c("td", [_c("img", {
@@ -8046,7 +8188,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "thead-light"
+    staticClass: "thead-light text-center"
   }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Código")]), _vm._v(" "), _c("th", [_vm._v("Foto")]), _vm._v(" "), _c("th", [_vm._v("Categoria")]), _vm._v(" "), _c("th", [_vm._v("Preço de compra")]), _vm._v(" "), _c("th", [_vm._v("Preço de venda")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
 }];
 render._withStripped = true;
@@ -8111,7 +8253,9 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.filtersearch, function (product) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filtersearch, function (product) {
     return _c("tr", {
       key: product.id
     }, [_c("td", [_vm._v(" " + _vm._s(product.product_name) + " ")]), _vm._v(" "), _c("td", [_vm._v(" " + _vm._s(product.product_code) + " ")]), _vm._v(" "), _c("td", [_c("img", {
@@ -8123,7 +8267,9 @@ var render = function render() {
       staticClass: "badge badge-success"
     }, [_vm._v("Disponível")])]) : _c("td", [_c("span", {
       staticClass: "badge badge-danger"
-    }, [_vm._v("Sem estoque")])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(product.product_quantity))]), _vm._v(" "), _c("td", [_c("router-link", {
+    }, [_vm._v("Sem estoque")])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(product.product_quantity))]), _vm._v(" "), _c("td", {
+      staticClass: "pr-3"
+    }, [_c("router-link", {
       staticClass: "btn btn-sm btn-primary",
       attrs: {
         to: {
@@ -8150,8 +8296,10 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "thead-light"
-  }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Código")]), _vm._v(" "), _c("th", [_vm._v("Foto")]), _vm._v(" "), _c("th", [_vm._v("Categoria")]), _vm._v(" "), _c("th", [_vm._v("Preço de compra")]), _vm._v(" "), _c("th", [_vm._v("Status")]), _vm._v(" "), _c("th", [_vm._v("Quantidade")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
+    staticClass: "thead-light text-center"
+  }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Código")]), _vm._v(" "), _c("th", [_vm._v("Foto")]), _vm._v(" "), _c("th", [_vm._v("Categoria")]), _vm._v(" "), _c("th", [_vm._v("Preço de compra")]), _vm._v(" "), _c("th", [_vm._v("Status")]), _vm._v(" "), _c("th", [_vm._v("Quantidade")]), _vm._v(" "), _c("th", {
+    staticClass: "pr-3"
+  }, [_vm._v("Ação")])])]);
 }];
 render._withStripped = true;
 
@@ -8215,7 +8363,9 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.filterSearch, function (employee) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filterSearch, function (employee) {
     return _c("tr", {
       key: employee.id
     }, [_c("td", [_vm._v(" " + _vm._s(employee.name) + " ")]), _vm._v(" "), _c("td", [_c("img", {
@@ -8250,7 +8400,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "thead-light"
+    staticClass: "thead-light text-center"
   }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Foto")]), _vm._v(" "), _c("th", [_vm._v("Telefone")]), _vm._v(" "), _c("th", [_vm._v("Salário")]), _vm._v(" "), _c("th", [_vm._v("Data de entrada")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
 }];
 render._withStripped = true;
@@ -8866,7 +9016,9 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.filtersearch, function (salary) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filtersearch, function (salary) {
     return _c("tr", {
       key: salary.id
     }, [_c("td", [_vm._v(" " + _vm._s(salary.salary_month) + " ")]), _vm._v(" "), _c("td", [_c("router-link", {
@@ -8896,7 +9048,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "thead-light"
+    staticClass: "thead-light text-center"
   }, [_c("tr", [_c("th", [_vm._v("Mês")]), _vm._v(" "), _c("th", [_vm._v("Detalhes")])])]);
 }];
 render._withStripped = true;
@@ -8963,7 +9115,9 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.filterSearch, function (salary) {
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filterSearch, function (salary) {
     return _c("tr", {
       key: salary.id
     }, [_c("td", [_vm._v(" " + _vm._s(salary.name) + " ")]), _vm._v(" "), _c("td", [_vm._v(_vm._s(salary.salary_month))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(salary.amount))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(salary.salary_date))]), _vm._v(" "), _c("td", [_c("router-link", {
@@ -8985,7 +9139,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "thead-light"
+    staticClass: "thead-light text-center"
   }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Mês")]), _vm._v(" "), _c("th", [_vm._v("Salário (R$)")]), _vm._v(" "), _c("th", [_vm._v("Data")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
 }];
 render._withStripped = true;
@@ -9045,7 +9199,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputFirstName"
+    }
+  }, [_vm._v("Nome do produto")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -9071,7 +9229,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.name[0]) + "\n                                                    ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputEmail"
+    }
+  }, [_vm._v("Endereço de email")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -9101,7 +9263,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-8"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputAddress"
+    }
+  }, [_vm._v("Endereço residencial")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -9127,7 +9293,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.address[0]) + " ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-4"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputPhone"
+    }
+  }, [_vm._v("Telefone")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -9138,7 +9308,7 @@ var render = function render() {
     attrs: {
       type: "text",
       id: "inputPhone",
-      placeholder: "Telefone - Ex: (90)99999-9999"
+      placeholder: "Ex: (90)99999-9999"
     },
     domProps: {
       value: _vm.form.phone
@@ -9151,8 +9321,8 @@ var render = function render() {
     }
   }), _vm._v(" "), _vm.errors.phone ? _c("small", {
     staticClass: "text-danger"
-  }, [_vm._v(" " + _vm._s(_vm.errors.phone[0]) + "\n                                                        ")]) : _vm._e()])])]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
+  }, [_vm._v(" " + _vm._s(_vm.errors.phone[0]) + "\n                                                    ")]) : _vm._e()])])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group mt-4"
   }, [_c("div", {
     staticClass: "form-row"
   }, [_c("div", {
@@ -9266,7 +9436,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputName"
+    }
+  }, [_vm._v("Nome completo")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -9292,7 +9466,11 @@ var render = function render() {
     staticClass: "text-danger"
   }, [_vm._v(" " + _vm._s(_vm.errors.name[0]) + "\n                                                ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputEmail"
+    }
+  }, [_vm._v("Endereço de email")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -9322,7 +9500,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-8"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputAddress"
+    }
+  }, [_vm._v("Endereço residencial")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -9352,7 +9534,11 @@ var render = function render() {
     staticClass: "form-row"
   }, [_c("div", {
     staticClass: "col-md-6"
-  }, [_c("input", {
+  }, [_c("label", {
+    attrs: {
+      "for": "inputPhone"
+    }
+  }, [_vm._v("Telefone")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -9363,7 +9549,7 @@ var render = function render() {
     attrs: {
       type: "text",
       id: "inputPhone",
-      placeholder: "Telefone - Ex: (90)99999-9999"
+      placeholder: "Ex: (90)99999-9999"
     },
     domProps: {
       value: _vm.form.phone
@@ -9379,7 +9565,7 @@ var render = function render() {
   }, [_vm._v(" " + _vm._s(_vm.errors.phone[0]) + "\n                                                ")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "col-md-6"
   })])]), _vm._v(" "), _c("div", {
-    staticClass: "form-group"
+    staticClass: "form-group mt-4"
   }, [_c("div", {
     staticClass: "form-row"
   }, [_c("div", {
@@ -9498,7 +9684,9 @@ var render = function render() {
     staticClass: "table-responsive"
   }, [_c("table", {
     staticClass: "table align-items-center table-flush"
-  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.filtersearch, function (supplier) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", {
+    staticClass: "text-center"
+  }, _vm._l(_vm.filtersearch, function (supplier) {
     return _c("tr", {
       key: supplier.id
     }, [_c("td", [_vm._v(" " + _vm._s(supplier.name) + " ")]), _vm._v(" "), _c("td", [_c("img", {
@@ -9544,7 +9732,7 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("thead", {
-    staticClass: "thead-light"
+    staticClass: "thead-light text-center"
   }, [_c("tr", [_c("th", [_vm._v("Nome")]), _vm._v(" "), _c("th", [_vm._v("Foto")]), _vm._v(" "), _c("th", [_vm._v("Telefone")]), _vm._v(" "), _c("th", [_vm._v("Email")]), _vm._v(" "), _c("th", [_vm._v("Ação")])])]);
 }];
 render._withStripped = true;
@@ -14273,7 +14461,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#em_photo {\r\n    height: 40px;\r\n    width: 40px;\n}\r\n", ""]);
+exports.push([module.i, "\n#em_photo {\r\n    height: 40px;\r\n    width: 40px;\n}\n.table td {\r\n    vertical-align: middle;\n}\r\n", ""]);
 
 // exports
 
@@ -72263,13 +72451,13 @@ var routes = [
   component: OrdersToday,
   name: 'orders-today'
 }, {
-  path: '/orders/:id',
-  component: OrdersShow,
-  name: 'orders-show'
-}, {
   path: '/orders/search',
   component: OrdersSearch,
   name: 'orders-search'
+}, {
+  path: '/orders/:id',
+  component: OrdersShow,
+  name: 'orders-show'
 }, {
   path: '/:pathMatch(.*)*',
   name: 'NotFound',
