@@ -3782,7 +3782,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         var reader = new FileReader();
         reader.onload = function (event) {
-          _this.form.newphoto = event.target.result;
+          _this.form.photo = event.target.result;
         };
         reader.readAsDataURL(file);
       }

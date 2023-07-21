@@ -52,7 +52,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployees"
                         aria-expanded="true" aria-controls="collapseEmployees">
-                        <i class="far fa-fw fa-window-maximize"></i>
+                        <i class="far fa-address-card"></i>
                         <span>Funcionários</span>
                     </a>
                     <div id="collapseEmployees" class="collapse" aria-labelledby="headingBootstrap"
@@ -69,7 +69,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSuppliers"
                         aria-expanded="true" aria-controls="collapseSuppliers">
-                        <i class="far fa-fw fa-window-maximize"></i>
+                        <i class="fas fa-truck"></i>
                         <span>Fornecedores</span>
                     </a>
                     <div id="collapseSuppliers" class="collapse" aria-labelledby="headingBootstrap"
@@ -85,7 +85,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse"
                         data-target="#collapseBootstrap2" aria-expanded="true" aria-controls="collapseBootstrap2">
-                        <i class="far fa-fw fa-window-maximize"></i>
+                        <i class="fas fa-th"></i>
                         <span>Categorias</span>
                     </a>
                     <div id="collapseBootstrap2" class="collapse" aria-labelledby="headingBootstrap"
@@ -101,7 +101,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse"
                         data-target="#collapseBootstrap3" aria-expanded="true" aria-controls="collapseBootstrap3">
-                        <i class="far fa-fw fa-window-maximize"></i>
+                        <i class="fas fa-box-open"></i>
                         <span>Produtos</span>
                     </a>
                     <div id="collapseBootstrap3" class="collapse" aria-labelledby="headingBootstrap"
@@ -117,7 +117,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse"
                         data-target="#collapseBootstrap4" aria-expanded="true" aria-controls="collapseBootstrap4">
-                        <i class="far fa-fw fa-window-maximize"></i>
+                        <i class="fas fa-coins"></i>
                         <span>Despesas</span>
                     </a>
                     <div id="collapseBootstrap4" class="collapse" aria-labelledby="headingBootstrap"
@@ -133,7 +133,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse"
                         data-target="#collapseBootstrap44" aria-expanded="true" aria-controls="collapseBootstrap44">
-                        <i class="far fa-fw fa-window-maximize"></i>
+                        <i class="fas fa-handshake"></i>
                         <span>Clientes</span>
                     </a>
                     <div id="collapseBootstrap44" class="collapse" aria-labelledby="headingBootstrap"
@@ -149,7 +149,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse"
                         data-target="#collapseBootstrap5" aria-expanded="true" aria-controls="collapseBootstrap5">
-                        <i class="far fa-fw fa-window-maximize"></i>
+                        <i class="fas fa-hand-holding-usd"></i>
                         <span>Salários</span>
                     </a>
                     <div id="collapseBootstrap5" class="collapse" aria-labelledby="headingBootstrap"
@@ -169,7 +169,7 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse"
                         data-target="#collapseBootstrap51" aria-expanded="true" aria-controls="collapseBootstrap51">
-                        <i class="far fa-fw fa-window-maximize"></i>
+                        <i class="fas fa-receipt"></i>
                         <span>Ordens</span>
                     </a>
                     <div id="collapseBootstrap51" class="collapse" aria-labelledby="headingBootstrap"
@@ -184,7 +184,7 @@
 
                 <li class="nav-item">
                     <router-link class="nav-link" to="/stock">
-                        <i class="fab fa-fw fa-wpforms"></i>
+                        <i class="fas fa-warehouse"></i>
                         <span>Estoque de produtos</span>
                     </router-link>
                 </li>
@@ -210,10 +210,11 @@
                             <li class="nav-item dropdown no-arrow" >
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <router-link to="/logout" class="ml-2 d-lg-inline text-white small"
+                                    <router-link to="/logout" class="ml-1 d-inline text-white small"
                                         v-if="$route.path === '/login' || $route.path === '/register' || $route.path === '/forget' ? false : true "
                                         style="display: none;">
-                                        Logout
+                                        <i class="fas fa-sign-out-alt fa-lg mr-2"></i>
+                                        <span>Logout</span>
                                     </router-link>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

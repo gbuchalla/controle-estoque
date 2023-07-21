@@ -37,7 +37,7 @@
                                         <div class="form-group">
                                             <div class="form-row">
                                                 <div class="col-md-6">
-                                                    <label for="inputAddress">Endereço residencial</label>
+                                                    <label for="inputAddress">Endereço</label>
                                                     <input type="text" class="form-control" id="inputAddress"
                                                         placeholder="" v-model="form.address">
                                                     <small class="text-danger" v-if="errors.address"> {{ errors.address[0] }} </small>
