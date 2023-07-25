@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sistema de Controle de Estoque - Dashboard</title>
+    <title>StockSimple Manager</title>
 
     <link href="{{ asset('img/logo2.png') }}" rel="icon">
 
@@ -26,7 +26,9 @@
                     <div class="text-white sidebar-brand-icon">
                         <img src="{{ asset('img/logo3.png') }}">
                     </div>
-                    <div class="sidebar-brand-text mx-3">Controle de Estoque</div>
+                    <div class="sidebar-brand-text mx-3 h6 mb-0 border-left pl-4 py-1" style="font-size: 1.05rem; letter-spacing: 1.5px;">
+                        StockSimple Manager
+                    </div>
                 </router-link>
 
                 <hr class="sidebar-divider my-0">
@@ -189,8 +191,6 @@
                     </router-link>
                 </li>
 
-                <hr class="sidebar-divider">
-                <div class="version" id="version-ruangadmin"></div>
             </ul>
 
 
@@ -266,8 +266,8 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <script src="{{ asset('backend/vendor/jquery-easing/jquery.easing.min.js') }}"></script>

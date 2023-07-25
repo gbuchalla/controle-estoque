@@ -3,7 +3,7 @@
         <footer class="sticky-footer mt-auto bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    Sistema de Controle de Estoque
+                    StockSimple Manager
                     <span>&copy; {{ date() }}
                         <!-- desenvolvido por <b> <a href="https://buchalla.dev" target = "_blank" > Guilherme B.Ferreira < /a></b > -->
                     </span>
