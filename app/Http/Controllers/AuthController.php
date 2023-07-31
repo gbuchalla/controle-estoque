@@ -32,10 +32,20 @@ class AuthController extends Controller
     {        
         // Caso não seja válido, retorna automaticamente um JSON com mensagem de 'data invalid' e motivo.
         $request->validate([
-            'name' => 'required|unique:users|max:255',
+            'name' => 'required|max:255',
             'email' => 'required|unique:users|max:255',
             'password' => 'required|confirmed|min:4|max:8|',
             'password_confirmation' => 'required'
+        ],
+        [
+            'name.required' => 'O campo nome precisa ser preenchido',
+            'email.required' => 'O campo de email precisa ser preenchido',
+            'unique' => 'Já há um cadastro com esse :attribute',
+            'password.required' => 'O campo senha precisa ser preenchido',
+            'password.min' => 'A senha precisa ter ao menos 4 dígitos',
+            'password.max' => 'A senha precisa ter no máximo 8 dígitos',
+            'password.confirmed' => 'O campo de senha e o de confirmação de senha estão diferentes',
+            'password_confirmation.required' => 'O campo de confirmação de senha precisa ser preenchido'
         ]);
     
         $user = new User();

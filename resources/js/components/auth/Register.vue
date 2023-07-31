@@ -79,7 +79,7 @@ export default {
                 name: '',
                 email: '',
                 password: '',
-                confirm_password: ''
+                password_confirmation: ''
             },
             errors: {}
         }
@@ -88,7 +88,7 @@ export default {
         register() {
             axios.post('/api/auth/register', this.form)
                 .then(res => {
-                    User.responseAfterLogin(res)
+                    User.storeDataIfValid(res)
                     Toast.fire({
                         icon: 'success',
                         title: 'Cadastro feito com sucesso'
