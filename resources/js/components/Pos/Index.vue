@@ -16,7 +16,6 @@
         <div class="col-xl-5 col-lg-5">
           <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <router-link :to="{ name: 'expenses-create'}" class="m-0 font-weight-bold text-primary">Inserir despesa</router-link> 
               <router-link :to="{name: 'customers-create'}" class="btn btn-sm btn-info">
                 <font color="#ffffff">Adicionar cliente</font>
               </router-link>
@@ -82,7 +81,7 @@
                 <input type="text" class="form-control mb-3" required v-model="pay">
 
                 <label>Saldo devedor (R$)</label>
-                <input type="text" class="form-control mb-3" required v-model="due">
+                <input type="text" readonly class="form-control mb-3" required v-model="due">
 
                 <label>Método de pagamento</label>
                 <select class="form-control mb-4" v-model="payment_method">
@@ -120,10 +119,10 @@
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <div class="card-body p-2 ">
-                  <input type="text" v-model="productSearchTerm" class="search-bar form-control"
-                    placeholder="Pesquisar produto">
+                  <input type="text" v-model="productSearchTerm" @keydown="setPageNumber(1)"
+                  class="search-bar form-control" placeholder="Pesquisar produto">
                   <div class="row mw-100 m-0">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-6 px-0" v-for="product in productsFilterSearch"
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-6 px-0" v-for="product in paginatedFilteredProducts"
                       :key="product.id">
                       <button class="btn btn-sm px-0 h-100 w-100" @click.prevent="addToCart(product.id)">
                         <div class="card h-100">
@@ -138,15 +137,32 @@
                       </button>
                     </div>
                   </div>
+                  <nav class="mt-3" aria-label="Page navigation example">
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>                     
+                        <li v-for="n in numberOfProductsPages" class="page-item">
+                          <a class="page-link" href="" @click.prevent="setPageNumber(n)">{{ n }}</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </ul>
+                  </nav>
                 </div>
               </div>
 
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <div class="card-body p-2 ">
-                  <input type="text" v-model="subproductSearchTerm" class="search-bar form-control"
-                    placeholder="Pesquisar produto da categoria">
+                  <input type="text" v-model="subproductSearchTerm" @keydown="setPageNumber(1)" 
+                  class="search-bar form-control" placeholder="Pesquisar produto da categoria">
                   <div class="row mw-100 m-0">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-6 px-0" v-for="subproduct in subproductsFilterSearch"
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-6 px-0" v-for="subproduct in paginatedFilteredSubproducts"
                       :key="subproduct.id">
                       <button class="btn btn-sm px-0 h-100 w-100" @click.prevent="addToCart(subproduct.id)">
                         <div class="card h-100">
@@ -159,8 +175,25 @@
                           </div>
                         </div>
                       </button>
-                    </div>
+                    </div>  
                   </div>
+                  <nav class="mt-3" aria-label="Page navigation example">
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                          </a>
+                        </li>                     
+                        <li v-for="n in numberOfSubproductsPages" class="page-item">
+                          <a class="page-link" href="" @click.prevent="setPageNumber(n)">{{ n }}</a>
+                        </li>
+                        <li class="page-item">
+                          <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                          </a>
+                        </li>
+                      </ul>
+                  </nav>
                 </div>
               </div>
             </div>
@@ -195,12 +228,13 @@ export default {
     return {
       customer_id: '',
       pay: '',
-      due: '',
       payment_method: '',
 
       products: [],
-      categories: '',
       subproducts: [],
+      productsPerPage: 12,
+      pageNumber: 1,
+      categories: '',
       productSearchTerm: '',
       subproductSearchTerm: '',
       customers: '',
@@ -211,6 +245,10 @@ export default {
   },
 
   computed: {
+    due() {
+      return this.total - this.pay;
+    },
+
     productsFilterSearch() {
       return this.products.filter(product => {
         return product.product_name.match(this.productSearchTerm);
@@ -223,6 +261,24 @@ export default {
       })
     },
 
+    numberOfProductsPages() {
+      return Math.ceil(this.productsFilterSearch.length / this.productsPerPage);
+    },
+
+    numberOfSubproductsPages() {
+      return Math.ceil(this.subproductsFilterSearch.length / this.productsPerPage);
+    },
+    
+    paginatedFilteredProducts() {
+      const lastProductOfPage = this.pageNumber * this.productsPerPage;
+      return this.productsFilterSearch.slice(lastProductOfPage - this.productsPerPage, lastProductOfPage);
+    },
+    
+    paginatedFilteredSubproducts() {
+      const lastProductOfPage = this.pageNumber * this.productsPerPage;
+      return this.subproductsFilterSearch.slice(lastProductOfPage - this.productsPerPage, lastProductOfPage);
+    },
+    
     quantity() {
       let quantity = 0;
       for (let i = 0; i < this.carts.length; i++) {
@@ -253,6 +309,7 @@ export default {
   methods: {
 
     // Start cart methods
+
     addToCart(product_id) {
       axios.post(`/api/cart/${product_id}`)
         .then(() => {
@@ -310,9 +367,11 @@ export default {
           this.$router.push({ name: 'home' });
         });
     },
+
     // End cart methods 
 
     // Start methods to fetch resources
+
     getProducts() {
       axios.get('/api/products/')
         .then(({ data }) => (this.products = data))
@@ -337,7 +396,12 @@ export default {
           return this.subproducts = data;
         })
         .catch();
+    },
+
+    setPageNumber(n) {
+      return this.pageNumber = n;
     }
+
     // End methods to fetch resources
   }
 }
